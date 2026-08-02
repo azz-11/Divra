@@ -1,0 +1,171 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ink: #030328;
+  --ink-2: #0a0a3d;
+  --surface: #0c0c3a;
+  --surface-2: #12123f;
+  --brand: #5561e5;
+  --brand-2: #7781ea;
+  --brand-light: #99a0ef;
+  --brand-pale: #dddffa;
+  --text: #f4f4fb;
+  --text-dim: rgba(244, 244, 251, 0.62);
+  --text-dimmer: rgba(244, 244, 251, 0.38);
+  --line: rgba(255, 255, 255, 0.09);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--ink);
+  color: var(--text);
+  font-family: 'Tajawal', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: 'Cairo', sans-serif;
+  margin: 0;
+}
+
+::selection {
+  background: var(--brand);
+  color: var(--text);
+}
+
+/* شريط تمرير أنيق */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--ink);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--brand);
+  border-radius: 10px;
+}
+
+/* تدرج نصي بنفسجي */
+.text-gradient {
+  background: linear-gradient(120deg, var(--brand-light), var(--brand-pale));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* بطاقة زجاجية */
+.glass {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--line);
+}
+
+/* أزرار */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.75rem;
+  border-radius: 999px;
+  font-weight: 700;
+  font-family: 'Cairo', sans-serif;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+  border: none;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.btn-primary {
+  background: linear-gradient(120deg, var(--brand), var(--brand-2));
+  color: var(--text);
+  box-shadow: 0 10px 30px -8px rgba(85, 97, 229, 0.6);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 40px -8px rgba(85, 97, 229, 0.75);
+}
+.btn-ghost {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text);
+  border: 1px solid var(--line);
+}
+.btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+/* شريط Marquee لانهائي */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee-track {
+  display: inline-flex;
+  white-space: nowrap;
+  animation: marquee 22s linear infinite;
+}
+[dir='rtl'] .marquee-track {
+  animation-direction: reverse;
+}
+
+/* مؤشر السكرول */
+@keyframes scrollPulse {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(14px);
+    opacity: 0;
+  }
+}
+.scroll-dot {
+  animation: scrollPulse 1.6s ease-in-out infinite;
+}
+
+/* توهج خلفي */
+.glow-ring {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(2px);
+  pointer-events: none;
+}
+
+/* أبعاد محجوزة لصور المنتجات */
+.product-media {
+  aspect-ratio: 1 / 1;
+}
+
+/* احترام تفضيل تقليل الحركة */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .marquee-track,
+  .scroll-dot {
+    animation: none !important;
+  }
+  * {
+    transition-duration: 0.01ms !important;
+  }
+}
