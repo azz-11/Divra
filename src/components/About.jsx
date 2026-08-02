@@ -28,7 +28,7 @@ const FEATURES = [
 
 const STATS = [
   { value: '15+', label: 'عاماً من الخبرة' },
-  { value: '9', label: 'تشطيبات فاخرة' },
+  { value: '4', label: 'قطع منتقاة' },
 ]
 
 export default function About({ reduced }) {
@@ -90,7 +90,7 @@ export default function About({ reduced }) {
             />
             <img
               ref={imageRef}
-              src="/products/faucet-bath-chrome.webp"
+              src="/products/faucet-bath-black.webp"
               alt="مخلط ديفرا الفاخر"
               className="relative z-10 h-full w-full object-contain drop-shadow-2xl"
               loading="lazy"

@@ -11,27 +11,27 @@
 - **RTL بالكامل** (`dir="rtl" lang="ar"`) بخصائص CSS منطقية
 - خطوط **Cairo** (عناوين) و**Tajawal** (نصوص) من Google Fonts
 
-## الأصول المطلوبة (Assets)
+## الأصول (Assets)
 
-انسخ الأصول إلى مجلد `public/` قبل التشغيل:
+الأصول التالية مضمّنة في `public/` وجاهزة (معالَجة من ملفات العميل):
 
 ```
 public/
-  logo.png                       # الشعار (خلفية شفافة)
-  video/hero.mp4                 # فيديو الهيرو
+  logo.png                          # شعار مؤقت (wordmark) — استبدله بالشعار الرسمي
+  video/hero.mp4                    # فيديو الهيرو (مضغوط، بدون صوت)
   video/hero.webm
-  products/faucet-bath-black.webp
-  products/faucet-bath-chrome.webp
-  products/faucet-bath-gray.webp
-  products/faucet-tall-black.webp
-  products/faucet-tall-gray.webp
-  products/faucet-shower-black.webp
-  products/faucet-shower-gray.webp
-  products/faucet-wall-black.webp
-  products/faucet-wall-gray.webp
+  products/poster.webp              # بوستر الفيديو
+  products/faucet-tall-black.webp   # صنبور المطبخ العالي
+  products/faucet-bath-black.webp   # مخلط البانيو الجداري
+  products/faucet-shower-black.webp # مخلط الدش الجداري
+  products/faucet-basin-black.webp  # خلاط المغسلة
 ```
 
-> الكود يشير إلى هذه المسارات مباشرة؛ بمجرد وضع الملفات يعمل الموقع كاملاً.
+> الصور بخلفية شفافة (WebP) لتناسب الطابع الداكن. التشطيب المتوفّر حالياً **أسود مطفي**
+> فقط؛ عند توفّر تشطيبات إضافية (كروم/رمادي) أضِف الصور في `public/products` وسجّلها
+> ضمن `finishes` و`images` في `src/productsData.js` لتفعيل مبدّل التشطيب تلقائياً.
+>
+> **الشعار** الحالي مؤقت مولّد؛ ضع الشعار الرسمي بخلفية شفافة مكان `public/logo.png`.
 
 ## التشغيل
 

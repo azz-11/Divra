@@ -149,14 +149,15 @@ export default function ProductRow({ product, index, reduced }) {
         {/* دوائر تبديل التشطيب */}
         <div className="mt-6 flex items-center gap-4">
           <span className="text-sm text-text-dim">التشطيب:</span>
-          <div className="flex gap-3">
+          <div className="flex items-center gap-3">
             {product.finishes.map((key) => (
               <button
                 key={key}
                 onClick={() => changeFinish(key)}
                 aria-label={FINISH[key].name}
                 title={FINISH[key].name}
-                className={`h-9 w-9 rounded-full border-2 transition-transform hover:scale-110 ${
+                disabled={product.finishes.length === 1}
+                className={`h-9 w-9 rounded-full border-2 transition-transform hover:scale-110 disabled:cursor-default ${
                   finish === key
                     ? 'border-brand-light ring-2 ring-brand/40'
                     : 'border-white/20'
@@ -164,6 +165,11 @@ export default function ProductRow({ product, index, reduced }) {
                 style={{ background: FINISH[key].swatch }}
               />
             ))}
+            {product.finishes.length === 1 && (
+              <span className="text-sm text-text-dim">
+                {FINISH[product.finishes[0]].name}
+              </span>
+            )}
           </div>
         </div>
       </div>
