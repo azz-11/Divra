@@ -4,7 +4,7 @@ import SocialIcons from './SocialIcons.jsx'
 const LINKS = [
   { label: 'الرئيسية', to: '/' },
   { label: 'من نحن', to: '/about' },
-  { label: 'المنتجات', to: '/collection/kitchen' },
+  { label: 'المنتجات', to: '/collection/mixers' },
   { label: 'تواصل معنا', to: '/#contact' },
 ]
 

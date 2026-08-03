@@ -143,6 +143,14 @@ h4 {
   animation: scrollPulse 1.6s ease-in-out infinite;
 }
 
+/* طفو ناعم للمنتجات */
+@keyframes floaty {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+.floaty { animation: floaty 5s ease-in-out infinite; }
+.floaty-slow { animation: floaty 7s ease-in-out infinite; }
+
 /* توهج خلفي */
 .glow-ring {
   position: absolute;

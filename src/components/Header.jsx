@@ -6,7 +6,7 @@ import SearchOverlay from './SearchOverlay.jsx'
 const NAV = [
   { label: 'الرئيسية', to: '/' },
   { label: 'من نحن', to: '/about' },
-  { label: 'المنتجات', to: '/collection/kitchen' },
+  { label: 'المنتجات', to: '/collection/mixers' },
   { label: 'تواصل معنا', to: '/#contact' },
 ]
 

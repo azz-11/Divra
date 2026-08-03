@@ -50,11 +50,20 @@ export default function CollectionPage({ reduced }) {
 
       {/* المنتجات */}
       <div className="mx-auto max-w-7xl px-6">
-        <div className="divide-y divide-line">
-          {products.map((p, i) => (
-            <ProductRow key={p.id} product={p} index={i} accent={collection.accent} reduced={reduced} />
-          ))}
-        </div>
+        {products.length > 0 ? (
+          <div className="divide-y divide-line">
+            {products.map((p, i) => (
+              <ProductRow key={p.id} product={p} index={i} accent={collection.accent} reduced={reduced} />
+            ))}
+          </div>
+        ) : (
+          <div className="glass mx-auto my-16 max-w-xl rounded-xl2 p-10 text-center">
+            <p className="font-cairo text-xl font-bold text-brand-light">قريباً</p>
+            <p className="mt-2 text-text-dim">
+              منتجات قسم «{collection.name}» في طريقها إليك — تابعنا لأحدث الإضافات.
+            </p>
+          </div>
+        )}
       </div>
 
       {/* رجوع للرئيسية */}
