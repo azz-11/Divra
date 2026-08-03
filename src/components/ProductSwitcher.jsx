@@ -47,12 +47,12 @@ export default function ProductSwitcher({ reduced }) {
       <video
         key={cur.id}
         ref={videoRef}
-        className="absolute inset-0 h-full w-full object-cover"
+        className="absolute inset-0 h-full w-full bg-[#0a0a2e] object-cover"
         autoPlay
         muted
         loop
         playsInline
-        poster={imgOf(cur)}
+        preload="auto"
       >
         <source src={`${cur.video}.webm`} type="video/webm" />
         <source src={`${cur.video}.mp4`} type="video/mp4" />
