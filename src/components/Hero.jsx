@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useLang } from '../i18n.jsx'
 
 // الأجهزة اللمسية (خصوصاً iOS) لا تدعم تحريك الفيديو بالـ currentTime بثبات،
 // لذا نكتفي فيها بتشغيل تلقائي متحرك (loop) بدل السكرول-سكرَب
@@ -18,6 +19,7 @@ export default function Hero({ reduced }) {
   const videoRef = useRef(null)
   const contentRef = useRef(null)
   const [touch, setTouch] = useState(false)
+  const { t } = useLang()
 
   useEffect(() => {
     setTouch(detectTouch())
@@ -140,24 +142,23 @@ export default function Hero({ reduced }) {
         {/* المحتوى */}
         <div ref={contentRef} className="relative z-10 mx-auto max-w-4xl px-6 text-center">
           <span className="mb-5 inline-block rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-sm text-white backdrop-blur">
-            أدوات صحية فاخرة
+            {t('أدوات صحية فاخرة')}
           </span>
           <h1 className="font-cairo text-4xl font-black leading-tight text-white sm:text-6xl md:text-7xl">
-            فنّ الماء بلمسة <span className="text-brand-light">ديفرا</span>
+            {t('فنّ الماء بلمسة')} <span className="text-brand-light">{t('ديفرا')}</span>
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-base text-white/85 sm:text-lg">
-            صنابير ومخلاطات منحوتة بدقّة تجمع بين الجمال والأداء، لتمنح مطبخك
-            وحمّامك حضوراً استثنائياً يليق بذوقك الرفيع.
+            {t('صنابير ومخلاطات منحوتة بدقّة تجمع بين الجمال والأداء، لتمنح مطبخك وحمّامك حضوراً استثنائياً يليق بذوقك الرفيع.')}
           </p>
           <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
             <a href="#collections" className="btn btn-primary">
-              استكشف المجموعة
+              {t('استكشف المجموعة')}
             </a>
             <a
               href="/about"
               className="btn border border-white/30 bg-white/10 text-white backdrop-blur hover:bg-white/20"
             >
-              تعرّف على ديفرا
+              {t('تعرّف على ديفرا')}
             </a>
           </div>
         </div>
@@ -169,7 +170,7 @@ export default function Hero({ reduced }) {
           style={{ insetInline: 0 }}
           aria-label="مرّر للأسفل"
         >
-          <span className="text-xs">{tall ? 'مرّر لتحريك المشهد' : 'مرّر للأسفل'}</span>
+          <span className="text-xs">{tall ? t('مرّر لتحريك المشهد') : t('مرّر للأسفل')}</span>
           <span className="flex h-9 w-5 items-start justify-center rounded-full border border-white/30 p-1">
             <span className="scroll-dot h-1.5 w-1.5 rounded-full bg-brand-light" />
           </span>

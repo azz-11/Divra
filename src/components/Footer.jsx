@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import SocialIcons from './SocialIcons.jsx'
+import { useLang } from '../i18n.jsx'
 
 const LINKS = [
   { label: 'الرئيسية', to: '/' },
@@ -9,6 +10,7 @@ const LINKS = [
 ]
 
 export default function Footer() {
+  const { t } = useLang()
   return (
     <footer className="border-t border-line bg-surface-2 py-12">
       <div className="mx-auto flex max-w-7xl flex-col items-center gap-7 px-6 md:flex-row md:justify-between">
@@ -19,7 +21,7 @@ export default function Footer() {
         <nav className="flex flex-wrap justify-center gap-6">
           {LINKS.map((l) => (
             <Link key={l.to} to={l.to} className="text-sm text-text-dim transition-colors hover:text-text">
-              {l.label}
+              {t(l.label)}
             </Link>
           ))}
         </nav>
@@ -27,7 +29,7 @@ export default function Footer() {
         <SocialIcons gap="gap-3" />
       </div>
       <p className="mt-8 text-center text-xs text-text-dimmer">
-        © {new Date().getFullYear()} ديفرا Divra. جميع الحقوق محفوظة.
+        © {new Date().getFullYear()} ديفرا Divra. {t('جميع الحقوق محفوظة.')}
       </p>
     </footer>
   )

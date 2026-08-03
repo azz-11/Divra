@@ -3,11 +3,13 @@ import { useParams, useLocation, Link, Navigate } from 'react-router-dom'
 import ProductRow from '../components/ProductRow.jsx'
 import ProductBackground from '../components/ProductBackground.jsx'
 import { COLLECTIONS, collectionOf, productsIn } from '../productsData.js'
+import { useLang } from '../i18n.jsx'
 
 export default function CollectionPage({ reduced }) {
   const { id } = useParams()
   const { hash } = useLocation()
   const collection = collectionOf(id)
+  const { t, tr } = useLang()
 
   useEffect(() => {
     if (hash) {
@@ -17,7 +19,7 @@ export default function CollectionPage({ reduced }) {
     window.scrollTo(0, 0)
   }, [id, hash])
 
-  if (!collection) return <Navigate to="/collection/kitchen" replace />
+  if (!collection) return <Navigate to="/collection/mixers" replace />
 
   const products = productsIn(id)
 
@@ -28,10 +30,10 @@ export default function CollectionPage({ reduced }) {
         <ProductBackground variant={collection.bg} accent={collection.accent} />
         <div className="relative z-10 mx-auto max-w-3xl px-6">
           <span className="mb-4 inline-block rounded-full border border-line bg-brand/10 px-4 py-1.5 text-sm" style={{ color: collection.accent }}>
-            المجموعة
+            {t('المجموعة')}
           </span>
-          <h1 className="font-cairo text-4xl font-black sm:text-5xl md:text-6xl">{collection.name}</h1>
-          <p className="mx-auto mt-4 max-w-xl text-lg text-text-dim">{collection.intro}</p>
+          <h1 className="font-cairo text-4xl font-black sm:text-5xl md:text-6xl">{tr(collection.name)}</h1>
+          <p className="mx-auto mt-4 max-w-xl text-lg text-text-dim">{tr(collection.intro)}</p>
         </div>
       </header>
 
@@ -43,7 +45,7 @@ export default function CollectionPage({ reduced }) {
             to={`/collection/${c.id}`}
             className={`btn text-sm ${c.id === id ? 'btn-primary' : 'btn-ghost'}`}
           >
-            {c.short}
+            {tr(c.short)}
           </Link>
         ))}
       </div>
@@ -58,9 +60,9 @@ export default function CollectionPage({ reduced }) {
           </div>
         ) : (
           <div className="glass mx-auto my-16 max-w-xl rounded-xl2 p-10 text-center">
-            <p className="font-cairo text-xl font-bold text-brand-light">قريباً</p>
+            <p className="font-cairo text-xl font-bold text-brand-strong">{t('قريباً')}</p>
             <p className="mt-2 text-text-dim">
-              منتجات قسم «{collection.name}» في طريقها إليك — تابعنا لأحدث الإضافات.
+              {t('منتجات قسم')} «{tr(collection.name)}» {t('في طريقها إليك — تابعنا لأحدث الإضافات.')}
             </p>
           </div>
         )}
@@ -68,7 +70,7 @@ export default function CollectionPage({ reduced }) {
 
       {/* رجوع للرئيسية */}
       <div className="pb-24 text-center">
-        <Link to="/" className="btn btn-ghost">العودة للرئيسية</Link>
+        <Link to="/" className="btn btn-ghost">{t('العودة للرئيسية')}</Link>
       </div>
     </div>
   )

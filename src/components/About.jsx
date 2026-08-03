@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useLang } from '../i18n.jsx'
 
 const FEATURES = [
   {
@@ -34,6 +35,7 @@ const STATS = [
 export default function About({ reduced }) {
   const sectionRef = useRef(null)
   const imageRef = useRef(null)
+  const { t } = useLang()
 
   useEffect(() => {
     if (reduced) return
@@ -111,7 +113,7 @@ export default function About({ reduced }) {
               <div className="font-cairo text-2xl font-black text-brand-strong">
                 {s.value}
               </div>
-              <div className="text-xs text-text-dim">{s.label}</div>
+              <div className="text-xs text-text-dim">{t(s.label)}</div>
             </div>
           ))}
         </div>
@@ -122,18 +124,16 @@ export default function About({ reduced }) {
             data-reveal
             className="mb-4 inline-block rounded-full border border-line bg-brand/10 px-4 py-1.5 text-sm text-brand-strong"
           >
-            من نحن
+            {t('من نحن')}
           </span>
           <h2
             data-reveal
             className="font-cairo text-3xl font-black leading-snug sm:text-4xl md:text-5xl"
           >
-            نصنع <span className="text-gradient">تفاصيل</span> تدوم
+            {t('نصنع')} <span className="text-gradient">{t('تفاصيل')}</span> {t('تدوم')}
           </h2>
           <p data-reveal className="mt-5 text-text-dim">
-            في ديفرا نؤمن أن الأدوات الصحية ليست مجرّد وظيفة، بل لغة تعبّر عن
-            رقيّ المكان. نجمع بين هندسة دقيقة وحرفية عالية لنقدّم صنابير ومخلاطات
-            تتحدّى الزمن جمالاً وأداءً.
+            {t('في ديفرا نؤمن أن الأدوات الصحية ليست مجرّد وظيفة، بل لغة تعبّر عن رقيّ المكان. نجمع بين هندسة دقيقة وحرفية عالية لنقدّم صنابير ومخلاطات تتحدّى الزمن جمالاً وأداءً.')}
           </p>
 
           <div className="mt-9 space-y-5">
@@ -150,8 +150,8 @@ export default function About({ reduced }) {
                   </svg>
                 </span>
                 <div>
-                  <h3 className="font-cairo text-lg font-bold">{f.title}</h3>
-                  <p className="mt-1 text-sm text-text-dim">{f.desc}</p>
+                  <h3 className="font-cairo text-lg font-bold">{t(f.title)}</h3>
+                  <p className="mt-1 text-sm text-text-dim">{t(f.desc)}</p>
                 </div>
               </div>
             ))}

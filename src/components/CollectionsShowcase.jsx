@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { COLLECTIONS } from '../productsData.js'
+import { useLang } from '../i18n.jsx'
 
 const EASE = 'cubic-bezier(0.33,1,0.68,1)' // انتقال ناعم (ease-out ناعم)
 const DUR = 1000
@@ -14,6 +15,9 @@ export default function CollectionsShowcase({ reduced }) {
   )
   const animating = useRef(false)
   const drag = useRef({ x: 0, active: false })
+  const { t, tr, dir } = useLang()
+  const Prev = dir === 'rtl' ? ArrowRight : ArrowLeft
+  const Next = dir === 'rtl' ? ArrowLeft : ArrowRight
 
   // تحديث حالة الجوال
   useEffect(() => {
@@ -111,14 +115,14 @@ export default function CollectionsShowcase({ reduced }) {
               transition: `opacity ${DUR}ms ${EASE}`,
             }}
           >
-            {active_c.short}
+            {tr(active_c.short)}
           </span>
         </div>
 
         {/* شارة العلامة */}
         <div className="absolute top-24 start-4 sm:start-8" style={{ insetInlineStart: undefined, zIndex: 60 }}>
           <span className="text-xs font-semibold uppercase text-[#0f2a4d]/70" style={{ letterSpacing: '0.18em' }}>
-            DIVRA · أقسامنا
+            {t('DIVRA · أقسامنا')}
           </span>
         </div>
 
@@ -136,7 +140,7 @@ export default function CollectionsShowcase({ reduced }) {
                 <div className={reduced ? '' : isCenter ? 'floaty h-full w-full' : 'floaty-slow h-full w-full'}>
                   <img
                     src={c.image}
-                    alt={c.name}
+                    alt={tr(c.name)}
                     draggable={false}
                     style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'bottom center' }}
                   />
@@ -149,33 +153,33 @@ export default function CollectionsShowcase({ reduced }) {
         {/* النص السفلي + أزرار التنقّل + زر كل المنتجات */}
         <div className="absolute bottom-6 start-4 sm:bottom-16 sm:start-16" style={{ zIndex: 60, maxWidth: 460 }}>
           <p className="mb-2 text-base font-bold uppercase text-[#0f2a4d] sm:mb-3 sm:text-[22px]" style={{ fontFamily: 'Aktiv Grotesk Arabic, Readex Pro, sans-serif', transition: `opacity ${DUR}ms ${EASE}` }}>
-            {active_c.name}
+            {tr(active_c.name)}
           </p>
           {/* المميزات */}
           <div className="mb-4 flex flex-wrap gap-2 sm:mb-5">
-            {active_c.features.map((f) => (
-              <span key={f} className="rounded-full border border-[#0f2a4d]/20 bg-white/50 px-3 py-1 text-xs text-[#0f2a4d] backdrop-blur">
-                {f}
+            {active_c.features.map((f, fi) => (
+              <span key={fi} className="rounded-full border border-[#0f2a4d]/20 bg-white/50 px-3 py-1 text-xs text-[#0f2a4d] backdrop-blur">
+                {tr(f)}
               </span>
             ))}
           </div>
 
           <div className="flex flex-wrap items-center gap-3">
-            <button onClick={() => navigate('prev')} aria-label="السابق"
+            <button onClick={() => navigate('prev')} aria-label={dir === 'rtl' ? 'السابق' : 'Previous'}
               className="grid h-12 w-12 place-items-center rounded-full border-2 border-[#0f2a4d]/60 text-[#0f2a4d] transition-all hover:scale-105 hover:bg-[#0f2a4d]/8 sm:h-16 sm:w-16">
-              <ArrowRight size={26} strokeWidth={2.25} />
+              <Prev size={26} strokeWidth={2.25} />
             </button>
-            <button onClick={() => navigate('next')} aria-label="التالي"
+            <button onClick={() => navigate('next')} aria-label={dir === 'rtl' ? 'التالي' : 'Next'}
               className="grid h-12 w-12 place-items-center rounded-full border-2 border-[#0f2a4d]/60 text-[#0f2a4d] transition-all hover:scale-105 hover:bg-[#0f2a4d]/8 sm:h-16 sm:w-16">
-              <ArrowLeft size={26} strokeWidth={2.25} />
+              <Next size={26} strokeWidth={2.25} />
             </button>
 
             {/* زر مشاهدة جميع منتجات القسم */}
             <Link to={`/collection/${active_c.id}`}
               className="ms-1 inline-flex items-center gap-2 rounded-full bg-[#2f6fd6] px-5 py-3 text-sm font-bold text-white transition-transform hover:scale-105"
               style={{ fontFamily: 'Aktiv Grotesk Arabic, Readex Pro, sans-serif' }}>
-              كل المنتجات
-              <ArrowLeft size={18} strokeWidth={2.5} />
+              {t('كل المنتجات')}
+              <Next size={18} strokeWidth={2.5} />
             </Link>
           </div>
         </div>

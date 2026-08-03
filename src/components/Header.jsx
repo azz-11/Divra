@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import SocialIcons from './SocialIcons.jsx'
 import SearchOverlay from './SearchOverlay.jsx'
+import { useLang } from '../i18n.jsx'
 
 const NAV = [
   { label: 'الرئيسية', to: '/' },
@@ -15,6 +16,7 @@ export default function Header() {
   const [open, setOpen] = useState(false)
   const [search, setSearch] = useState(false)
   const { pathname } = useLocation()
+  const { t, lang, toggle } = useLang()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60)
@@ -60,16 +62,29 @@ export default function Header() {
                   solid ? 'text-text-dim hover:text-text' : 'text-white/85 hover:text-white'
                 }`}
               >
-                {item.label}
+                {t(item.label)}
               </Link>
             ))}
           </nav>
 
           <div className="flex items-center gap-2">
+            {/* زر تبديل اللغة */}
+            <button
+              onClick={toggle}
+              aria-label={lang === 'ar' ? 'Switch to English' : 'التبديل إلى العربية'}
+              className={`grid h-11 min-w-11 place-items-center rounded-full border px-3 text-sm font-bold transition-colors ${
+                solid
+                  ? 'border-line bg-white/60 text-text hover:border-brand hover:text-brand'
+                  : 'border-white/40 bg-white/10 text-white hover:border-white'
+              }`}
+            >
+              {lang === 'ar' ? 'EN' : 'ع'}
+            </button>
+
             {/* زر البحث (بدل الاستشارة) */}
             <button
               onClick={() => setSearch(true)}
-              aria-label="بحث"
+              aria-label={t('بحث')}
               className={`grid h-11 w-11 place-items-center rounded-full border transition-colors ${
                 solid
                   ? 'border-line bg-white/60 text-text hover:border-brand hover:text-brand'
@@ -84,7 +99,7 @@ export default function Header() {
 
             {/* الهامبرغر — جوال */}
             <button
-              aria-label="القائمة"
+              aria-label={t('القائمة')}
               aria-expanded={open}
               onClick={() => setOpen((v) => !v)}
               className={`grid h-11 w-11 place-items-center rounded-full border lg:hidden ${
@@ -117,7 +132,7 @@ export default function Header() {
         <nav className="flex flex-1 flex-col items-center justify-center gap-7">
           {NAV.map((item) => (
             <Link key={item.to} to={item.to} className="font-cairo text-2xl font-bold text-text">
-              {item.label}
+              {t(item.label)}
             </Link>
           ))}
           <SocialIcons className="mt-6" gap="gap-3" />

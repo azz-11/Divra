@@ -1,4 +1,5 @@
 import SocialIcons from './SocialIcons.jsx'
+import { useLang } from '../i18n.jsx'
 
 const INFO = [
   {
@@ -22,17 +23,18 @@ const INFO = [
 ]
 
 export default function Contact() {
+  const { t } = useLang()
   return (
     <section id="contact" className="relative overflow-hidden bg-surface py-24 md:py-32">
       <div className="mx-auto max-w-4xl px-6 text-center">
         <span className="mb-4 inline-block rounded-full border border-line bg-brand/10 px-4 py-1.5 text-sm text-brand-strong">
-          تواصل معنا
+          {t('تواصل معنا')}
         </span>
         <h2 className="font-cairo text-3xl font-black leading-snug sm:text-4xl md:text-5xl">
-          نحن <span className="text-gradient">قريبون</span> منك
+          {t('نحن')} <span className="text-gradient">{t('قريبون')}</span> {t('منك')}
         </h2>
         <p className="mx-auto mt-4 max-w-lg text-text-dim">
-          تواصل معنا عبر أيّ من القنوات التالية وسنسعد بخدمتك.
+          {t('تواصل معنا عبر أيّ من القنوات التالية وسنسعد بخدمتك.')}
         </p>
 
         <div className="mt-12 grid gap-5 sm:grid-cols-3">
@@ -44,17 +46,17 @@ export default function Contact() {
               rel="noopener noreferrer"
               className="glass flex flex-col items-center gap-3 rounded-xl2 p-7 transition-all hover:-translate-y-1 hover:border-brand-light"
             >
-              <span className="grid h-14 w-14 place-items-center rounded-full bg-brand/15 text-brand-light">
+              <span className="grid h-14 w-14 place-items-center rounded-full bg-brand/15 text-brand-strong">
                 <svg viewBox="0 0 24 24" className="h-7 w-7" fill="currentColor">{item.icon}</svg>
               </span>
-              <span className="text-xs text-text-dimmer">{item.label}</span>
+              <span className="text-xs text-text-dimmer">{t(item.label)}</span>
               <span dir="ltr" className="font-cairo font-bold">{item.value}</span>
             </a>
           ))}
         </div>
 
         <div className="mt-12 flex flex-col items-center gap-4">
-          <span className="text-sm text-text-dim">تابعنا على</span>
+          <span className="text-sm text-text-dim">{t('تابعنا على')}</span>
           <SocialIcons gap="gap-3" />
         </div>
       </div>

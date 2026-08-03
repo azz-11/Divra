@@ -8,6 +8,7 @@ import Home from './pages/Home.jsx'
 import AboutPage from './pages/AboutPage.jsx'
 import CollectionPage from './pages/CollectionPage.jsx'
 import useReducedMotion from './useReducedMotion.js'
+import { LanguageProvider } from './i18n.jsx'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -21,7 +22,8 @@ export default function App() {
   }, [])
 
   return (
-    <BrowserRouter>
+    <LanguageProvider>
+      <BrowserRouter>
       <Header />
       <main>
         <Routes>
@@ -32,6 +34,7 @@ export default function App() {
         </Routes>
       </main>
       <Footer />
-    </BrowserRouter>
+      </BrowserRouter>
+    </LanguageProvider>
   )
 }

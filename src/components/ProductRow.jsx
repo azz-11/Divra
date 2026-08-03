@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { FINISH } from '../productsData.js'
+import { useLang } from '../i18n.jsx'
 
 export default function ProductRow({ product, index, accent = '#5561e5', reduced }) {
   const rowRef = useRef(null)
@@ -9,6 +10,7 @@ export default function ProductRow({ product, index, accent = '#5561e5', reduced
   const imgRef = useRef(null)
   const [finish, setFinish] = useState(product.finishes[0])
   const reversed = index % 2 === 1
+  const { t, tr } = useLang()
 
   useEffect(() => {
     if (reduced) return
@@ -53,7 +55,7 @@ export default function ProductRow({ product, index, accent = '#5561e5', reduced
           <img
             ref={imgRef}
             src={product.images[finish]}
-            alt={`${product.title} - ${FINISH[finish].name}`}
+            alt={`${tr(product.title)} - ${tr(FINISH[finish].name)}`}
             className="relative z-10 h-full w-full object-contain drop-shadow-2xl"
             loading="lazy"
           />
@@ -62,27 +64,27 @@ export default function ProductRow({ product, index, accent = '#5561e5', reduced
 
       {/* النص */}
       <div className={reversed ? 'lg:order-1' : 'lg:order-2'}>
-        <h3 className="font-cairo text-2xl font-black sm:text-3xl">{product.title}</h3>
-        <p className="mt-3 max-w-md text-text-dim">{product.desc}</p>
+        <h3 className="font-cairo text-2xl font-black sm:text-3xl">{tr(product.title)}</h3>
+        <p className="mt-3 max-w-md text-text-dim">{tr(product.desc)}</p>
 
         <div className="mt-6 grid max-w-md grid-cols-2 gap-3">
-          {product.specs.map(([k, v]) => (
-            <div key={k} className="glass rounded-xl2 px-4 py-3">
-              <div className="text-xs text-text-dimmer">{k}</div>
-              <div className="mt-0.5 font-cairo font-bold text-brand-light">{v}</div>
+          {product.specs.map(([k, v], si) => (
+            <div key={si} className="glass rounded-xl2 px-4 py-3">
+              <div className="text-xs text-text-dimmer">{tr(k)}</div>
+              <div className="mt-0.5 font-cairo font-bold text-brand-strong">{tr(v)}</div>
             </div>
           ))}
         </div>
 
         <div className="mt-6 flex items-center gap-4">
-          <span className="text-sm text-text-dim">التشطيب:</span>
+          <span className="text-sm text-text-dim">{t('التشطيب:')}</span>
           <div className="flex items-center gap-3">
             {product.finishes.map((key) => (
               <button
                 key={key}
                 onClick={() => changeFinish(key)}
-                aria-label={FINISH[key].name}
-                title={FINISH[key].name}
+                aria-label={tr(FINISH[key].name)}
+                title={tr(FINISH[key].name)}
                 disabled={product.finishes.length === 1}
                 className={`h-9 w-9 rounded-full border-2 transition-transform hover:scale-110 disabled:cursor-default ${
                   finish === key ? 'border-brand ring-2 ring-brand/40' : 'border-line'
@@ -91,7 +93,7 @@ export default function ProductRow({ product, index, accent = '#5561e5', reduced
               />
             ))}
             {product.finishes.length === 1 && (
-              <span className="text-sm text-text-dim">{FINISH[product.finishes[0]].name}</span>
+              <span className="text-sm text-text-dim">{tr(FINISH[product.finishes[0]].name)}</span>
             )}
           </div>
         </div>
