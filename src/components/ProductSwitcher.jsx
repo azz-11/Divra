@@ -1,104 +1,102 @@
 import { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
-import { ArrowUpLeft } from 'lucide-react'
 import { PRODUCTS, collectionOf } from '../productsData.js'
 import { useLang } from '../i18n.jsx'
 
-// منتجات مختارة للمبدّل التفاعلي (نستخدم صور public/products الموجودة)
+// منتجات المبدّل + فيديو loop لكل منتج (التصنيف غير مرتبط بالفيديو — للتجربة)
 const IDS = ['mixer-chrome', 'shattaf', 'spray-gold', 'jacuzzi', 'toilet']
+const VIDEOS = ['/video/switch-1', '/video/switch-2', '/video/switch-3']
 const imgOf = (p) => p.images[p.finishes[0]]
-const ITEMS = IDS.map((id) => PRODUCTS.find((p) => p.id === id)).filter(Boolean)
+const ITEMS = IDS.map((id, i) => ({
+  ...PRODUCTS.find((p) => p.id === id),
+  video: VIDEOS[i % VIDEOS.length],
+})).filter((x) => x.id)
 
 export default function ProductSwitcher({ reduced }) {
   const [active, setActive] = useState(0)
-  const imgRef = useRef(null)
   const textRef = useRef(null)
+  const videoRef = useRef(null)
   const { t, tr } = useLang()
 
   const cur = ITEMS[active]
   const eyebrow = tr(collectionOf(cur.collection).name)
-  const spec = cur.specs[0] // مواصفة رئيسية واحدة
+  const spec = cur.specs[0]
 
-  // حركة الدخول عند تغيّر المنتج الحالي (مرتبطة بالـ state)
+  // ظهور النص عند تغيّر المنتج + محاولة تشغيل الفيديو
   useEffect(() => {
+    if (videoRef.current) videoRef.current.play?.().catch(() => {})
     if (reduced) return
     const tl = gsap.timeline()
-    tl.fromTo(imgRef.current, { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.55, ease: 'back.out(1.6)' })
-    tl.fromTo(textRef.current.children, { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 0.4, stagger: 0.06, ease: 'power3.out' }, 0.05)
+    tl.fromTo(textRef.current.children, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.5, stagger: 0.07, ease: 'power3.out' })
     return () => tl.kill()
   }, [active, reduced])
 
-  // اختيار منتج: تلاشٍ وتصغير ثم تبديل الحالة ثم ظهور (تتكفّل useEffect بالظهور)
   const select = (i) => {
     if (i === active) return
     if (reduced) return setActive(i)
-    gsap.to(imgRef.current, {
-      opacity: 0, scale: 0.9, duration: 0.25, ease: 'power2.in',
-      onComplete: () => setActive(i),
+    // النص القديم يخرج للأعلى ثم يتبدّل (تتكفّل useEffect بالدخول)
+    gsap.to(textRef.current, {
+      opacity: 0, y: -18, duration: 0.25, ease: 'power2.in',
+      onComplete: () => { gsap.set(textRef.current, { opacity: 1, y: 0 }); setActive(i) },
     })
-    gsap.to(textRef.current, { opacity: 0, y: -18, duration: 0.25, ease: 'power2.in',
-      onComplete: () => gsap.set(textRef.current, { opacity: 1, y: 0 }) })
   }
 
   return (
-    <section className="relative overflow-hidden py-24 md:py-28" id="switcher">
-      {/* خلفية متدرّجة بنفسجي/كحلي فاتحة */}
+    <section id="switcher" className="relative min-h-screen w-full overflow-hidden">
+      {/* فيديو ملء الشاشة — loop لكل منتج (يُعاد تحميله عند التبديل) */}
+      <video
+        key={cur.id}
+        ref={videoRef}
+        className="absolute inset-0 h-full w-full object-cover"
+        autoPlay
+        muted
+        loop
+        playsInline
+        poster={imgOf(cur)}
+      >
+        <source src={`${cur.video}.webm`} type="video/webm" />
+        <source src={`${cur.video}.mp4`} type="video/mp4" />
+      </video>
+
+      {/* طبقة تدرّج داكن للتباين */}
       <div
-        className="pointer-events-none absolute inset-0"
-        style={{ background: 'radial-gradient(120% 90% at 50% 15%, #eaf1ff 0%, #cddffb 55%, #b9d2fb 100%)' }}
-      />
-      <div
-        className="pointer-events-none absolute inset-inline-0 top-1/3 mx-auto h-[60vmin] w-[60vmin] -translate-y-1/2 rounded-full blur-3xl"
-        style={{ insetInline: 0, background: 'radial-gradient(circle, rgba(85,97,229,.28), transparent 70%)' }}
+        className="absolute inset-0"
+        style={{ background: 'linear-gradient(180deg, rgba(3,3,40,.55) 0%, rgba(3,3,40,.35) 45%, rgba(3,3,40,.85) 100%)' }}
       />
 
-      <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-10 px-6 lg:grid-cols-[minmax(0,1fr)_1.15fr]">
-        {/* العمود النصي الثابت */}
-        <div ref={textRef} className="order-2 lg:order-1">
-          <span className="mb-3 block text-sm font-bold uppercase tracking-widest text-brand-strong">
+      {/* المحتوى فوق الفيديو */}
+      <div className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col justify-center px-6 py-28">
+        <div ref={textRef} className="max-w-2xl">
+          <span className="mb-3 block text-sm font-bold uppercase tracking-widest text-brand-light">
             {t('ديفرا')} · {eyebrow}
           </span>
-          <h2 className="font-cairo text-4xl font-black leading-[1.05] text-text sm:text-5xl md:text-6xl">
+          <h2 className="font-cairo text-4xl font-black leading-[1.05] text-white sm:text-6xl md:text-7xl">
             {tr(cur.title)}
           </h2>
-          <p className="mt-5 max-w-md text-lg text-text-dim">{tr(cur.tagline)}</p>
-          {/* مواصفة رئيسية كبطاقة صغيرة */}
-          <div className="mt-7 inline-flex items-center gap-3 rounded-xl2 bg-white/70 px-5 py-3 shadow-sm backdrop-blur">
-            <span className="text-xs text-text-dimmer">{tr(spec[0])}</span>
-            <span className="font-cairo text-lg font-black text-brand-strong">{tr(spec[1])}</span>
+          <p className="mt-5 max-w-md text-lg text-white/85">{tr(cur.tagline)}</p>
+          <div className="mt-6 inline-flex items-center gap-3 rounded-xl2 border border-white/20 bg-white/10 px-5 py-3 backdrop-blur">
+            <span className="text-xs text-white/70">{tr(spec[0])}</span>
+            <span className="font-cairo text-lg font-black text-white">{tr(spec[1])}</span>
           </div>
         </div>
 
-        {/* الصورة المركزية + البطاقات العائمة */}
-        <div className="relative order-1 flex min-h-[46vh] items-center justify-center lg:order-2 lg:min-h-[62vh]">
-          <img
-            ref={imgRef}
-            src={imgOf(cur)}
-            alt={tr(cur.title)}
-            className="max-h-[42vh] w-auto max-w-full object-contain drop-shadow-2xl lg:max-h-[58vh]"
-          />
-
-          {/* بطاقات التبديل العائمة */}
-          <div className="absolute bottom-0 inset-inline-0 mx-auto flex flex-wrap justify-center gap-3 px-2" style={{ insetInline: 0 }}>
-            {ITEMS.map((it, i) => (
-              <button
-                key={it.id}
-                onClick={() => select(i)}
-                aria-label={tr(it.title)}
-                className={`group relative flex w-32 items-center gap-2 rounded-2xl border bg-white/75 p-2 pe-8 text-start backdrop-blur transition-all hover:-translate-y-1 hover:shadow-lg sm:w-40 ${
-                  i === active ? 'border-brand shadow-[0_0_0_2px_rgba(79,143,240,.35)]' : 'border-white/70 hover:border-brand-light'
-                }`}
-              >
-                <img src={imgOf(it)} alt="" className="h-10 w-10 flex-shrink-0 object-contain sm:h-12 sm:w-12" loading="lazy" />
-                <span className="line-clamp-2 text-[11px] font-bold leading-tight text-text sm:text-xs">
-                  {tr(it.title)}
-                </span>
-                <span className="absolute inset-inline-end-1.5 top-1/2 grid h-6 w-6 -translate-y-1/2 place-items-center rounded-full bg-brand/15 text-brand-strong transition-colors group-hover:bg-brand group-hover:text-white" style={{ insetInlineEnd: '0.375rem' }}>
-                  <ArrowUpLeft size={14} strokeWidth={2.5} className="rtl:rotate-0 ltr:-scale-x-100" />
-                </span>
-              </button>
-            ))}
-          </div>
+        {/* المسميات (أزرار التبديل) تحت الكتابات */}
+        <div className="mt-10 flex flex-wrap gap-3">
+          {ITEMS.map((it, i) => (
+            <button
+              key={it.id}
+              onClick={() => select(i)}
+              aria-label={tr(it.title)}
+              className={`flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-bold backdrop-blur transition-all hover:-translate-y-0.5 ${
+                i === active
+                  ? 'border-brand-light bg-white/20 text-white shadow-[0_0_0_2px_rgba(149,195,255,.5)]'
+                  : 'border-white/25 bg-white/10 text-white/80 hover:border-white/60 hover:text-white'
+              }`}
+            >
+              <img src={imgOf(it)} alt="" className="h-7 w-7 flex-shrink-0 object-contain" loading="lazy" />
+              {tr(it.title)}
+            </button>
+          ))}
         </div>
       </div>
     </section>
