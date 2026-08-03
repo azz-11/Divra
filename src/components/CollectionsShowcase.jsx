@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { COLLECTIONS } from '../productsData.js'
 
-const EASE = 'cubic-bezier(0.4,0,0.2,1)'
-const DUR = 650
+const EASE = 'cubic-bezier(0.33,1,0.68,1)' // انتقال ناعم (ease-out ناعم)
+const DUR = 1000
 const N = COLLECTIONS.length
 
 export default function CollectionsShowcase({ reduced }) {
