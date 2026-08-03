@@ -1,12 +1,12 @@
 import { useEffect } from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Header from './components/Header.jsx'
-import Hero from './components/Hero.jsx'
-import About from './components/About.jsx'
-import Products from './components/Products.jsx'
-import Contact from './components/Contact.jsx'
 import Footer from './components/Footer.jsx'
+import Home from './pages/Home.jsx'
+import AboutPage from './pages/AboutPage.jsx'
+import CollectionPage from './pages/CollectionPage.jsx'
 import useReducedMotion from './useReducedMotion.js'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -15,22 +15,23 @@ export default function App() {
   const reduced = useReducedMotion()
 
   useEffect(() => {
-    // إعادة حساب المشغّلات بعد تحميل الأصول (صور/خطوط)
     const refresh = () => ScrollTrigger.refresh()
     window.addEventListener('load', refresh)
     return () => window.removeEventListener('load', refresh)
   }, [])
 
   return (
-    <div className="relative">
+    <BrowserRouter>
       <Header />
       <main>
-        <Hero reduced={reduced} />
-        <About reduced={reduced} />
-        <Products reduced={reduced} />
-        <Contact />
+        <Routes>
+          <Route path="/" element={<Home reduced={reduced} />} />
+          <Route path="/about" element={<AboutPage reduced={reduced} />} />
+          <Route path="/collection/:id" element={<CollectionPage reduced={reduced} />} />
+          <Route path="*" element={<Home reduced={reduced} />} />
+        </Routes>
       </main>
       <Footer />
-    </div>
+    </BrowserRouter>
   )
 }
