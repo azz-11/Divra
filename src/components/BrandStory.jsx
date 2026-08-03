@@ -4,11 +4,12 @@ import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { useLang } from '../i18n.jsx'
 
 const EASE = 'cubic-bezier(0.33,1,0.68,1)'
+const FADE = 750 // مدة الانتقال (crossfade)
 
-// شرائح حكاية العلامة — الفيديوهات حالياً بدائل بصرية (تُستبدل عند إرفاق فيديوهات الحكاية)
+// شرائح حكاية العلامة — فيديوهات الحكاية
 const STORY = [
   {
-    video: '/video/switch-2',
+    video: '/video/story-1',
     tag: { ar: 'حكايتنا', en: 'Our story' },
     title: { ar: 'كل قطرة تبدأ بفكرة', en: 'Every drop begins with an idea' },
     text: {
@@ -17,7 +18,7 @@ const STORY = [
     },
   },
   {
-    video: '/video/switch-1',
+    video: '/video/story-2',
     tag: { ar: 'الحِرفة', en: 'Craft' },
     title: { ar: 'نَنحت المعدن كما تُكتب القصيدة', en: 'We sculpt metal the way a poem is written' },
     text: {
@@ -26,7 +27,7 @@ const STORY = [
     },
   },
   {
-    video: '/video/switch-3',
+    video: '/video/story-3',
     tag: { ar: 'التصميم', en: 'Design' },
     title: { ar: 'الجمال في أبسط تفصيل', en: 'Beauty in the simplest detail' },
     text: {
@@ -35,7 +36,7 @@ const STORY = [
     },
   },
   {
-    video: '/video/hero',
+    video: '/video/story-4',
     tag: { ar: 'الجودة', en: 'Quality' },
     title: { ar: 'أداءٌ يدوم كما يدوم الانطباع الأول', en: 'Performance that lasts like a first impression' },
     text: {
@@ -44,7 +45,7 @@ const STORY = [
     },
   },
   {
-    video: '/video/switch-2',
+    video: '/video/story-1',
     tag: { ar: 'ابدأ رحلتك', en: 'Begin your journey' },
     title: { ar: 'مساحتك تنتظر لمسة ديفرا', en: 'Your space awaits the Divra touch' },
     text: {
@@ -57,41 +58,68 @@ const STORY = [
 
 const N = STORY.length
 
+function Slide({ video }) {
+  return (
+    <video className="absolute inset-0 h-full w-full object-cover" autoPlay muted loop playsInline preload="auto">
+      <source src={`${video}.webm`} type="video/webm" />
+      <source src={`${video}.mp4`} type="video/mp4" />
+    </video>
+  )
+}
+
 export default function BrandStory({ reduced }) {
   const [active, setActive] = useState(0)
+  const [prev, setPrev] = useState(null) // الشريحة الخارجة أثناء الـ crossfade
   const animating = useRef(false)
   const drag = useRef({ x: 0, on: false })
   const textRef = useRef(null)
-  const videoRef = useRef(null)
+  const curVidRef = useRef(null)
   const { tr, dir } = useLang()
   const Prev = dir === 'rtl' ? ArrowRight : ArrowLeft
   const Next = dir === 'rtl' ? ArrowLeft : ArrowRight
 
   const cur = STORY[active]
 
+  // عند تغيّر الشريحة: crossfade للفيديو + دخول النص
   useEffect(() => {
-    videoRef.current?.play?.().catch(() => {})
-    if (reduced) return
-    const el = textRef.current
-    if (!el) return
-    // حركة دخول النص (CSS transition)
-    el.style.transition = 'none'
-    el.style.opacity = 0
-    el.style.transform = 'translateY(26px)'
-    const id = requestAnimationFrame(() => {
-      el.style.transition = `opacity 700ms ${EASE}, transform 700ms ${EASE}`
-      el.style.opacity = 1
-      el.style.transform = 'translateY(0)'
-    })
-    return () => cancelAnimationFrame(id)
-  }, [active, reduced])
+    // إظهار الفيديو الجديد تدريجياً فوق القديم
+    const v = curVidRef.current
+    if (v && !reduced) {
+      v.style.transition = 'none'
+      v.style.opacity = 0
+      requestAnimationFrame(() => {
+        v.style.transition = `opacity ${FADE}ms ${EASE}`
+        v.style.opacity = 1
+      })
+    }
+    // إزالة الشريحة القديمة بعد اكتمال الانتقال
+    let t
+    if (prev !== null) t = setTimeout(() => setPrev(null), FADE + 60)
 
-  const go = (dirStep) => {
-    if (animating.current) return
+    // حركة دخول النص
+    const el = textRef.current
+    if (el && !reduced) {
+      el.style.transition = 'none'
+      el.style.opacity = 0
+      el.style.transform = 'translateY(26px)'
+      requestAnimationFrame(() => {
+        el.style.transition = `opacity 700ms ${EASE}, transform 700ms ${EASE}`
+        el.style.opacity = 1
+        el.style.transform = 'translateY(0)'
+      })
+    }
+    return () => t && clearTimeout(t)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [active])
+
+  const change = (idx) => {
+    if (idx === active || animating.current) return
     animating.current = true
-    setActive((p) => (p + dirStep + N) % N)
-    setTimeout(() => (animating.current = false), 650)
+    setPrev(active)
+    setActive(idx)
+    setTimeout(() => (animating.current = false), FADE)
   }
+  const go = (step) => change((active + step + N) % N)
 
   const onDown = (e) => { drag.current = { x: e.clientX ?? e.touches?.[0]?.clientX ?? 0, on: true } }
   const onUp = (e) => {
@@ -110,19 +138,20 @@ export default function BrandStory({ reduced }) {
       onPointerUp={onUp}
       style={{ touchAction: 'pan-y' }}
     >
-      {/* فيديو ملء الشاشة */}
-      <video
-        key={active}
-        ref={videoRef}
-        className="absolute inset-0 h-full w-full object-cover"
-        autoPlay muted loop playsInline preload="auto"
-      >
-        <source src={`${cur.video}.webm`} type="video/webm" />
-        <source src={`${cur.video}.mp4`} type="video/mp4" />
-      </video>
+      {/* طبقتا فيديو للـ crossfade */}
+      <div className="absolute inset-0">
+        {prev !== null && (
+          <div key={`p-${prev}`} className="absolute inset-0" style={{ zIndex: 0 }}>
+            <Slide video={STORY[prev].video} />
+          </div>
+        )}
+        <div key={`c-${active}`} ref={curVidRef} className="absolute inset-0" style={{ zIndex: 1, opacity: reduced ? 1 : 0 }}>
+          <Slide video={cur.video} />
+        </div>
+      </div>
 
       {/* تعتيم للتباين */}
-      <div className="absolute inset-0" style={{ background: 'radial-gradient(120% 100% at 50% 50%, rgba(3,3,40,.35) 0%, rgba(3,3,40,.72) 100%)' }} />
+      <div className="absolute inset-0" style={{ zIndex: 2, background: 'radial-gradient(120% 100% at 50% 50%, rgba(3,3,40,.35) 0%, rgba(3,3,40,.72) 100%)' }} />
 
       {/* النص في المنتصف */}
       <div className="relative z-10 mx-auto flex min-h-screen max-w-4xl flex-col items-center justify-center px-6 text-center">
@@ -141,30 +170,20 @@ export default function BrandStory({ reduced }) {
       </div>
 
       {/* أزرار التنقّل */}
-      <button
-        onClick={() => go(-1)}
-        aria-label={dir === 'rtl' ? 'السابق' : 'Previous'}
-        className="absolute start-4 top-1/2 z-20 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full border-2 border-white/50 text-white backdrop-blur transition-all hover:scale-105 hover:border-white hover:bg-white/10 sm:start-8 sm:h-16 sm:w-16"
-      >
+      <button onClick={() => go(-1)} aria-label={dir === 'rtl' ? 'السابق' : 'Previous'}
+        className="absolute start-4 top-1/2 z-20 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full border-2 border-white/50 text-white backdrop-blur transition-all hover:scale-105 hover:border-white hover:bg-white/10 sm:start-8 sm:h-16 sm:w-16">
         <Prev size={26} strokeWidth={2.25} />
       </button>
-      <button
-        onClick={() => go(1)}
-        aria-label={dir === 'rtl' ? 'التالي' : 'Next'}
-        className="absolute end-4 top-1/2 z-20 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full border-2 border-white/50 text-white backdrop-blur transition-all hover:scale-105 hover:border-white hover:bg-white/10 sm:end-8 sm:h-16 sm:w-16"
-      >
+      <button onClick={() => go(1)} aria-label={dir === 'rtl' ? 'التالي' : 'Next'}
+        className="absolute end-4 top-1/2 z-20 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full border-2 border-white/50 text-white backdrop-blur transition-all hover:scale-105 hover:border-white hover:bg-white/10 sm:end-8 sm:h-16 sm:w-16">
         <Next size={26} strokeWidth={2.25} />
       </button>
 
       {/* مؤشّرات الشرائح */}
       <div className="absolute bottom-8 inset-inline-0 z-20 mx-auto flex justify-center gap-2" style={{ insetInline: 0 }}>
         {STORY.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => setActive(i)}
-            aria-label={`${i + 1}`}
-            className={`h-1.5 rounded-full transition-all ${i === active ? 'w-8 bg-white' : 'w-2.5 bg-white/40 hover:bg-white/70'}`}
-          />
+          <button key={i} onClick={() => change(i)} aria-label={`${i + 1}`}
+            className={`h-1.5 rounded-full transition-all ${i === active ? 'w-8 bg-white' : 'w-2.5 bg-white/40 hover:bg-white/70'}`} />
         ))}
       </div>
     </section>
