@@ -68,7 +68,7 @@ export default function Hero({ reduced }) {
             trigger: sectionRef.current,
             start: 'top top',
             end: 'bottom bottom',
-            scrub: 0.4,
+            scrub: 1,
             pin: pinRef.current,
             anticipatePin: 1,
           },
@@ -107,7 +107,7 @@ export default function Hero({ reduced }) {
     <section
       id="hero"
       ref={sectionRef}
-      className={`relative ${tall ? 'h-[220vh]' : 'min-h-screen'}`}
+      className={`relative ${tall ? 'h-[320vh]' : 'min-h-screen'}`}
     >
       <div
         ref={pinRef}
@@ -123,8 +123,9 @@ export default function Hero({ reduced }) {
           poster="/products/poster.webp"
           {...(touch ? { autoPlay: true, loop: true } : {})}
         >
-          <source src="/video/hero.webm" type="video/webm" />
+          {/* mp4 (all-intra) أولاً لأنه أصغر وأسرع في الـ seek على كل المتصفّحات */}
           <source src="/video/hero.mp4" type="video/mp4" />
+          <source src="/video/hero.webm" type="video/webm" />
         </video>
 
         {/* طبقة تدرج داكن للتباين */}
