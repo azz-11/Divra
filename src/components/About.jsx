@@ -85,7 +85,7 @@ export default function About({ reduced }) {
               className="absolute inset-6 rounded-full opacity-60 blur-2xl"
               style={{
                 background:
-                  'radial-gradient(circle, rgba(85,97,229,.55), transparent 70%)',
+                  'radial-gradient(circle, rgba(79,143,240,.4), transparent 70%)',
               }}
             />
             <img
@@ -108,7 +108,7 @@ export default function About({ reduced }) {
               }`}
               style={i === 0 ? { insetInlineStart: 0 } : { insetInlineEnd: 0 }}
             >
-              <div className="font-cairo text-2xl font-black text-brand-light">
+              <div className="font-cairo text-2xl font-black text-brand-strong">
                 {s.value}
               </div>
               <div className="text-xs text-text-dim">{s.label}</div>
@@ -120,7 +120,7 @@ export default function About({ reduced }) {
         <div>
           <span
             data-reveal
-            className="mb-4 inline-block rounded-full border border-line bg-white/5 px-4 py-1.5 text-sm text-brand-pale"
+            className="mb-4 inline-block rounded-full border border-line bg-brand/10 px-4 py-1.5 text-sm text-brand-strong"
           >
             من نحن
           </span>
@@ -139,7 +139,7 @@ export default function About({ reduced }) {
           <div className="mt-9 space-y-5">
             {FEATURES.map((f) => (
               <div key={f.title} data-reveal className="flex items-start gap-4">
-                <span className="grid h-12 w-12 flex-shrink-0 place-items-center rounded-xl2 bg-brand/15 text-brand-light">
+                <span className="grid h-12 w-12 flex-shrink-0 place-items-center rounded-xl2 bg-brand/15 text-brand-strong">
                   <svg
                     viewBox="0 0 24 24"
                     className="h-6 w-6"

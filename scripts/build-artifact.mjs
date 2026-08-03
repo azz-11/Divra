@@ -6,14 +6,12 @@ const P = '/home/user/Divra/public'
 const b64raw = (path) => readFileSync(path).toString('base64')
 const b64 = (path, mime) => `data:${mime};base64,${b64raw(path)}`
 
-// الصور تعمل كـ data URI بلا مشاكل
+// الصور تعمل كـ data URI بلا مشاكل — نُضمّن كل صور المنتجات + الشعار تلقائياً
 const assets = {
   '/logo.png': b64(`${P}/logo.png`, 'image/png'),
-  '/products/poster.webp': b64(`${P}/products/poster.webp`, 'image/webp'),
-  '/products/faucet-tall-black.webp': b64(`${P}/products/faucet-tall-black.webp`, 'image/webp'),
-  '/products/faucet-bath-black.webp': b64(`${P}/products/faucet-bath-black.webp`, 'image/webp'),
-  '/products/faucet-shower-black.webp': b64(`${P}/products/faucet-shower-black.webp`, 'image/webp'),
-  '/products/faucet-basin-black.webp': b64(`${P}/products/faucet-basin-black.webp`, 'image/webp'),
+}
+for (const f of readdirSync(`${P}/products`)) {
+  if (f.endsWith('.webp')) assets[`/products/${f}`] = b64(`${P}/products/${f}`, 'image/webp')
 }
 
 // الفيديو: Chromium لا يشغّل <video> من data: URI (لا يدعم byte-range)،

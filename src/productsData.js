@@ -100,7 +100,7 @@ export const COLLECTIONS = [
     short: 'الخلاطات',
     intro: 'خلاطات تجمع الدقّة والأناقة لتكون قلب مغسلتك ومطبخك.',
     features: ['تحكّم دقيق بالتدفّق', 'تشطيب أسود مطفي', 'خامات مقاومة للصدأ'],
-    accent: '#5561e5', bg: '#0c0c3a',
+    accent: '#2f6fd6', bg: '#e4f0ff',
     image: '/products/mixer-chrome.webp',
   },
   {
@@ -109,7 +109,7 @@ export const COLLECTIONS = [
     short: 'الشطاف',
     intro: 'شطافات أنيقة بضغط متوازن وتحكّم سلس ونظافة فائقة.',
     features: ['ضغط ماء متوازن', 'تحكّم سلس', 'تشطيب مقاوم للصدأ'],
-    accent: '#7781ea', bg: '#0a0a3d',
+    accent: '#2f6fd6', bg: '#cae1ff',
     image: '/products/shattaf-gold.webp',
   },
   {
@@ -118,7 +118,7 @@ export const COLLECTIONS = [
     short: 'المروش',
     intro: 'رؤوس مرشّات قابلة للتوجيه بضغط ماء متوازن وتركيب سهل.',
     features: ['رؤوس قابلة للتوجيه', 'ضغط ماء متوازن', 'تركيب سهل'],
-    accent: '#99a0ef', bg: '#12123f',
+    accent: '#2f6fd6', bg: '#afd2ff',
     image: '/products/shower-gold.webp',
   },
   {
@@ -127,7 +127,7 @@ export const COLLECTIONS = [
     short: 'البانيو',
     intro: 'خلاطات بانيو جدارية بخطوط نحتية تمنح حمّامك حضوراً فندقياً.',
     features: ['مخرج مزدوج', 'محوّل انسيابي', 'تصميم جداري أنيق'],
-    accent: '#5561e5', bg: '#0c0c3a',
+    accent: '#2f6fd6', bg: '#e4f0ff',
     image: '/products/faucet-bath-black.webp',
   },
   {
@@ -136,7 +136,7 @@ export const COLLECTIONS = [
     short: 'الكراسي',
     intro: 'كراسي حمّام آمنة ومريحة بمواد مضادة للانزلاق وتحمّل عالٍ.',
     features: ['مواد مضادة للانزلاق', 'تحمّل عالٍ', 'راحة وأمان'],
-    accent: '#7781ea', bg: '#0a0a3d',
+    accent: '#2f6fd6', bg: '#cae1ff',
     image: '/products/toilet-white.webp',
   },
   {
@@ -145,7 +145,7 @@ export const COLLECTIONS = [
     short: 'الجاكوزي',
     intro: 'جاكوزي فاخر بنفّاثات تدليك وإضاءة محيطة وتحكّم رقمي.',
     features: ['نفّاثات تدليك', 'إضاءة محيطة', 'تحكّم رقمي'],
-    accent: '#99a0ef', bg: '#12123f',
+    accent: '#2f6fd6', bg: '#d3e6ff',
     image: '/products/jacuzzi-white.webp',
   },
 ]

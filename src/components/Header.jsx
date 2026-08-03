@@ -44,10 +44,10 @@ export default function Header() {
           {/* الشعار + أيقونات التواصل بجانبه */}
           <div className="flex items-center gap-4">
             <Link to="/" className="flex items-center">
-              <img src="/logo.png" alt="ديفرا Divra" className="h-9 w-auto" />
+              <img src={solid ? '/logo.png' : '/logo-light.png'} alt="ديفرا Divra" className="h-9 w-auto" />
             </Link>
             <span className="hidden h-6 w-px bg-line md:block" />
-            <SocialIcons className="hidden md:flex" />
+            <SocialIcons className="hidden md:flex" light={!solid} />
           </div>
 
           {/* التنقل — سطح المكتب */}
@@ -56,7 +56,9 @@ export default function Header() {
               <Link
                 key={item.to}
                 to={item.to}
-                className="text-sm font-medium text-text-dim transition-colors hover:text-text"
+                className={`text-sm font-medium transition-colors ${
+                  solid ? 'text-text-dim hover:text-text' : 'text-white/85 hover:text-white'
+                }`}
               >
                 {item.label}
               </Link>
@@ -68,7 +70,11 @@ export default function Header() {
             <button
               onClick={() => setSearch(true)}
               aria-label="بحث"
-              className="grid h-11 w-11 place-items-center rounded-full border border-line bg-white/5 text-text transition-colors hover:border-brand-light hover:text-brand-light"
+              className={`grid h-11 w-11 place-items-center rounded-full border transition-colors ${
+                solid
+                  ? 'border-line bg-white/60 text-text hover:border-brand hover:text-brand'
+                  : 'border-white/40 bg-white/10 text-white hover:border-white'
+              }`}
             >
               <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2">
                 <circle cx="11" cy="11" r="7" />
@@ -81,12 +87,21 @@ export default function Header() {
               aria-label="القائمة"
               aria-expanded={open}
               onClick={() => setOpen((v) => !v)}
-              className="grid h-11 w-11 place-items-center rounded-full border border-line lg:hidden"
+              className={`grid h-11 w-11 place-items-center rounded-full border lg:hidden ${
+                open || solid ? 'border-line' : 'border-white/40'
+              }`}
             >
               <span className="relative block h-4 w-6">
-                <span className={`absolute inset-inline-0 top-0 h-0.5 rounded bg-text transition-all ${open ? 'top-1.5 rotate-45' : ''}`} />
-                <span className={`absolute inset-inline-0 top-1.5 h-0.5 rounded bg-text transition-all ${open ? 'opacity-0' : ''}`} />
-                <span className={`absolute inset-inline-0 top-3 h-0.5 rounded bg-text transition-all ${open ? 'top-1.5 -rotate-45' : ''}`} />
+                {(() => {
+                  const bar = open || solid ? 'bg-text' : 'bg-white'
+                  return (
+                    <>
+                      <span className={`absolute inset-inline-0 top-0 h-0.5 rounded ${bar} transition-all ${open ? 'top-1.5 rotate-45' : ''}`} />
+                      <span className={`absolute inset-inline-0 top-1.5 h-0.5 rounded ${bar} transition-all ${open ? 'opacity-0' : ''}`} />
+                      <span className={`absolute inset-inline-0 top-3 h-0.5 rounded ${bar} transition-all ${open ? 'top-1.5 -rotate-45' : ''}`} />
+                    </>
+                  )
+                })()}
               </span>
             </button>
           </div>
@@ -95,7 +110,7 @@ export default function Header() {
 
       {/* قائمة الجوال */}
       <div
-        className={`fixed inset-0 z-40 flex flex-col bg-ink/95 backdrop-blur-xl transition-all duration-300 lg:hidden ${
+        className={`fixed inset-0 z-40 flex flex-col bg-[#eaf3ff]/95 backdrop-blur-xl transition-all duration-300 lg:hidden ${
           open ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'
         }`}
       >

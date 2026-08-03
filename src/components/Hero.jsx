@@ -139,21 +139,24 @@ export default function Hero({ reduced }) {
 
         {/* المحتوى */}
         <div ref={contentRef} className="relative z-10 mx-auto max-w-4xl px-6 text-center">
-          <span className="mb-5 inline-block rounded-full border border-line bg-white/5 px-4 py-1.5 text-sm text-brand-pale backdrop-blur">
+          <span className="mb-5 inline-block rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-sm text-white backdrop-blur">
             أدوات صحية فاخرة
           </span>
-          <h1 className="font-cairo text-4xl font-black leading-tight sm:text-6xl md:text-7xl">
-            فنّ الماء بلمسة <span className="text-gradient">ديفرا</span>
+          <h1 className="font-cairo text-4xl font-black leading-tight text-white sm:text-6xl md:text-7xl">
+            فنّ الماء بلمسة <span className="text-brand-light">ديفرا</span>
           </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-base text-text-dim sm:text-lg">
+          <p className="mx-auto mt-6 max-w-2xl text-base text-white/85 sm:text-lg">
             صنابير ومخلاطات منحوتة بدقّة تجمع بين الجمال والأداء، لتمنح مطبخك
             وحمّامك حضوراً استثنائياً يليق بذوقك الرفيع.
           </p>
           <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
-            <a href="#products" className="btn btn-primary">
+            <a href="#collections" className="btn btn-primary">
               استكشف المجموعة
             </a>
-            <a href="#about" className="btn btn-ghost">
+            <a
+              href="/about"
+              className="btn border border-white/30 bg-white/10 text-white backdrop-blur hover:bg-white/20"
+            >
               تعرّف على ديفرا
             </a>
           </div>
@@ -161,8 +164,8 @@ export default function Hero({ reduced }) {
 
         {/* مؤشر السكرول */}
         <a
-          href="#about"
-          className="absolute inset-inline-0 bottom-8 z-10 mx-auto flex w-full flex-col items-center gap-2 text-text-dimmer"
+          href="#collections"
+          className="absolute inset-inline-0 bottom-8 z-10 mx-auto flex w-full flex-col items-center gap-2 text-white/70"
           style={{ insetInline: 0 }}
           aria-label="مرّر للأسفل"
         >

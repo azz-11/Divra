@@ -25,7 +25,7 @@ export default function Contact() {
   return (
     <section id="contact" className="relative overflow-hidden bg-surface py-24 md:py-32">
       <div className="mx-auto max-w-4xl px-6 text-center">
-        <span className="mb-4 inline-block rounded-full border border-line bg-white/5 px-4 py-1.5 text-sm text-brand-pale">
+        <span className="mb-4 inline-block rounded-full border border-line bg-brand/10 px-4 py-1.5 text-sm text-brand-strong">
           تواصل معنا
         </span>
         <h2 className="font-cairo text-3xl font-black leading-snug sm:text-4xl md:text-5xl">

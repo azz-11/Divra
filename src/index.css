@@ -3,18 +3,20 @@
 @tailwind utilities;
 
 :root {
-  --ink: #030328;
-  --ink-2: #0a0a3d;
-  --surface: #0c0c3a;
-  --surface-2: #12123f;
-  --brand: #5561e5;
-  --brand-2: #7781ea;
-  --brand-light: #99a0ef;
-  --brand-pale: #dddffa;
-  --text: #f4f4fb;
-  --text-dim: rgba(244, 244, 251, 0.62);
-  --text-dimmer: rgba(244, 244, 251, 0.38);
-  --line: rgba(255, 255, 255, 0.09);
+  /* ثيم فاتح أزرق — الخلفيات من درجات الأزرق الفاتحة، والنص كحلي غامق للقراءة */
+  --ink: #e4f0ff; /* الخلفية الأساسية الفاتحة */
+  --ink-2: #cae1ff;
+  --surface: #ffffff; /* بطاقات */
+  --surface-2: #eef6ff;
+  --brand: #4f8ff0; /* أزرق تفاعلي بتباين كافٍ */
+  --brand-2: #7aa9f5;
+  --brand-light: #95c3ff; /* الأزرق الفاتح الأساسي */
+  --brand-pale: #cae1ff;
+  --brand-strong: #2f6fd6; /* للأزرار والروابط التي تحتاج تبايناً */
+  --text: #0f2a4d; /* كحلي غامق للكتابات */
+  --text-dim: rgba(15, 42, 77, 0.66);
+  --text-dimmer: rgba(15, 42, 77, 0.42);
+  --line: rgba(15, 42, 77, 0.12);
 }
 
 * {
@@ -29,7 +31,9 @@ body {
   margin: 0;
   background: var(--ink);
   color: var(--text);
-  font-family: 'Tajawal', sans-serif;
+  /* الخط الأساسي: Aktiv Grotesk Arabic مع بديل Readex Pro — الوصف بوزن ميديم */
+  font-family: 'Aktiv Grotesk Arabic', 'Readex Pro', sans-serif;
+  font-weight: 500;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
@@ -38,7 +42,8 @@ h1,
 h2,
 h3,
 h4 {
-  font-family: 'Cairo', sans-serif;
+  font-family: 'Aktiv Grotesk Arabic', 'Readex Pro', sans-serif;
+  font-weight: 700; /* العناوين بولد */
   margin: 0;
 }
 
@@ -59,17 +64,17 @@ h4 {
   border-radius: 10px;
 }
 
-/* تدرج نصي بنفسجي */
+/* تدرج نصي أزرق */
 .text-gradient {
-  background: linear-gradient(120deg, var(--brand-light), var(--brand-pale));
+  background: linear-gradient(120deg, var(--brand), var(--brand-strong));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-/* بطاقة زجاجية */
+/* بطاقة زجاجية فاتحة */
 .glass {
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--line);
@@ -84,7 +89,7 @@ h4 {
   padding: 0.85rem 1.75rem;
   border-radius: 999px;
   font-weight: 700;
-  font-family: 'Cairo', sans-serif;
+  font-family: 'Aktiv Grotesk Arabic', 'Readex Pro', sans-serif;
   cursor: pointer;
   transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
   border: none;
@@ -92,21 +97,21 @@ h4 {
   white-space: nowrap;
 }
 .btn-primary {
-  background: linear-gradient(120deg, var(--brand), var(--brand-2));
-  color: var(--text);
-  box-shadow: 0 10px 30px -8px rgba(85, 97, 229, 0.6);
+  background: linear-gradient(120deg, var(--brand), var(--brand-strong));
+  color: #ffffff;
+  box-shadow: 0 10px 30px -8px rgba(47, 111, 214, 0.5);
 }
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 16px 40px -8px rgba(85, 97, 229, 0.75);
+  box-shadow: 0 16px 40px -8px rgba(47, 111, 214, 0.65);
 }
 .btn-ghost {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(15, 42, 77, 0.05);
   color: var(--text);
   border: 1px solid var(--line);
 }
 .btn-ghost:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(15, 42, 77, 0.1);
   transform: translateY(-2px);
 }
 

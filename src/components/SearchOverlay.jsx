@@ -38,7 +38,7 @@ export default function SearchOverlay({ open, onClose }) {
   if (!open) return null
 
   return (
-    <div className="fixed inset-0 z-[60] flex flex-col bg-ink/95 backdrop-blur-xl">
+    <div className="fixed inset-0 z-[60] flex flex-col bg-[#eaf3ff]/95 backdrop-blur-xl">
       <div className="mx-auto flex w-full max-w-2xl flex-1 flex-col px-5 pt-24">
         <div className="glass flex items-center gap-3 rounded-xl2 px-4">
           <svg viewBox="0 0 24 24" className="h-5 w-5 text-text-dim" fill="none" stroke="currentColor" strokeWidth="2">

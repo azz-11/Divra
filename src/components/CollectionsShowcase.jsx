@@ -97,7 +97,7 @@ export default function CollectionsShowcase({ reduced }) {
         <div
           className="pointer-events-none absolute inset-0"
           style={{
-            zIndex: 50, opacity: 0.35, backgroundSize: '200px 200px',
+            zIndex: 50, opacity: 0.12, backgroundSize: '200px 200px',
             backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E")`,
           }}
         />
@@ -106,8 +106,8 @@ export default function CollectionsShowcase({ reduced }) {
         <div className="absolute inset-inline-0 flex select-none items-center justify-center" style={{ insetInline: 0, top: '16%', zIndex: 2, pointerEvents: 'none' }}>
           <span
             style={{
-              fontFamily: 'Cairo, sans-serif', fontSize: 'clamp(72px, 22vw, 300px)', fontWeight: 900,
-              color: '#fff', opacity: 0.05, lineHeight: 1, letterSpacing: '-0.02em', whiteSpace: 'nowrap',
+              fontFamily: 'Aktiv Grotesk Arabic, Readex Pro, sans-serif', fontSize: 'clamp(72px, 22vw, 300px)', fontWeight: 900,
+              color: '#0f2a4d', opacity: 0.06, lineHeight: 1, letterSpacing: '-0.02em', whiteSpace: 'nowrap',
               transition: `opacity ${DUR}ms ${EASE}`,
             }}
           >
@@ -117,7 +117,7 @@ export default function CollectionsShowcase({ reduced }) {
 
         {/* شارة العلامة */}
         <div className="absolute top-24 start-4 sm:start-8" style={{ insetInlineStart: undefined, zIndex: 60 }}>
-          <span className="text-xs font-semibold uppercase text-white/80" style={{ letterSpacing: '0.18em' }}>
+          <span className="text-xs font-semibold uppercase text-[#0f2a4d]/70" style={{ letterSpacing: '0.18em' }}>
             DIVRA · أقسامنا
           </span>
         </div>
@@ -148,13 +148,13 @@ export default function CollectionsShowcase({ reduced }) {
 
         {/* النص السفلي + أزرار التنقّل + زر كل المنتجات */}
         <div className="absolute bottom-6 start-4 sm:bottom-16 sm:start-16" style={{ zIndex: 60, maxWidth: 460 }}>
-          <p className="mb-2 text-base font-bold uppercase text-white/95 sm:mb-3 sm:text-[22px]" style={{ fontFamily: 'Cairo, sans-serif', transition: `opacity ${DUR}ms ${EASE}` }}>
+          <p className="mb-2 text-base font-bold uppercase text-[#0f2a4d] sm:mb-3 sm:text-[22px]" style={{ fontFamily: 'Aktiv Grotesk Arabic, Readex Pro, sans-serif', transition: `opacity ${DUR}ms ${EASE}` }}>
             {active_c.name}
           </p>
           {/* المميزات */}
           <div className="mb-4 flex flex-wrap gap-2 sm:mb-5">
             {active_c.features.map((f) => (
-              <span key={f} className="rounded-full border border-white/25 bg-white/10 px-3 py-1 text-xs text-white/90 backdrop-blur">
+              <span key={f} className="rounded-full border border-[#0f2a4d]/20 bg-white/50 px-3 py-1 text-xs text-[#0f2a4d] backdrop-blur">
                 {f}
               </span>
             ))}
@@ -162,18 +162,18 @@ export default function CollectionsShowcase({ reduced }) {
 
           <div className="flex flex-wrap items-center gap-3">
             <button onClick={() => navigate('prev')} aria-label="السابق"
-              className="grid h-12 w-12 place-items-center rounded-full border-2 border-white/80 text-white transition-all hover:scale-105 hover:bg-white/10 sm:h-16 sm:w-16">
+              className="grid h-12 w-12 place-items-center rounded-full border-2 border-[#0f2a4d]/60 text-[#0f2a4d] transition-all hover:scale-105 hover:bg-[#0f2a4d]/8 sm:h-16 sm:w-16">
               <ArrowRight size={26} strokeWidth={2.25} />
             </button>
             <button onClick={() => navigate('next')} aria-label="التالي"
-              className="grid h-12 w-12 place-items-center rounded-full border-2 border-white/80 text-white transition-all hover:scale-105 hover:bg-white/10 sm:h-16 sm:w-16">
+              className="grid h-12 w-12 place-items-center rounded-full border-2 border-[#0f2a4d]/60 text-[#0f2a4d] transition-all hover:scale-105 hover:bg-[#0f2a4d]/8 sm:h-16 sm:w-16">
               <ArrowLeft size={26} strokeWidth={2.25} />
             </button>
 
             {/* زر مشاهدة جميع منتجات القسم */}
             <Link to={`/collection/${active_c.id}`}
-              className="ms-1 inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-bold text-ink transition-transform hover:scale-105"
-              style={{ fontFamily: 'Cairo, sans-serif' }}>
+              className="ms-1 inline-flex items-center gap-2 rounded-full bg-[#2f6fd6] px-5 py-3 text-sm font-bold text-white transition-transform hover:scale-105"
+              style={{ fontFamily: 'Aktiv Grotesk Arabic, Readex Pro, sans-serif' }}>
               كل المنتجات
               <ArrowLeft size={18} strokeWidth={2.5} />
             </Link>
@@ -183,13 +183,13 @@ export default function CollectionsShowcase({ reduced }) {
         {/* مؤشّر رقم القسم أسفل اليسار */}
         <div className="absolute bottom-8 end-4 hidden sm:bottom-20 sm:end-10 sm:block" style={{ zIndex: 60 }}>
           <span
-            className="flex items-baseline gap-1 text-white/90"
-            style={{ fontFamily: 'Cairo, sans-serif', letterSpacing: '-0.02em', lineHeight: 1 }}
+            className="flex items-baseline gap-1 text-[#0f2a4d]/90"
+            style={{ fontFamily: 'Aktiv Grotesk Arabic, Readex Pro, sans-serif', letterSpacing: '-0.02em', lineHeight: 1 }}
           >
             <span style={{ fontSize: 'clamp(28px, 5vw, 64px)', fontWeight: 700 }}>
               {String(active + 1).padStart(2, '0')}
             </span>
-            <span className="text-white/50" style={{ fontSize: 'clamp(14px, 2vw, 24px)' }}>
+            <span className="text-[#0f2a4d]/45" style={{ fontSize: 'clamp(14px, 2vw, 24px)' }}>
               / {String(N).padStart(2, '0')}
             </span>
           </span>

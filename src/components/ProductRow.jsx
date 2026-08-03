@@ -85,7 +85,7 @@ export default function ProductRow({ product, index, accent = '#5561e5', reduced
                 title={FINISH[key].name}
                 disabled={product.finishes.length === 1}
                 className={`h-9 w-9 rounded-full border-2 transition-transform hover:scale-110 disabled:cursor-default ${
-                  finish === key ? 'border-brand-light ring-2 ring-brand/40' : 'border-white/20'
+                  finish === key ? 'border-brand ring-2 ring-brand/40' : 'border-line'
                 }`}
                 style={{ background: FINISH[key].swatch }}
               />

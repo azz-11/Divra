@@ -12,14 +12,16 @@ export default {
         'brand-2': 'var(--brand-2)',
         'brand-light': 'var(--brand-light)',
         'brand-pale': 'var(--brand-pale)',
+        'brand-strong': 'var(--brand-strong)',
         text: 'var(--text)',
         'text-dim': 'var(--text-dim)',
         'text-dimmer': 'var(--text-dimmer)',
         line: 'var(--line)',
       },
       fontFamily: {
-        cairo: ['Cairo', 'sans-serif'],
-        tajawal: ['Tajawal', 'sans-serif'],
+        // كلاهما يشير إلى الخط الجديد (Aktiv Grotesk Arabic) مع البديل
+        cairo: ['Aktiv Grotesk Arabic', 'Readex Pro', 'sans-serif'],
+        tajawal: ['Aktiv Grotesk Arabic', 'Readex Pro', 'sans-serif'],
       },
       borderRadius: {
         xl2: '22px',

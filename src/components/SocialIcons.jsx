@@ -27,7 +27,10 @@ export const SOCIALS = [
   },
 ]
 
-export default function SocialIcons({ size = 18, className = '', gap = 'gap-2' }) {
+export default function SocialIcons({ size = 18, className = '', gap = 'gap-2', light = false }) {
+  const style = light
+    ? 'border-white/35 bg-white/10 text-white/90 hover:border-white hover:text-white'
+    : 'border-line bg-white/60 text-text-dim hover:border-brand hover:text-brand'
   return (
     <div className={`flex items-center ${gap} ${className}`}>
       {SOCIALS.map((s) => (
@@ -38,7 +41,7 @@ export default function SocialIcons({ size = 18, className = '', gap = 'gap-2' }
           rel="noopener noreferrer"
           aria-label={s.name}
           title={s.name}
-          className="grid h-9 w-9 place-items-center rounded-full border border-line bg-white/5 text-text-dim transition-all hover:-translate-y-0.5 hover:border-brand-light hover:text-brand-light"
+          className={`grid h-9 w-9 place-items-center rounded-full border transition-all hover:-translate-y-0.5 ${style}`}
         >
           <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor" aria-hidden="true">
             <path d={s.path} />

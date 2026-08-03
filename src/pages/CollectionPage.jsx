@@ -27,7 +27,7 @@ export default function CollectionPage({ reduced }) {
       <header className="relative overflow-hidden py-20 text-center">
         <ProductBackground variant={collection.bg} accent={collection.accent} />
         <div className="relative z-10 mx-auto max-w-3xl px-6">
-          <span className="mb-4 inline-block rounded-full border border-line bg-white/5 px-4 py-1.5 text-sm" style={{ color: collection.accent }}>
+          <span className="mb-4 inline-block rounded-full border border-line bg-brand/10 px-4 py-1.5 text-sm" style={{ color: collection.accent }}>
             المجموعة
           </span>
           <h1 className="font-cairo text-4xl font-black sm:text-5xl md:text-6xl">{collection.name}</h1>

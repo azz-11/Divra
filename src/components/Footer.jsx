@@ -10,7 +10,7 @@ const LINKS = [
 
 export default function Footer() {
   return (
-    <footer className="border-t border-line bg-ink py-12">
+    <footer className="border-t border-line bg-surface-2 py-12">
       <div className="mx-auto flex max-w-7xl flex-col items-center gap-7 px-6 md:flex-row md:justify-between">
         <Link to="/" className="flex items-center">
           <img src="/logo.png" alt="ديفرا Divra" className="h-9 w-auto" />
