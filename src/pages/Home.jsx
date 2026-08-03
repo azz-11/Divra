@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import Hero from '../components/Hero.jsx'
+import ProductSwitcher from '../components/ProductSwitcher.jsx'
 import CollectionsShowcase from '../components/CollectionsShowcase.jsx'
 import Contact from '../components/Contact.jsx'
 
@@ -17,6 +18,7 @@ export default function Home({ reduced }) {
   return (
     <>
       <Hero reduced={reduced} />
+      <ProductSwitcher reduced={reduced} />
       <CollectionsShowcase reduced={reduced} />
       <Contact />
     </>

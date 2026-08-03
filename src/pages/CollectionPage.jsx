@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useParams, useLocation, Link, Navigate } from 'react-router-dom'
-import ProductRow from '../components/ProductRow.jsx'
+import ProductGridReveal from '../components/ProductGridReveal.jsx'
 import ProductBackground from '../components/ProductBackground.jsx'
 import { COLLECTIONS, collectionOf, productsIn } from '../productsData.js'
 import { useLang } from '../i18n.jsx'
@@ -50,26 +50,20 @@ export default function CollectionPage({ reduced }) {
         ))}
       </div>
 
-      {/* المنتجات */}
-      <div className="mx-auto max-w-7xl px-6">
-        {products.length > 0 ? (
-          <div className="divide-y divide-line">
-            {products.map((p, i) => (
-              <ProductRow key={p.id} product={p} index={i} accent={collection.accent} reduced={reduced} />
-            ))}
-          </div>
-        ) : (
-          <div className="glass mx-auto my-16 max-w-xl rounded-xl2 p-10 text-center">
-            <p className="font-cairo text-xl font-bold text-brand-strong">{t('قريباً')}</p>
-            <p className="mt-2 text-text-dim">
-              {t('منتجات قسم')} «{tr(collection.name)}» {t('في طريقها إليك — تابعنا لأحدث الإضافات.')}
-            </p>
-          </div>
-        )}
-      </div>
+      {/* المنتجات — شبكة بطاقات + قسم كامل الشاشة عند الاختيار */}
+      {products.length > 0 ? (
+        <ProductGridReveal products={products} accent={collection.accent} reduced={reduced} />
+      ) : (
+        <div className="glass mx-auto my-16 max-w-xl rounded-xl2 p-10 text-center">
+          <p className="font-cairo text-xl font-bold text-brand-strong">{t('قريباً')}</p>
+          <p className="mt-2 text-text-dim">
+            {t('منتجات قسم')} «{tr(collection.name)}» {t('في طريقها إليك — تابعنا لأحدث الإضافات.')}
+          </p>
+        </div>
+      )}
 
       {/* رجوع للرئيسية */}
-      <div className="pb-24 text-center">
+      <div className="py-16 text-center">
         <Link to="/" className="btn btn-ghost">{t('العودة للرئيسية')}</Link>
       </div>
     </div>
