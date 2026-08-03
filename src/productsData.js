@@ -70,6 +70,16 @@ export const PRODUCTS = [
     images: { white: '/products/toilet-white.webp' },
   },
   {
+    id: 'jacuzzi',
+    collection: 'jacuzzi',
+    title: 'جاكوزي التدليك الحر',
+    tagline: 'نفّاثات تدليك ومخلط جانبي بمرش يدوي',
+    desc: 'حوض جاكوزي حر بنفّاثات تدليك مائية ومخلط جانبي مع مرش يدوي، لتجربة استرخاء تشبه المنتجعات في منزلك.',
+    specs: [['النوع', 'حر قائم'], ['النفّاثات', 'تدليك مائي'], ['الملحقات', 'مرش يدوي'], ['الضمان', '5 سنوات']],
+    finishes: ['white'],
+    images: { white: '/products/jacuzzi-white.webp' },
+  },
+  {
     id: 'shattaf',
     collection: 'shattaf',
     title: 'الشطاف الذهبي',
@@ -136,8 +146,7 @@ export const COLLECTIONS = [
     intro: 'جاكوزي فاخر بنفّاثات تدليك وإضاءة محيطة وتحكّم رقمي.',
     features: ['نفّاثات تدليك', 'إضاءة محيطة', 'تحكّم رقمي'],
     accent: '#99a0ef', bg: '#12123f',
-    image: '/products/faucet-shower-black.webp', // مؤقت
-    placeholder: true,
+    image: '/products/jacuzzi-white.webp',
   },
 ]
 
