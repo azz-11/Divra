@@ -1,25 +1,66 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+// الأجهزة اللمسية (خصوصاً iOS) لا تدعم تحريك الفيديو بالـ currentTime بثبات،
+// لذا نكتفي فيها بتشغيل تلقائي متحرك (loop) بدل السكرول-سكرَب
+function detectTouch() {
+  if (typeof window === 'undefined') return false
+  return (
+    window.matchMedia('(hover: none) and (pointer: coarse)').matches ||
+    /iP(hone|ad|od)|Android/i.test(navigator.userAgent)
+  )
+}
 
 export default function Hero({ reduced }) {
   const sectionRef = useRef(null)
   const pinRef = useRef(null)
   const videoRef = useRef(null)
   const contentRef = useRef(null)
+  const [touch, setTouch] = useState(false)
 
   useEffect(() => {
+    setTouch(detectTouch())
+  }, [])
+
+  // الوضع المتحرك التلقائي (جوال) — تشغيل الفيديو loop
+  useEffect(() => {
+    if (!touch) return
+    const v = videoRef.current
+    v.muted = true
+    const play = () => v.play().catch(() => {})
+    if (v.readyState >= 2) play()
+    else v.addEventListener('canplay', play, { once: true })
+  }, [touch])
+
+  // الظهور الأولي للنص (على كل الأجهزة ما لم يُفعّل تقليل الحركة)
+  useEffect(() => {
     if (reduced) return
+    const ctx = gsap.context(() => {
+      gsap.from(contentRef.current.children, {
+        y: 40,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.15,
+        ease: 'power3.out',
+        delay: 0.2,
+      })
+    }, sectionRef)
+    return () => ctx.revert()
+  }, [reduced])
+
+  // السكرول-سكرَب (سطح المكتب فقط)
+  useEffect(() => {
+    if (reduced || touch) return
     const video = videoRef.current
     const ctx = gsap.context(() => {
-      // ربط تقدّم الفيديو بموضع السكرول (scrubbing)
       const state = { frame: 0 }
 
       const setupScrub = () => {
         const duration = video.duration || 8
-        gsap.killTweensOf(state)
+        // تهيئة فك الترميز لضمان ظهور الإطارات عند الـ seek
+        video.play().then(() => video.pause()).catch(() => {})
 
-        // تثبيت الهيرو وتحريك الفيديو إطاراً بإطار مع السكرول
         gsap.to(state, {
           frame: duration,
           ease: 'none',
@@ -32,14 +73,12 @@ export default function Hero({ reduced }) {
             anticipatePin: 1,
           },
           onUpdate: () => {
-            // نتجنّب طلبات seek متزاحمة أثناء الجاهزية
             if (video.readyState >= 2) {
               video.currentTime = Math.min(state.frame, duration - 0.05)
             }
           },
         })
 
-        // تلاشي النص وتحرّكه للأسفل مع تقدّم السكرول
         gsap.to(contentRef.current, {
           y: 80,
           opacity: 0,
@@ -55,39 +94,26 @@ export default function Hero({ reduced }) {
         ScrollTrigger.refresh()
       }
 
-      if (video.readyState >= 1) {
-        setupScrub()
-      } else {
-        video.addEventListener('loadedmetadata', setupScrub, { once: true })
-      }
-
-      // ظهور أولي للنص
-      gsap.from(contentRef.current.children, {
-        y: 40,
-        opacity: 0,
-        duration: 1,
-        stagger: 0.15,
-        ease: 'power3.out',
-        delay: 0.2,
-      })
+      if (video.readyState >= 1) setupScrub()
+      else video.addEventListener('loadedmetadata', setupScrub, { once: true })
     }, sectionRef)
     return () => ctx.revert()
-  }, [reduced])
+  }, [reduced, touch])
+
+  // ارتفاع القسم: مساحة سكرول إضافية على سطح المكتب فقط
+  const tall = !reduced && !touch
 
   return (
-    // ارتفاع إضافي يوفّر مسافة السكرول التي يُقرأ خلالها الفيديو
-    // (عند تفضيل تقليل الحركة نكتفي بشاشة واحدة ثابتة)
     <section
       id="hero"
       ref={sectionRef}
-      className={`relative ${reduced ? 'min-h-screen' : 'h-[220vh]'}`}
+      className={`relative ${tall ? 'h-[220vh]' : 'min-h-screen'}`}
     >
-      {/* الحاوية المثبّتة بحجم الشاشة */}
       <div
         ref={pinRef}
         className="relative flex h-screen items-center justify-center overflow-hidden"
       >
-        {/* فيديو يتقدّم بالسكرول — بلا تشغيل تلقائي أو loop */}
+        {/* الفيديو: يتقدّم بالسكرول (سطح المكتب) أو loop تلقائي (جوال) */}
         <video
           ref={videoRef}
           className="absolute inset-0 h-full w-full object-cover"
@@ -95,6 +121,7 @@ export default function Hero({ reduced }) {
           playsInline
           preload="auto"
           poster="/products/poster.webp"
+          {...(touch ? { autoPlay: true, loop: true } : {})}
         >
           <source src="/video/hero.webm" type="video/webm" />
           <source src="/video/hero.mp4" type="video/mp4" />
@@ -138,7 +165,7 @@ export default function Hero({ reduced }) {
           style={{ insetInline: 0 }}
           aria-label="مرّر للأسفل"
         >
-          <span className="text-xs">مرّر لتحريك المشهد</span>
+          <span className="text-xs">{tall ? 'مرّر لتحريك المشهد' : 'مرّر للأسفل'}</span>
           <span className="flex h-9 w-5 items-start justify-center rounded-full border border-white/30 p-1">
             <span className="scroll-dot h-1.5 w-1.5 rounded-full bg-brand-light" />
           </span>
