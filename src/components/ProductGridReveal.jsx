@@ -90,13 +90,15 @@ export default function ProductGridReveal({ products, accent = '#2f6fd6', reduce
             {/* صورة المنتج مع حركة Ken Burns */}
             <div className="relative flex items-center justify-center">
               <span className="absolute inset-0 m-auto h-3/4 w-3/4 rounded-full blur-3xl" style={{ background: `radial-gradient(circle, ${accent}33, transparent 70%)` }} />
-              <img
-                data-media
-                key={selected.id}
-                src={selected.images[selected.finishes[0]]}
-                alt={tr(selected.title)}
-                className={`relative max-h-[70vh] w-auto max-w-full object-contain drop-shadow-2xl ${reduced ? '' : 'kenburns'}`}
-              />
+              <div className="relative max-h-[70vh] w-auto max-w-full overflow-hidden drop-shadow-2xl">
+                <img
+                  data-media
+                  key={selected.id}
+                  src={selected.images[selected.finishes[0]]}
+                  alt={tr(selected.title)}
+                  className={`block max-h-[70vh] w-auto max-w-full object-contain ${reduced ? '' : 'kenburns'}`}
+                />
+              </div>
             </div>
 
             {/* التفاصيل */}
