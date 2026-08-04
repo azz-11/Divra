@@ -11,10 +11,9 @@ const UI = {
   'القائمة': 'Menu',
   // الهيرو
   'أدوات صحية فاخرة': 'Luxury sanitary ware',
-  'فنّ الماء بلمسة': 'The art of water by',
+  'لحظاتك... تستحق أن تُعاش بجمال': 'Your moments deserve to be lived beautifully',
   'ديفرا': 'Divra',
-  'صنابير ومخلاطات منحوتة بدقّة تجمع بين الجمال والأداء، لتمنح مطبخك وحمّامك حضوراً استثنائياً يليق بذوقك الرفيع.':
-    'Precisely sculpted faucets and mixers that blend beauty and performance, giving your kitchen and bathroom an exceptional presence worthy of your refined taste.',
+  'تفاصيل تنسجم مع إيقاع حياتك.': 'Details in harmony with the rhythm of your life.',
   'استكشف المجموعة': 'Explore the collection',
   'تعرّف على ديفرا': 'Discover Divra',
   'مرّر لتحريك المشهد': 'Scroll to move the scene',

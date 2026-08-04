@@ -145,10 +145,10 @@ export default function Hero({ reduced }) {
             {t('أدوات صحية فاخرة')}
           </span>
           <h1 className="font-cairo text-4xl font-black leading-tight text-white sm:text-6xl md:text-7xl">
-            {t('فنّ الماء بلمسة')} <span className="text-brand-light">{t('ديفرا')}</span>
+            {t('لحظاتك... تستحق أن تُعاش بجمال')}
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-base text-white/85 sm:text-lg">
-            {t('صنابير ومخلاطات منحوتة بدقّة تجمع بين الجمال والأداء، لتمنح مطبخك وحمّامك حضوراً استثنائياً يليق بذوقك الرفيع.')}
+            {t('تفاصيل تنسجم مع إيقاع حياتك.')}
           </p>
           <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
             <a href="#collections" className="btn btn-primary">
