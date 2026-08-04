@@ -1,7 +1,7 @@
 import { useLang } from '../i18n.jsx'
 
 // لقطات المنتجات (بطاقات 3:4) — مؤقتة الآن، تُستبدل باللقطات الحقيقية في public/scenes
-const SCENES = [1, 2, 3, 4, 5, 6, 7, 8].map((n) => `/scenes/scene-${n}.webp`)
+const SCENES = [1, 2, 3, 4, 5].map((n) => `/scenes/scene-${n}.webp`)
 
 function Card({ src }) {
   return (
