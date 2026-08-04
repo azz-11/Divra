@@ -28,8 +28,8 @@ export default function ProductsIndex() {
           <h1 className="font-cairo text-4xl font-black text-white sm:text-5xl md:text-6xl">{t('المنتجات')}</h1>
         </div>
 
-        {/* شبكة الأقسام — بطاقات صور 3:4 */}
-        <div className="grid grid-cols-2 gap-5 sm:gap-6 md:grid-cols-3">
+        {/* شبكة الأقسام — بطاقات صور 3:4 (أصغر قليلاً) */}
+        <div className="mx-auto grid max-w-5xl grid-cols-2 gap-4 sm:gap-5 md:grid-cols-3">
           {COLLECTIONS.map((c) => (
             <Link key={c.id} to={`/collection/${c.id}`} className="group flex flex-col items-center">
               <div className="relative aspect-[3/4] w-full overflow-hidden rounded-2xl border border-white/15 shadow-[0_18px_50px_-18px_rgba(0,0,0,.7)] transition-all duration-500 group-hover:-translate-y-1.5 group-hover:border-brand-light/70 group-hover:shadow-[0_26px_60px_-16px_rgba(79,143,240,.55)]">

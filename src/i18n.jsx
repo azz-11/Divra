@@ -64,6 +64,10 @@ const UI = {
   'جميع الحقوق محفوظة.': 'All rights reserved.',
   // البنر
   'من عالم ديفرا': 'From Divra’s world',
+  // صفحة القسم
+  'عن': 'About',
+  'منتجات القسم': 'Section products',
+  'كل الأقسام': 'All categories',
   // اللغة
   'English': 'العربية',
 }
