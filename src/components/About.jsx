@@ -1,14 +1,13 @@
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { splitWords } from '../lib/motion.js'
 
 const FEATURES = [
   {
     title: 'تصميم نحتي',
     desc: 'خطوط انسيابية منحوتة بعناية تحوّل كل صنبور إلى قطعة فنية.',
-    icon: (
-      <path d="M12 2l2.4 6.9L21 11l-6.6 2.1L12 20l-2.4-6.9L3 11l6.6-2.1L12 2z" />
-    ),
+    icon: <path d="M12 2l2.4 6.9L21 11l-6.6 2.1L12 20l-2.4-6.9L3 11l6.6-2.1L12 2z" />,
   },
   {
     title: 'جودة معتمدة',
@@ -27,18 +26,20 @@ const FEATURES = [
 ]
 
 const STATS = [
-  { value: '15+', label: 'عاماً من الخبرة' },
-  { value: '4', label: 'قطع منتقاة' },
+  { value: 15, suffix: '+', label: 'عاماً من الخبرة' },
+  { value: 4, suffix: '', label: 'قطع منتقاة' },
+  { value: 100, suffix: '%', label: 'نحاس أصلي' },
 ]
 
 export default function About({ reduced }) {
   const sectionRef = useRef(null)
   const imageRef = useRef(null)
+  const headRef = useRef(null)
 
   useEffect(() => {
     if (reduced) return
     const ctx = gsap.context(() => {
-      // الصورة تبدأ مكبّرة وتصغر تدريجياً مع مرور القسم
+      // Image eases from zoomed-in to natural through the section
       gsap.fromTo(
         imageRef.current,
         { scale: 1.25 },
@@ -53,7 +54,31 @@ export default function About({ reduced }) {
           },
         },
       )
-      // ظهور العناصر النصية
+
+      // Slow rotation of the decorative ring
+      gsap.to('[data-spin]', {
+        rotation: 360,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: 1.5,
+        },
+      })
+
+      // Word-reveal the heading
+      const words = splitWords(headRef.current)
+      gsap.from(words, {
+        opacity: 0,
+        yPercent: 110,
+        duration: 0.9,
+        stagger: 0.06,
+        ease: 'power4.out',
+        scrollTrigger: { trigger: headRef.current, start: 'top 82%' },
+      })
+
+      // Reveal text blocks
       gsap.utils.toArray('[data-reveal]').forEach((el) => {
         gsap.from(el, {
           y: 40,
@@ -62,8 +87,24 @@ export default function About({ reduced }) {
           ease: 'power3.out',
           scrollTrigger: {
             trigger: el,
-            start: 'top 85%',
+            start: 'top 88%',
             toggleActions: 'play none none reverse',
+          },
+        })
+      })
+
+      // Count-up stats
+      gsap.utils.toArray('[data-count]').forEach((el) => {
+        const target = Number(el.dataset.count)
+        const suffix = el.dataset.suffix || ''
+        const obj = { v: 0 }
+        gsap.to(obj, {
+          v: target,
+          duration: 1.6,
+          ease: 'power2.out',
+          scrollTrigger: { trigger: el, start: 'top 90%', once: true },
+          onUpdate: () => {
+            el.textContent = Math.round(obj.v) + suffix
           },
         })
       })
@@ -77,16 +118,24 @@ export default function About({ reduced }) {
       ref={sectionRef}
       className="relative overflow-hidden bg-surface py-24 md:py-32"
     >
+      {/* ambient gold glow */}
+      <div
+        className="glow-blob inset-inline-start-[-10%] top-[10%] h-[420px] w-[420px]"
+        style={{ insetInlineStart: '-8%', background: 'rgba(201,169,106,0.14)' }}
+      />
+
       <div className="mx-auto grid max-w-7xl items-center gap-14 px-6 lg:grid-cols-2">
-        {/* عمود الصورة */}
+        {/* Image column */}
         <div className="relative flex justify-center">
           <div className="glass relative aspect-square w-full max-w-md rounded-full p-10">
             <div
-              className="absolute inset-6 rounded-full opacity-60 blur-2xl"
-              style={{
-                background:
-                  'radial-gradient(circle, rgba(85,97,229,.55), transparent 70%)',
-              }}
+              className="absolute inset-6 rounded-full opacity-70 blur-2xl"
+              style={{ background: 'radial-gradient(circle, rgba(201,169,106,.4), transparent 68%)' }}
+            />
+            {/* rotating dashed ring */}
+            <div
+              data-spin
+              className="absolute inset-2 rounded-full border border-dashed border-gold/25"
             />
             <img
               ref={imageRef}
@@ -97,40 +146,46 @@ export default function About({ reduced }) {
             />
           </div>
 
-          {/* إحصائيات عائمة */}
-          {STATS.map((s, i) => (
+          {/* Floating stat chips */}
+          <div
+            className="glass absolute top-6 z-20 rounded-xl2 px-5 py-3 text-center"
+            style={{ insetInlineStart: 0 }}
+          >
             <div
-              key={s.label}
-              className={`glass absolute z-20 rounded-xl2 px-5 py-3 text-center ${
-                i === 0
-                  ? 'top-6 inset-inline-start-0'
-                  : 'bottom-6 inset-inline-end-0'
-              }`}
-              style={i === 0 ? { insetInlineStart: 0 } : { insetInlineEnd: 0 }}
+              data-count="15"
+              data-suffix="+"
+              className="font-display text-2xl font-bold text-gold-2"
             >
-              <div className="font-cairo text-2xl font-black text-brand-light">
-                {s.value}
-              </div>
-              <div className="text-xs text-text-dim">{s.label}</div>
+              0
             </div>
-          ))}
+            <div className="text-xs text-text-dim">عاماً من الخبرة</div>
+          </div>
+          <div
+            className="glass absolute bottom-6 z-20 rounded-xl2 px-5 py-3 text-center"
+            style={{ insetInlineEnd: 0 }}
+          >
+            <div
+              data-count="4"
+              className="font-display text-2xl font-bold text-gold-2"
+            >
+              0
+            </div>
+            <div className="text-xs text-text-dim">قطع منتقاة</div>
+          </div>
         </div>
 
-        {/* عمود النص */}
+        {/* Text column */}
         <div>
-          <span
-            data-reveal
-            className="mb-4 inline-block rounded-full border border-line bg-white/5 px-4 py-1.5 text-sm text-brand-pale"
-          >
+          <span data-reveal className="eyebrow mb-4">
             من نحن
           </span>
           <h2
-            data-reveal
+            ref={headRef}
             className="font-cairo text-3xl font-black leading-snug sm:text-4xl md:text-5xl"
           >
-            نصنع <span className="text-gradient">تفاصيل</span> تدوم
+            نصنع تفاصيل تدوم
           </h2>
-          <p data-reveal className="mt-5 text-text-dim">
+          <p data-reveal className="mt-5 leading-relaxed text-text-dim">
             في ديفرا نؤمن أن الأدوات الصحية ليست مجرّد وظيفة، بل لغة تعبّر عن
             رقيّ المكان. نجمع بين هندسة دقيقة وحرفية عالية لنقدّم صنابير ومخلاطات
             تتحدّى الزمن جمالاً وأداءً.
@@ -139,13 +194,8 @@ export default function About({ reduced }) {
           <div className="mt-9 space-y-5">
             {FEATURES.map((f) => (
               <div key={f.title} data-reveal className="flex items-start gap-4">
-                <span className="grid h-12 w-12 flex-shrink-0 place-items-center rounded-xl2 bg-brand/15 text-brand-light">
-                  <svg
-                    viewBox="0 0 24 24"
-                    className="h-6 w-6"
-                    fill="currentColor"
-                    aria-hidden="true"
-                  >
+                <span className="grid h-12 w-12 flex-shrink-0 place-items-center rounded-xl2 border border-line bg-gold/10 text-gold-2">
+                  <svg viewBox="0 0 24 24" className="h-6 w-6" fill="currentColor" aria-hidden="true">
                     {f.icon}
                   </svg>
                 </span>
@@ -153,6 +203,22 @@ export default function About({ reduced }) {
                   <h3 className="font-cairo text-lg font-bold">{f.title}</h3>
                   <p className="mt-1 text-sm text-text-dim">{f.desc}</p>
                 </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Inline stat strip */}
+          <div data-reveal className="mt-10 grid grid-cols-3 gap-4 border-t border-line pt-7">
+            {STATS.map((s) => (
+              <div key={s.label}>
+                <div
+                  data-count={s.value}
+                  data-suffix={s.suffix}
+                  className="font-display text-3xl font-bold text-gold-2"
+                >
+                  0
+                </div>
+                <div className="mt-1 text-xs leading-tight text-text-dim">{s.label}</div>
               </div>
             ))}
           </div>

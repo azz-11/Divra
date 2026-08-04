@@ -3,13 +3,26 @@
 موقع عرض (Landing Page) لعلامة **ديفرا** للأدوات الصحية الفاخرة (صنابير مطبخ، خلاطات حمّام وبانيو).
 الموقع **عرض فقط** — لا يحتوي على سلة شراء أو دفع.
 
+> **هوية بصرية محدّثة:** أسود سينمائي دافئ + لمسة **ذهبية شمبانيا** (بدل البنفسجي)،
+> استناداً إلى توصية «Luxury/Premium Brand» من سكِل `ui-ux-pro-max`، مع منظومة
+> حركة سكرول احترافية (Pinned Horizontal Showcase، مؤشر مخصّص، شريط تقدّم،
+> كشف الكلمات، أزرار مغناطيسية، عدّادات).
+
 ## التقنيات
 
 - **React + Vite**
-- **TailwindCSS** (مع Design Tokens عبر متغيرات CSS)
-- **GSAP + ScrollTrigger** لحركات السكرول (زووم، ظهور تدريجي، Parallax)
+- **TailwindCSS** (مع Design Tokens عبر متغيرات CSS — أسود/ذهبي)
+- **GSAP + ScrollTrigger** لحركات السكرول (سكراب فيديو، تثبيت، سكرول أفقي، Parallax، عدّادات)
 - **RTL بالكامل** (`dir="rtl" lang="ar"`) بخصائص CSS منطقية
-- خطوط **Cairo** (عناوين) و**Tajawal** (نصوص) من Google Fonts
+- خطوط **Cairo** (عناوين) و**Tajawal** (نصوص) و**Playfair Display** (الاسم اللاتيني والأرقام)
+
+## أبرز التفاعلات (Scroll Motion)
+
+- **الهيرو**: تشغيل الفيديو إطاراً بإطار مع السكرول (scrub) + تثبيت + كشف الكلمات.
+- **المجموعة**: قسم مثبّت بسكرول **أفقي** يستعرض القطع كتجربة معرض احترافية.
+- **مؤشر مخصّص** ذهبي متتبّع + **شريط تقدّم** أعلى الصفحة.
+- **أزرار مغناطيسية**، عدّادات أرقام، كشف تدريجي للعناصر، Parallax للصور.
+- يُحترم `prefers-reduced-motion` بالكامل (بدائل ثابتة لكل حركة).
 
 ## الأصول (Assets)
 
@@ -52,17 +65,22 @@ npm run preview  # معاينة البناء
 ```
 src/
   components/
-    Header.jsx      # هيدر ثابت + قائمة جوال
-    Hero.jsx        # فيديو خلفية + زووم GSAP
-    About.jsx       # من نحن + إحصائيات عائمة
-    Products.jsx    # المنتجات + فلترة + Marquee
-    ProductRow.jsx  # صف منتج واحد + تبديل التشطيب
+    Header.jsx      # هيدر ثابت + قائمة جوال + wordmark
+    Hero.jsx        # فيديو scrub + كشف الكلمات + أزرار مغناطيسية
+    Marquee.jsx     # شريط مفردات العلامة
+    About.jsx       # من نحن + عدّادات + حلقة دوّارة
+    Collection.jsx  # سكرول أفقي مثبّت لاستعراض القطع
+    Products.jsx    # المنتجات + فلترة
+    ProductRow.jsx  # صف منتج واحد + تبديل التشطيب + Parallax
     Contact.jsx     # نموذج تواصل (واجهة فقط)
-    Footer.jsx
+    Footer.jsx      # فوتر + wordmark عملاق
+    Cursor.jsx      # مؤشر مخصّص + شريط تقدّم السكرول
+  lib/
+    motion.js       # مساعدات: تقطيع كلمات RTL-safe + تأثير مغناطيسي
   App.jsx
   productsData.js   # بيانات المنتجات والتشطيبات
   useReducedMotion.js
-  index.css         # Design Tokens + مكوّنات
+  index.css         # Design Tokens (أسود/ذهبي) + مكوّنات
 ```
 
 ## ملاحظات

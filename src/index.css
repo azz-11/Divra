@@ -2,19 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+/* =========================================================================
+   DIVRA — Design Tokens (Cinematic Black + Champagne Gold)
+   Palette sourced from ui-ux-pro-max "Luxury/Premium Brand" recommendation:
+   premium warm-black base + gold accent, tuned for WCAG AA on dark.
+   ========================================================================= */
 :root {
-  --ink: #030328;
-  --ink-2: #0a0a3d;
-  --surface: #0c0c3a;
-  --surface-2: #12123f;
-  --brand: #5561e5;
-  --brand-2: #7781ea;
-  --brand-light: #99a0ef;
-  --brand-pale: #dddffa;
-  --text: #f4f4fb;
-  --text-dim: rgba(244, 244, 251, 0.62);
-  --text-dimmer: rgba(244, 244, 251, 0.38);
-  --line: rgba(255, 255, 255, 0.09);
+  --ink: #0a0908;          /* near-black, warm */
+  --ink-2: #100e0b;
+  --surface: #14110c;      /* raised surface */
+  --surface-2: #1b1710;
+  --gold: #c9a96a;         /* champagne gold — primary accent */
+  --gold-2: #e3c88c;       /* brighter gold for text/hover */
+  --gold-deep: #9c7c46;    /* darker gold for shadows/borders */
+  --gold-pale: #f1e6cc;    /* palest gold for large headings */
+  --text: #f6f2e9;         /* warm off-white */
+  --text-dim: rgba(246, 242, 233, 0.6);
+  --text-dimmer: rgba(246, 242, 233, 0.34);
+  --line: rgba(201, 169, 106, 0.16);
+  --line-strong: rgba(201, 169, 106, 0.32);
 }
 
 * {
@@ -31,6 +37,7 @@ body {
   color: var(--text);
   font-family: 'Tajawal', sans-serif;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
   overflow-x: hidden;
 }
 
@@ -42,128 +49,248 @@ h4 {
   margin: 0;
 }
 
-::selection {
-  background: var(--brand);
-  color: var(--text);
+/* Latin display font for the wordmark + numerals */
+.font-display {
+  font-family: 'Playfair Display', 'Cairo', serif;
 }
 
-/* شريط تمرير أنيق */
+::selection {
+  background: var(--gold);
+  color: var(--ink);
+}
+
+/* Elegant gold scrollbar */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 9px;
 }
 ::-webkit-scrollbar-track {
   background: var(--ink);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--brand);
+  background: linear-gradient(var(--gold-deep), var(--gold));
   border-radius: 10px;
 }
 
-/* تدرج نصي بنفسجي */
+/* Gold text gradient */
 .text-gradient {
-  background: linear-gradient(120deg, var(--brand-light), var(--brand-pale));
+  background: linear-gradient(115deg, var(--gold-2) 0%, var(--gold) 45%, var(--gold-pale) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-/* بطاقة زجاجية */
+/* Thin engraved gold outline text (for oversized ghost numerals) */
+.text-outline {
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 1px var(--line-strong);
+  color: transparent;
+}
+
+/* Frosted glass card */
 .glass {
-  background: rgba(255, 255, 255, 0.04);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(246, 242, 233, 0.035);
+  backdrop-filter: blur(18px) saturate(1.1);
+  -webkit-backdrop-filter: blur(18px) saturate(1.1);
   border: 1px solid var(--line);
 }
 
-/* أزرار */
+/* ---- Buttons ---- (in @layer components so display utilities like
+   `hidden` / `sm:inline-flex` still win over the base .btn display) */
+@layer components {
 .btn {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0.85rem 1.75rem;
+  padding: 0.9rem 1.9rem;
   border-radius: 999px;
   font-weight: 700;
   font-family: 'Cairo', sans-serif;
+  letter-spacing: 0.01em;
   cursor: pointer;
-  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.35s ease, background 0.35s ease, color 0.35s ease;
   border: none;
   text-decoration: none;
   white-space: nowrap;
+  overflow: hidden;
 }
 .btn-primary {
-  background: linear-gradient(120deg, var(--brand), var(--brand-2));
-  color: var(--text);
-  box-shadow: 0 10px 30px -8px rgba(85, 97, 229, 0.6);
+  background: linear-gradient(115deg, var(--gold) 0%, var(--gold-2) 100%);
+  color: #1a1409;
+  box-shadow: 0 10px 34px -10px rgba(201, 169, 106, 0.55);
 }
 .btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 16px 40px -8px rgba(85, 97, 229, 0.75);
+  box-shadow: 0 18px 46px -10px rgba(201, 169, 106, 0.7);
 }
 .btn-ghost {
-  background: rgba(255, 255, 255, 0.05);
+  background: transparent;
   color: var(--text);
-  border: 1px solid var(--line);
+  border: 1px solid var(--line-strong);
 }
 .btn-ghost:hover {
-  background: rgba(255, 255, 255, 0.1);
-  transform: translateY(-2px);
+  background: rgba(201, 169, 106, 0.08);
+  border-color: var(--gold);
+  color: var(--gold-2);
+}
+/* subtle sheen sweep on primary */
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 30%, rgba(255, 255, 255, 0.5) 50%, transparent 70%);
+  transform: translateX(-120%);
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn-primary:hover::after {
+  transform: translateX(120%);
+}
 }
 
-/* شريط Marquee لانهائي */
+/* Small caps eyebrow label */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: 'Cairo', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--gold-2);
+  text-transform: uppercase;
+}
+.eyebrow::before {
+  content: '';
+  width: 26px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold));
+}
+
+/* Infinite marquee */
 @keyframes marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
 .marquee-track {
   display: inline-flex;
   white-space: nowrap;
-  animation: marquee 22s linear infinite;
+  animation: marquee 26s linear infinite;
 }
 [dir='rtl'] .marquee-track {
   animation-direction: reverse;
 }
 
-/* مؤشر السكرول */
+/* Scroll hint dot */
 @keyframes scrollPulse {
-  0% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(14px);
-    opacity: 0;
-  }
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(14px); opacity: 0; }
 }
 .scroll-dot {
   animation: scrollPulse 1.6s ease-in-out infinite;
 }
 
-/* توهج خلفي */
+/* Ambient glow blob (slow float) */
+@keyframes floatBlob {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(4%, -6%) scale(1.08); }
+}
+.glow-blob {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(60px);
+  animation: floatBlob 14s ease-in-out infinite;
+}
+
 .glow-ring {
   position: absolute;
   border-radius: 50%;
-  filter: blur(2px);
   pointer-events: none;
 }
 
-/* أبعاد محجوزة لصور المنتجات */
+/* reserved aspect for product media */
 .product-media {
   aspect-ratio: 1 / 1;
 }
 
-/* احترام تفضيل تقليل الحركة */
+/* Character-split reveal — each char wrapped in .char, animated by GSAP */
+.char {
+  display: inline-block;
+  will-change: transform, opacity;
+}
+.word {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+/* Fine gold hairline divider */
+.hairline {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--line-strong), transparent);
+}
+
+/* Custom cursor (desktop pointer devices only) */
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  pointer-events: none;
+  border-radius: 50%;
+  mix-blend-mode: difference;
+}
+.cursor-dot {
+  width: 7px;
+  height: 7px;
+  background: var(--gold-pale);
+  transform: translate(-50%, -50%);
+}
+.cursor-ring {
+  width: 38px;
+  height: 38px;
+  border: 1px solid rgba(241, 230, 204, 0.7);
+  transform: translate(-50%, -50%);
+  transition: width 0.28s ease, height 0.28s ease, opacity 0.28s ease,
+    background 0.28s ease;
+}
+.cursor-ring.is-hover {
+  width: 62px;
+  height: 62px;
+  background: rgba(201, 169, 106, 0.12);
+}
+@media (hover: none), (pointer: coarse) {
+  .cursor-dot,
+  .cursor-ring {
+    display: none !important;
+  }
+}
+
+/* Scroll progress bar */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  inset-inline: 0;
+  height: 2px;
+  transform-origin: right center; /* RTL: grows from the right */
+  background: linear-gradient(90deg, var(--gold-2), var(--gold), var(--gold-deep));
+  z-index: 60;
+}
+
+/* Respect reduced-motion */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
   .marquee-track,
-  .scroll-dot {
+  .scroll-dot,
+  .glow-blob {
     animation: none !important;
+  }
+  .cursor-dot,
+  .cursor-ring {
+    display: none !important;
   }
   * {
     transition-duration: 0.01ms !important;
