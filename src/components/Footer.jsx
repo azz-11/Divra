@@ -5,7 +5,7 @@ import { useLang } from '../i18n.jsx'
 const LINKS = [
   { label: 'الرئيسية', to: '/' },
   { label: 'من نحن', to: '/about' },
-  { label: 'المنتجات', to: '/collection/mixers' },
+  { label: 'المنتجات', to: '/products' },
   { label: 'تواصل معنا', to: '/#contact' },
 ]
 

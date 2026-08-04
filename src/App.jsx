@@ -6,6 +6,7 @@ import Header from './components/Header.jsx'
 import Footer from './components/Footer.jsx'
 import Home from './pages/Home.jsx'
 import AboutPage from './pages/AboutPage.jsx'
+import ProductsIndex from './pages/ProductsIndex.jsx'
 import CollectionPage from './pages/CollectionPage.jsx'
 import useReducedMotion from './useReducedMotion.js'
 import { LanguageProvider } from './i18n.jsx'
@@ -29,6 +30,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home reduced={reduced} />} />
           <Route path="/about" element={<AboutPage reduced={reduced} />} />
+          <Route path="/products" element={<ProductsIndex />} />
           <Route path="/collection/:id" element={<CollectionPage reduced={reduced} />} />
           <Route path="*" element={<Home reduced={reduced} />} />
         </Routes>

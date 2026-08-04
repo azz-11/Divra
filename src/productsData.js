@@ -126,6 +126,7 @@ export const COLLECTIONS = [
     intro: { ar: 'خلاطات تجمع الدقّة والأناقة لتكون قلب مغسلتك ومطبخك.', en: 'Mixers that blend precision and elegance to be the heart of your basin and kitchen.' },
     features: [{ ar: 'تحكّم دقيق بالتدفّق', en: 'Precise flow control' }, { ar: 'تشطيب أسود مطفي', en: 'Matte black finish' }, { ar: 'خامات مقاومة للصدأ', en: 'Rust-resistant materials' }],
     accent: '#2f6fd6', bg: '#e4f0ff', image: '/products/mixer-chrome.webp',
+    cover: '/categories/cat-1.webp',
   },
   {
     id: 'shattaf',
@@ -133,6 +134,7 @@ export const COLLECTIONS = [
     intro: { ar: 'شطافات أنيقة بضغط متوازن وتحكّم سلس ونظافة فائقة.', en: 'Elegant bidet sprays with balanced pressure, smooth control and superior hygiene.' },
     features: [{ ar: 'ضغط ماء متوازن', en: 'Balanced water pressure' }, { ar: 'تحكّم سلس', en: 'Smooth control' }, { ar: 'تشطيب مقاوم للصدأ', en: 'Rust-resistant finish' }],
     accent: '#2f6fd6', bg: '#cae1ff', image: '/products/shattaf-gold.webp',
+    cover: '/categories/cat-2.webp',
   },
   {
     id: 'sprays',
@@ -140,6 +142,7 @@ export const COLLECTIONS = [
     intro: { ar: 'رؤوس مرشّات قابلة للتوجيه بضغط ماء متوازن وتركيب سهل.', en: 'Adjustable shower heads with balanced pressure and easy installation.' },
     features: [{ ar: 'رؤوس قابلة للتوجيه', en: 'Adjustable heads' }, { ar: 'ضغط ماء متوازن', en: 'Balanced pressure' }, { ar: 'تركيب سهل', en: 'Easy installation' }],
     accent: '#2f6fd6', bg: '#afd2ff', image: '/products/shower-gold.webp',
+    cover: '/categories/cat-3.webp',
   },
   {
     id: 'bath',
@@ -147,6 +150,7 @@ export const COLLECTIONS = [
     intro: { ar: 'خلاطات بانيو جدارية بخطوط نحتية تمنح حمّامك حضوراً فندقياً.', en: 'Wall-mounted bath mixers with sculptural lines that give your bathroom a hotel presence.' },
     features: [{ ar: 'مخرج مزدوج', en: 'Dual outlet' }, { ar: 'محوّل انسيابي', en: 'Smooth diverter' }, { ar: 'تصميم جداري أنيق', en: 'Elegant wall design' }],
     accent: '#2f6fd6', bg: '#e4f0ff', image: '/products/faucet-bath-black.webp',
+    cover: '/categories/cat-4.webp',
   },
   {
     id: 'chairs',
@@ -154,6 +158,7 @@ export const COLLECTIONS = [
     intro: { ar: 'كراسي حمّام آمنة ومريحة بمواد مضادة للانزلاق وتحمّل عالٍ.', en: 'Safe, comfortable toilets with anti-slip materials and high durability.' },
     features: [{ ar: 'مواد مضادة للانزلاق', en: 'Anti-slip materials' }, { ar: 'تحمّل عالٍ', en: 'High durability' }, { ar: 'راحة وأمان', en: 'Comfort & safety' }],
     accent: '#2f6fd6', bg: '#cae1ff', image: '/products/toilet-white.webp',
+    cover: '/categories/cat-5.webp',
   },
   {
     id: 'jacuzzi',
@@ -161,6 +166,7 @@ export const COLLECTIONS = [
     intro: { ar: 'جاكوزي فاخر بنفّاثات تدليك وإضاءة محيطة وتحكّم رقمي.', en: 'A luxurious jacuzzi with massage jets, ambient lighting and digital control.' },
     features: [{ ar: 'نفّاثات تدليك', en: 'Massage jets' }, { ar: 'إضاءة محيطة', en: 'Ambient lighting' }, { ar: 'تحكّم رقمي', en: 'Digital control' }],
     accent: '#2f6fd6', bg: '#d3e6ff', image: '/products/jacuzzi-white.webp',
+    cover: '/categories/cat-6.webp',
   },
 ]
 

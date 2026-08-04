@@ -7,7 +7,7 @@ import { useLang } from '../i18n.jsx'
 const NAV = [
   { label: 'الرئيسية', to: '/' },
   { label: 'من نحن', to: '/about' },
-  { label: 'المنتجات', to: '/collection/mixers' },
+  { label: 'المنتجات', to: '/products' },
   { label: 'تواصل معنا', to: '/#contact' },
 ]
 
