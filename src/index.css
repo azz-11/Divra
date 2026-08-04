@@ -127,7 +127,7 @@ h4 {
 .marquee-track {
   display: inline-flex;
   white-space: nowrap;
-  animation: marquee 30s linear infinite;
+  animation: marquee 60s linear infinite;
   will-change: transform;
 }
 .marquee-track:hover {

@@ -1,16 +1,13 @@
 import { useLang } from '../i18n.jsx'
 
-// لقطات المنتجات (بطاقات 3:4) — مؤقتة الآن، تُستبدل باللقطات الحقيقية في public/scenes
-const SCENES = [1, 2, 3, 4, 5].map((n) => `/scenes/scene-${n}.webp`)
+// لقطات المنتجات الحقيقية (بطاقات 3:4)
+const SCENES = [1, 2, 3, 4, 5, 6].map((n) => `/scenes/scene-${n}.webp`)
 
 function Card({ src }) {
   return (
-    <div
-      className="scene-card relative mx-3 aspect-[3/4] w-52 shrink-0 overflow-hidden rounded-2xl sm:w-64"
-    >
+    <div className="scene-card relative mx-3 aspect-[3/4] w-52 shrink-0 overflow-hidden rounded-2xl sm:w-64">
       <img src={src} alt="" className="h-full w-full object-cover" draggable={false} />
-      {/* توهّج علوي خفيف */}
-      <span className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/30" />
+      <span className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/40" />
     </div>
   )
 }
@@ -18,19 +15,34 @@ function Card({ src }) {
 export default function ProductMarquee({ reduced }) {
   const { t } = useLang()
   return (
-    <section className="relative overflow-hidden bg-surface-2 py-16 md:py-20" aria-label={t('المنتجات')}>
-      {/* توهّج خلفي ناعم */}
+    <section
+      className="relative overflow-hidden border-y border-line py-20 md:py-24"
+      aria-label={t('المنتجات')}
+      style={{ background: 'linear-gradient(180deg, #ffffff 0%, #e7f0ff 48%, #ffffff 100%)' }}
+    >
+      {/* توهّجان ناعمان للعمق */}
+      <div className="pointer-events-none absolute -top-24 start-1/4 h-72 w-72 rounded-full blur-3xl" style={{ insetInlineStart: '25%', background: 'rgba(79,143,240,.16)' }} />
+      <div className="pointer-events-none absolute -bottom-24 end-1/4 h-72 w-72 rounded-full blur-3xl" style={{ insetInlineEnd: '25%', background: 'rgba(149,195,255,.22)' }} />
+
+      {/* عنوان صغير */}
+      <div className="relative z-10 mb-10 text-center">
+        <span className="inline-flex items-center gap-3 text-xs font-bold uppercase tracking-[0.25em] text-brand-strong">
+          <span className="h-px w-8 bg-brand/40" />
+          {t('من عالم ديفرا')}
+          <span className="h-px w-8 bg-brand/40" />
+        </span>
+      </div>
+
+      {/* الشريط الدوّار — تلاشٍ عند الحواف عبر mask */}
       <div
-        className="pointer-events-none absolute inset-inline-0 top-1/2 mx-auto h-[40vmin] w-[80vmin] -translate-y-1/2 rounded-full blur-3xl"
-        style={{ insetInline: 0, background: 'radial-gradient(circle, rgba(79,143,240,.18), transparent 70%)' }}
-      />
-
-      <div className="relative overflow-hidden" dir="ltr">
-        {/* تلاشٍ عند الحواف */}
-        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-surface-2 to-transparent" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-surface-2 to-transparent" />
-
-        <div className={reduced ? 'flex' : 'marquee-track'}>
+        className="relative overflow-hidden"
+        dir="ltr"
+        style={{
+          maskImage: 'linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent)',
+          WebkitMaskImage: 'linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent)',
+        }}
+      >
+        <div className={reduced ? 'flex justify-center' : 'marquee-track'}>
           {[0, 1].map((rep) => (
             <div key={rep} className="flex shrink-0" aria-hidden={rep === 1}>
               {SCENES.map((src, i) => (

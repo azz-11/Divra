@@ -63,6 +63,8 @@ const UI = {
   'التشطيب:': 'Finish:',
   // الفوتر
   'جميع الحقوق محفوظة.': 'All rights reserved.',
+  // البنر
+  'من عالم ديفرا': 'From Divra’s world',
   // اللغة
   'English': 'العربية',
 }
