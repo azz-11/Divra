@@ -19,9 +19,8 @@ export default {
         line: 'var(--line)',
       },
       fontFamily: {
-        // كلاهما يشير إلى الخط الجديد (Aktiv Grotesk Arabic) مع البديل
-        cairo: ['Aktiv Grotesk Arabic', 'Readex Pro', 'sans-serif'],
-        tajawal: ['Aktiv Grotesk Arabic', 'Readex Pro', 'sans-serif'],
+        cairo: ['IBM Plex Sans Arabic', 'sans-serif'],
+        tajawal: ['IBM Plex Sans Arabic', 'sans-serif'],
       },
       borderRadius: {
         xl2: '22px',

@@ -31,8 +31,7 @@ body {
   margin: 0;
   background: var(--ink);
   color: var(--text);
-  /* الخط الأساسي: Aktiv Grotesk Arabic مع بديل Readex Pro — الوصف بوزن ميديم */
-  font-family: 'Aktiv Grotesk Arabic', 'Readex Pro', sans-serif;
+  font-family: 'IBM Plex Sans Arabic', sans-serif;
   font-weight: 500;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
@@ -42,7 +41,7 @@ h1,
 h2,
 h3,
 h4 {
-  font-family: 'Aktiv Grotesk Arabic', 'Readex Pro', sans-serif;
+  font-family: 'IBM Plex Sans Arabic', sans-serif;
   font-weight: 700; /* العناوين بولد */
   margin: 0;
 }
@@ -89,7 +88,7 @@ h4 {
   padding: 0.85rem 1.75rem;
   border-radius: 999px;
   font-weight: 700;
-  font-family: 'Aktiv Grotesk Arabic', 'Readex Pro', sans-serif;
+  font-family: 'IBM Plex Sans Arabic', sans-serif;
   cursor: pointer;
   transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
   border: none;
