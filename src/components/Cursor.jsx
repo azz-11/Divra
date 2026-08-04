@@ -1,13 +1,11 @@
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
-// Custom gold cursor (dot + trailing ring) and a top scroll-progress bar.
-// Both no-op on touch/coarse pointers and when reduced motion is preferred.
+// Custom cyan cursor: instant dot + trailing ring that grows over interactive
+// targets. No-op on touch/coarse pointers and when reduced motion is preferred.
 export default function Cursor({ reduced }) {
   const dotRef = useRef(null)
   const ringRef = useRef(null)
-  const progressRef = useRef(null)
 
   useEffect(() => {
     const coarse = window.matchMedia('(pointer: coarse)').matches
@@ -24,7 +22,6 @@ export default function Cursor({ reduced }) {
       yTo(e.clientY)
     }
 
-    // Grow the ring over interactive targets
     const hoverables = document.querySelectorAll(
       'a, button, [data-cursor], input, select, textarea',
     )
@@ -45,32 +42,11 @@ export default function Cursor({ reduced }) {
     }
   }, [reduced])
 
-  useEffect(() => {
-    if (reduced) return
-    const st = ScrollTrigger.create({
-      start: 0,
-      end: 'max',
-      onUpdate: (self) => {
-        gsap.set(progressRef.current, { scaleX: self.progress })
-      },
-    })
-    return () => st.kill()
-  }, [reduced])
-
+  if (reduced) return null
   return (
     <>
-      <div
-        ref={progressRef}
-        className="scroll-progress"
-        style={{ transform: 'scaleX(0)' }}
-        aria-hidden="true"
-      />
-      {!reduced && (
-        <>
-          <div ref={ringRef} className="cursor-ring" aria-hidden="true" />
-          <div ref={dotRef} className="cursor-dot" aria-hidden="true" />
-        </>
-      )}
+      <div ref={ringRef} className="cursor-ring" aria-hidden="true" />
+      <div ref={dotRef} className="cursor-dot" aria-hidden="true" />
     </>
   )
 }

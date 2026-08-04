@@ -3,24 +3,24 @@
 @tailwind utilities;
 
 /* =========================================================================
-   DIVRA — Design Tokens (Cinematic Black + Champagne Gold)
-   Palette sourced from ui-ux-pro-max "Luxury/Premium Brand" recommendation:
-   premium warm-black base + gold accent, tuned for WCAG AA on dark.
+   DIVRA — Design Tokens (Sky/Blue identity, new concept)
+   Original brand blues preserved and extended into a sky→cyan gradient system.
    ========================================================================= */
 :root {
-  --ink: #0a0908;          /* near-black, warm */
-  --ink-2: #100e0b;
-  --surface: #14110c;      /* raised surface */
-  --surface-2: #1b1710;
-  --gold: #c9a96a;         /* champagne gold — primary accent */
-  --gold-2: #e3c88c;       /* brighter gold for text/hover */
-  --gold-deep: #9c7c46;    /* darker gold for shadows/borders */
-  --gold-pale: #f1e6cc;    /* palest gold for large headings */
-  --text: #f6f2e9;         /* warm off-white */
-  --text-dim: rgba(246, 242, 233, 0.6);
-  --text-dimmer: rgba(246, 242, 233, 0.34);
-  --line: rgba(201, 169, 106, 0.16);
-  --line-strong: rgba(201, 169, 106, 0.32);
+  --ink: #04061c;          /* deep navy-black */
+  --ink-2: #070a26;
+  --surface: #0a0d30;      /* raised surface */
+  --surface-2: #0f1440;
+  --brand: #3b6ef5;        /* blue — primary */
+  --brand-2: #5b8bff;
+  --sky: #38bdf8;          /* sky */
+  --cyan: #22d3ee;         /* cyan */
+  --brand-pale: #d5e8ff;
+  --text: #eef4ff;
+  --text-dim: rgba(238, 244, 255, 0.6);
+  --text-dimmer: rgba(238, 244, 255, 0.32);
+  --line: rgba(120, 170, 255, 0.14);
+  --line-strong: rgba(120, 170, 255, 0.3);
 }
 
 * {
@@ -49,17 +49,15 @@ h4 {
   margin: 0;
 }
 
-/* Latin display font for the wordmark + numerals */
 .font-display {
-  font-family: 'Playfair Display', 'Cairo', serif;
+  font-family: 'Sora', 'Cairo', sans-serif;
 }
 
 ::selection {
-  background: var(--gold);
+  background: var(--sky);
   color: var(--ink);
 }
 
-/* Elegant gold scrollbar */
 ::-webkit-scrollbar {
   width: 9px;
 }
@@ -67,88 +65,84 @@ h4 {
   background: var(--ink);
 }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(var(--gold-deep), var(--gold));
+  background: linear-gradient(var(--brand), var(--cyan));
   border-radius: 10px;
 }
 
-/* Gold text gradient */
+/* Sky→cyan text gradient */
 .text-gradient {
-  background: linear-gradient(115deg, var(--gold-2) 0%, var(--gold) 45%, var(--gold-pale) 100%);
+  background: linear-gradient(115deg, var(--sky) 0%, var(--brand-2) 50%, var(--cyan) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-/* Thin engraved gold outline text (for oversized ghost numerals) */
 .text-outline {
   -webkit-text-fill-color: transparent;
   -webkit-text-stroke: 1px var(--line-strong);
   color: transparent;
 }
 
-/* Frosted glass card */
 .glass {
-  background: rgba(246, 242, 233, 0.035);
-  backdrop-filter: blur(18px) saturate(1.1);
-  -webkit-backdrop-filter: blur(18px) saturate(1.1);
+  background: rgba(120, 170, 255, 0.05);
+  backdrop-filter: blur(18px) saturate(1.15);
+  -webkit-backdrop-filter: blur(18px) saturate(1.15);
   border: 1px solid var(--line);
 }
 
-/* ---- Buttons ---- (in @layer components so display utilities like
-   `hidden` / `sm:inline-flex` still win over the base .btn display) */
+/* ---- Buttons (in @layer components so `hidden`/`sm:` utilities win) ---- */
 @layer components {
-.btn {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0.9rem 1.9rem;
-  border-radius: 999px;
-  font-weight: 700;
-  font-family: 'Cairo', sans-serif;
-  letter-spacing: 0.01em;
-  cursor: pointer;
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 0.35s ease, background 0.35s ease, color 0.35s ease;
-  border: none;
-  text-decoration: none;
-  white-space: nowrap;
-  overflow: hidden;
-}
-.btn-primary {
-  background: linear-gradient(115deg, var(--gold) 0%, var(--gold-2) 100%);
-  color: #1a1409;
-  box-shadow: 0 10px 34px -10px rgba(201, 169, 106, 0.55);
-}
-.btn-primary:hover {
-  box-shadow: 0 18px 46px -10px rgba(201, 169, 106, 0.7);
-}
-.btn-ghost {
-  background: transparent;
-  color: var(--text);
-  border: 1px solid var(--line-strong);
-}
-.btn-ghost:hover {
-  background: rgba(201, 169, 106, 0.08);
-  border-color: var(--gold);
-  color: var(--gold-2);
-}
-/* subtle sheen sweep on primary */
-.btn-primary::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(115deg, transparent 30%, rgba(255, 255, 255, 0.5) 50%, transparent 70%);
-  transform: translateX(-120%);
-  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.btn-primary:hover::after {
-  transform: translateX(120%);
-}
+  .btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.9rem 1.9rem;
+    border-radius: 999px;
+    font-weight: 700;
+    font-family: 'Cairo', sans-serif;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 0.35s ease, background 0.35s ease, color 0.35s ease;
+    border: none;
+    text-decoration: none;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .btn-primary {
+    background: linear-gradient(115deg, var(--brand) 0%, var(--cyan) 100%);
+    color: #04122b;
+    box-shadow: 0 10px 34px -10px rgba(59, 110, 245, 0.6);
+  }
+  .btn-primary:hover {
+    box-shadow: 0 18px 46px -10px rgba(34, 211, 238, 0.7);
+  }
+  .btn-ghost {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--line-strong);
+  }
+  .btn-ghost:hover {
+    background: rgba(59, 110, 245, 0.1);
+    border-color: var(--sky);
+    color: var(--brand-pale);
+  }
+  .btn-primary::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(115deg, transparent 30%, rgba(255, 255, 255, 0.55) 50%, transparent 70%);
+    transform: translateX(-120%);
+    transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .btn-primary:hover::after {
+    transform: translateX(120%);
+  }
 }
 
-/* Small caps eyebrow label */
+/* Eyebrow */
 .eyebrow {
   display: inline-flex;
   align-items: center;
@@ -157,17 +151,38 @@ h4 {
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.18em;
-  color: var(--gold-2);
+  color: var(--sky);
   text-transform: uppercase;
 }
 .eyebrow::before {
   content: '';
   width: 26px;
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--gold));
+  background: linear-gradient(90deg, transparent, var(--sky));
 }
 
-/* Infinite marquee */
+/* ---- Clip-reveal lines: wrap text in .mask-line, animate .mask-inner ---- */
+.mask-line {
+  overflow: hidden;
+  display: block;
+}
+.mask-inner {
+  display: block;
+  will-change: transform;
+}
+
+/* ---- Manifesto sweep words (dim → illuminated) ---- */
+.sweep-word {
+  display: inline-block;
+  color: var(--text-dimmer);
+  transition: color 0.2s linear;
+  will-change: color;
+}
+.manifesto-static .sweep-word {
+  color: var(--text);
+}
+
+/* Kinetic marquee */
 @keyframes marquee {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
@@ -175,13 +190,12 @@ h4 {
 .marquee-track {
   display: inline-flex;
   white-space: nowrap;
-  animation: marquee 26s linear infinite;
+  animation: marquee 30s linear infinite;
 }
 [dir='rtl'] .marquee-track {
   animation-direction: reverse;
 }
 
-/* Scroll hint dot */
 @keyframes scrollPulse {
   0% { transform: translateY(0); opacity: 1; }
   100% { transform: translateY(14px); opacity: 0; }
@@ -190,17 +204,16 @@ h4 {
   animation: scrollPulse 1.6s ease-in-out infinite;
 }
 
-/* Ambient glow blob (slow float) */
 @keyframes floatBlob {
   0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(4%, -6%) scale(1.08); }
+  50% { transform: translate(5%, -7%) scale(1.1); }
 }
 .glow-blob {
   position: absolute;
   border-radius: 50%;
   pointer-events: none;
-  filter: blur(60px);
-  animation: floatBlob 14s ease-in-out infinite;
+  filter: blur(70px);
+  animation: floatBlob 16s ease-in-out infinite;
 }
 
 .glow-ring {
@@ -209,28 +222,24 @@ h4 {
   pointer-events: none;
 }
 
-/* reserved aspect for product media */
 .product-media {
   aspect-ratio: 1 / 1;
 }
 
-/* Character-split reveal — each char wrapped in .char, animated by GSAP */
 .char {
   display: inline-block;
   will-change: transform, opacity;
 }
 .word {
   display: inline-block;
-  white-space: nowrap;
 }
 
-/* Fine gold hairline divider */
 .hairline {
   height: 1px;
   background: linear-gradient(90deg, transparent, var(--line-strong), transparent);
 }
 
-/* Custom cursor (desktop pointer devices only) */
+/* Custom cursor */
 .cursor-dot,
 .cursor-ring {
   position: fixed;
@@ -239,26 +248,25 @@ h4 {
   z-index: 9999;
   pointer-events: none;
   border-radius: 50%;
-  mix-blend-mode: difference;
 }
 .cursor-dot {
   width: 7px;
   height: 7px;
-  background: var(--gold-pale);
+  background: var(--cyan);
   transform: translate(-50%, -50%);
+  box-shadow: 0 0 12px 2px rgba(34, 211, 238, 0.7);
 }
 .cursor-ring {
   width: 38px;
   height: 38px;
-  border: 1px solid rgba(241, 230, 204, 0.7);
+  border: 1px solid rgba(120, 170, 255, 0.6);
   transform: translate(-50%, -50%);
-  transition: width 0.28s ease, height 0.28s ease, opacity 0.28s ease,
-    background 0.28s ease;
+  transition: width 0.28s ease, height 0.28s ease, background 0.28s ease;
 }
 .cursor-ring.is-hover {
-  width: 62px;
-  height: 62px;
-  background: rgba(201, 169, 106, 0.12);
+  width: 64px;
+  height: 64px;
+  background: rgba(59, 110, 245, 0.12);
 }
 @media (hover: none), (pointer: coarse) {
   .cursor-dot,
@@ -267,18 +275,62 @@ h4 {
   }
 }
 
-/* Scroll progress bar */
-.scroll-progress {
+/* Fixed vertical section rail (desktop) */
+.rail {
+  /* display is controlled by Tailwind `hidden lg:flex` — don't set it here,
+     or it would override the `hidden` utility on mobile. */
   position: fixed;
-  top: 0;
-  inset-inline: 0;
-  height: 2px;
-  transform-origin: right center; /* RTL: grows from the right */
-  background: linear-gradient(90deg, var(--gold-2), var(--gold), var(--gold-deep));
-  z-index: 60;
+  top: 50%;
+  inset-inline-start: 26px;
+  transform: translateY(-50%);
+  z-index: 40;
+  flex-direction: column;
+  gap: 18px;
+  align-items: flex-start;
+}
+.rail-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-dimmer);
+  font-size: 0.72rem;
+  font-family: 'Cairo', sans-serif;
+  letter-spacing: 0.08em;
+  transition: color 0.3s ease;
+}
+.rail-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: transparent;
+  border: 1px solid var(--line-strong);
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+.rail-item.active {
+  color: var(--brand-pale);
+}
+.rail-item.active .rail-dot {
+  background: var(--cyan);
+  border-color: var(--cyan);
+  box-shadow: 0 0 12px 1px rgba(34, 211, 238, 0.7);
+  transform: scale(1.25);
+}
+.rail-label {
+  opacity: 0;
+  transform: translateX(6px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+[dir='rtl'] .rail-label {
+  transform: translateX(-6px);
+}
+.rail-item.active .rail-label,
+.rail-item:hover .rail-label {
+  opacity: 1;
+  transform: translateX(0);
 }
 
-/* Respect reduced-motion */
+/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

@@ -1,8 +1,7 @@
 const LINKS = [
   { label: 'الرئيسية', href: '#hero' },
-  { label: 'من نحن', href: '#about' },
-  { label: 'المجموعة', href: '#collection' },
-  { label: 'المنتجات', href: '#products' },
+  { label: 'البيان', href: '#manifesto' },
+  { label: 'المجموعة', href: '#showcase' },
   { label: 'تواصل معنا', href: '#contact' },
 ]
 
@@ -19,11 +18,11 @@ export default function Footer() {
 
       <div className="relative mx-auto flex max-w-7xl flex-col items-center gap-8 px-6 md:flex-row md:justify-between">
         <a href="#hero" className="flex items-center gap-3" aria-label="ديفرا">
-          <span className="font-display text-xl font-bold tracking-[0.32em] text-text">
+          <span className="font-display text-xl font-bold tracking-[0.28em] text-text">
             DIVRA
           </span>
           <span className="h-4 w-px bg-line-strong" />
-          <span className="font-cairo text-sm text-gold-2">ديفرا</span>
+          <span className="font-cairo text-sm text-sky">ديفرا</span>
         </a>
 
         <nav className="flex flex-wrap justify-center gap-6">
@@ -31,7 +30,7 @@ export default function Footer() {
             <a
               key={l.href}
               href={l.href}
-              className="text-sm text-text-dim transition-colors hover:text-gold-2"
+              className="text-sm text-text-dim transition-colors hover:text-sky"
             >
               {l.label}
             </a>

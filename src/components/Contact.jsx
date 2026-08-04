@@ -65,7 +65,7 @@ export default function Contact({ reduced }) {
   }
 
   const field =
-    'w-full rounded-xl2 border border-line bg-white/5 px-4 py-3 text-sm text-text placeholder:text-text-dimmer outline-none transition-colors focus:border-gold'
+    'w-full rounded-xl2 border border-line bg-white/5 px-4 py-3 text-sm text-text placeholder:text-text-dimmer outline-none transition-colors focus:border-sky'
 
   return (
     <section
@@ -93,7 +93,7 @@ export default function Contact({ reduced }) {
           <div className="mt-9 space-y-5">
             {INFO.map((item) => (
               <div key={item.label} data-reveal className="flex items-center gap-4">
-                <span className="grid h-12 w-12 flex-shrink-0 place-items-center rounded-xl2 border border-line bg-gold/10 text-gold-2">
+                <span className="grid h-12 w-12 flex-shrink-0 place-items-center rounded-xl2 border border-line bg-brand/12 text-sky">
                   <svg viewBox="0 0 24 24" className="h-6 w-6" fill="currentColor">
                     {item.icon}
                   </svg>
@@ -133,7 +133,7 @@ export default function Contact({ reduced }) {
           </button>
 
           {sent && (
-            <p className="mt-4 rounded-xl2 border border-gold/30 bg-gold/10 px-4 py-3 text-center text-sm text-gold-2">
+            <p className="mt-4 rounded-xl2 border border-sky/30 bg-sky/10 px-4 py-3 text-center text-sm text-brand-pale">
               ✓ تم استلام رسالتك، سنعاود التواصل معك قريباً.
             </p>
           )}
