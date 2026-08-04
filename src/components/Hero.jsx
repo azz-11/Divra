@@ -144,7 +144,7 @@ export default function Hero({ reduced }) {
           <span className="mb-5 inline-block rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-sm text-white backdrop-blur">
             {t('أدوات صحية فاخرة')}
           </span>
-          <h1 className="font-cairo text-4xl font-black leading-tight text-white sm:text-6xl md:text-7xl">
+          <h1 className="font-cairo whitespace-nowrap text-xl font-bold leading-tight text-white sm:text-3xl md:text-4xl">
             {t('لحظاتك... تستحق أن تُعاش بجمال')}
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-base text-white/85 sm:text-lg">
