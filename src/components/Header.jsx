@@ -48,8 +48,6 @@ export default function Header() {
             <Link to="/" className="flex items-center">
               <img src={solid ? '/logo.png' : '/logo-light.png'} alt="ديفرا Divra" className="h-9 w-auto" />
             </Link>
-            <span className="hidden h-6 w-px bg-line md:block" />
-            <SocialIcons className="hidden md:flex" light={!solid} />
           </div>
 
           {/* التنقل — سطح المكتب */}
