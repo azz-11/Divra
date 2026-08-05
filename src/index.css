@@ -71,9 +71,9 @@ h4 {
   -webkit-text-fill-color: transparent;
 }
 
-/* بطاقة زجاجية فاتحة */
+/* بطاقة زجاجية */
 .glass {
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.06);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--line);
