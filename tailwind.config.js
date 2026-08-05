@@ -19,8 +19,8 @@ export default {
         line: 'var(--line)',
       },
       fontFamily: {
-        cairo: ['IBM Plex Sans Arabic', 'sans-serif'],
-        tajawal: ['IBM Plex Sans Arabic', 'sans-serif'],
+        cairo: ['Cairo', 'sans-serif'],
+        tajawal: ['Cairo', 'sans-serif'],
       },
       borderRadius: {
         xl2: '22px',
