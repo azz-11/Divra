@@ -30,7 +30,7 @@ export const SOCIALS = [
 export default function SocialIcons({ size = 18, className = '', gap = 'gap-2', light = false }) {
   const style = light
     ? 'border-white/35 bg-white/10 text-white/90 hover:border-white hover:text-white'
-    : 'border-line bg-white/60 text-text-dim hover:border-brand hover:text-brand'
+    : 'border-line bg-white/10 text-text-dim hover:border-brand hover:text-brand'
   return (
     <div className={`flex items-center ${gap} ${className}`}>
       {SOCIALS.map((s) => (

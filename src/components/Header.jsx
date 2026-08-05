@@ -72,7 +72,7 @@ export default function Header() {
               aria-label={lang === 'ar' ? 'Switch to English' : 'التبديل إلى العربية'}
               className={`grid h-11 min-w-11 place-items-center rounded-full border px-3 text-sm font-bold transition-colors ${
                 solid
-                  ? 'border-line bg-white/60 text-text hover:border-brand hover:text-brand'
+                  ? 'border-line bg-white/10 text-text hover:border-brand hover:text-brand'
                   : 'border-white/40 bg-white/10 text-white hover:border-white'
               }`}
             >
@@ -85,7 +85,7 @@ export default function Header() {
               aria-label={t('بحث')}
               className={`grid h-11 w-11 place-items-center rounded-full border transition-colors ${
                 solid
-                  ? 'border-line bg-white/60 text-text hover:border-brand hover:text-brand'
+                  ? 'border-line bg-white/10 text-text hover:border-brand hover:text-brand'
                   : 'border-white/40 bg-white/10 text-white hover:border-white'
               }`}
             >
@@ -123,7 +123,7 @@ export default function Header() {
 
       {/* قائمة الجوال */}
       <div
-        className={`fixed inset-0 z-40 flex flex-col bg-[#eaf3ff]/95 backdrop-blur-xl transition-all duration-300 lg:hidden ${
+        className={`fixed inset-0 z-40 flex flex-col bg-[#02021b]/95 backdrop-blur-xl transition-all duration-300 lg:hidden ${
           open ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'
         }`}
       >

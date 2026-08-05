@@ -51,7 +51,7 @@ export default function ProductGridReveal({ products, accent = '#2f6fd6', reduce
             <button
               key={p.id}
               onClick={() => open(p)}
-              className={`group relative flex flex-col rounded-xl2 border bg-white/70 p-4 text-start backdrop-blur transition-all hover:-translate-y-1 hover:shadow-xl ${
+              className={`group relative flex flex-col rounded-xl2 border bg-white/10 p-4 text-start backdrop-blur transition-all hover:-translate-y-1 hover:shadow-xl ${
                 isActive ? 'border-brand shadow-[0_0_0_2px_rgba(79,143,240,.35)]' : 'border-line hover:border-brand-light'
               }`}
             >
@@ -75,13 +75,13 @@ export default function ProductGridReveal({ products, accent = '#2f6fd6', reduce
         <section
           ref={revealRef}
           className="relative flex min-h-screen scroll-mt-20 items-center overflow-hidden"
-          style={{ background: `linear-gradient(140deg, #e4f0ff 0%, ${accent}2e 60%, #cae1ff 100%)` }}
+          style={{ background: `linear-gradient(140deg, #02021b 0%, ${accent}2e 60%, #030435 100%)` }}
         >
           {/* زر الإغلاق */}
           <button
             onClick={close}
             aria-label={t('العودة للرئيسية')}
-            className="absolute end-5 top-24 z-20 grid h-12 w-12 place-items-center rounded-full border border-line bg-white/70 text-text backdrop-blur transition-all hover:scale-105 hover:border-brand"
+            className="absolute end-5 top-24 z-20 grid h-12 w-12 place-items-center rounded-full border border-line bg-white/10 text-text backdrop-blur transition-all hover:scale-105 hover:border-brand"
           >
             <X size={22} strokeWidth={2.25} />
           </button>
@@ -110,7 +110,7 @@ export default function ProductGridReveal({ products, accent = '#2f6fd6', reduce
               {/* جدول المواصفات */}
               <div className="mt-7 grid max-w-md grid-cols-2 gap-3">
                 {selected.specs.map(([k, v], i) => (
-                  <div key={i} className="rounded-xl2 border border-line bg-white/70 px-4 py-3 backdrop-blur">
+                  <div key={i} className="rounded-xl2 border border-line bg-white/10 px-4 py-3 backdrop-blur">
                     <div className="text-xs text-text-dimmer">{tr(k)}</div>
                     <div className="mt-0.5 font-cairo font-bold text-brand-strong">{tr(v)}</div>
                   </div>
