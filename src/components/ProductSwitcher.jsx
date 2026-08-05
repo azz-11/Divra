@@ -4,7 +4,7 @@ import { PRODUCTS, collectionOf } from '../productsData.js'
 import { useLang } from '../i18n.jsx'
 
 // منتجات المبدّل + فيديو loop لكل منتج (التصنيف غير مرتبط بالفيديو — للتجربة)
-const IDS = ['mixer-chrome', 'shattaf', 'spray-gold', 'jacuzzi', 'toilet']
+const IDS = ['mixer-chrome', 'shower-chrome', 'jacuzzi', 'bath', 'bath-tub', 'tall']
 const VIDEOS = ['/video/switch-1', '/video/switch-2', '/video/switch-3']
 const imgOf = (p) => p.images[p.finishes[0]]
 const ITEMS = IDS.map((id, i) => ({
