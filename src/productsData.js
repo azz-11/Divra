@@ -78,19 +78,6 @@ export const PRODUCTS = [
     finishes: ['black'], images: { black: '/products/faucet-bath-black.webp' },
   },
   {
-    id: 'toilet', collection: 'chairs',
-    title: { ar: 'كرسي الحمام المدمج', en: 'One-piece Toilet' },
-    tagline: { ar: 'تصميم قطعة واحدة انسيابي وسهل التنظيف', en: 'A flowing one-piece design that’s easy to clean' },
-    desc: { ar: 'كرسي حمّام من قطعة واحدة بتصميم انسيابي عصري، بشطف مزدوج موفّر للماء وسطح سهل التنظيف.', en: 'A one-piece toilet with a modern flowing design, dual water-saving flush and an easy-to-clean surface.' },
-    specs: [
-      [{ ar: 'التصميم', en: 'Design' }, { ar: 'قطعة واحدة', en: 'One-piece' }],
-      [{ ar: 'الشطف', en: 'Flush' }, { ar: 'مزدوج موفّر', en: 'Dual, water-saving' }],
-      [{ ar: 'الخامة', en: 'Material' }, { ar: 'سيراميك مطلي', en: 'Glazed ceramic' }],
-      [yrs, y5],
-    ],
-    finishes: ['white'], images: { white: '/products/toilet-white.webp' },
-  },
-  {
     id: 'jacuzzi', collection: 'jacuzzi',
     title: { ar: 'جاكوزي التدليك الحر', en: 'Freestanding Massage Jacuzzi' },
     tagline: { ar: 'نفّاثات تدليك ومخلط جانبي بمرش يدوي', en: 'Massage jets with a side mixer and handheld spray' },
@@ -103,19 +90,6 @@ export const PRODUCTS = [
     ],
     finishes: ['white'], images: { white: '/products/jacuzzi-white.webp' },
   },
-  {
-    id: 'shattaf', collection: 'shattaf',
-    title: { ar: 'الشطاف الذهبي', en: 'Gold Bidet Spray' },
-    tagline: { ar: 'ضغط متوازن وتشطيب ذهبي فاخر', en: 'Balanced pressure and a luxe gold finish' },
-    desc: { ar: 'شطاف جداري بضغط ماء متوازن وخرطوم مرن، بتشطيب ذهبي أنيق يليق بالحمّامات الفاخرة.', en: 'A wall-mounted bidet spray with balanced water pressure and a flexible hose, in an elegant gold finish worthy of luxury bathrooms.' },
-    specs: [
-      [{ ar: 'التركيب', en: 'Mount' }, { ar: 'جداري', en: 'Wall' }],
-      [{ ar: 'الخرطوم', en: 'Hose' }, { ar: 'مرن معدني', en: 'Flexible metal' }],
-      [{ ar: 'التشطيب', en: 'Finish' }, { ar: 'ذهبي', en: 'Gold' }],
-      [yrs, y5],
-    ],
-    finishes: ['gold'], images: { gold: '/products/shattaf-gold.webp' },
-  },
 ]
 
 // الأقسام الستة (ثنائية اللغة)
@@ -127,14 +101,6 @@ export const COLLECTIONS = [
     features: [{ ar: 'تحكّم دقيق بالتدفّق', en: 'Precise flow control' }, { ar: 'تشطيب أسود مطفي', en: 'Matte black finish' }, { ar: 'خامات مقاومة للصدأ', en: 'Rust-resistant materials' }],
     accent: '#2f6fd6', bg: '#e4f0ff', image: '/products/mixer-chrome.webp',
     cover: '/categories/cat-1.webp',
-  },
-  {
-    id: 'shattaf',
-    name: { ar: 'الشطاف', en: 'Bidet Spray' }, short: { ar: 'الشطاف', en: 'Bidet' },
-    intro: { ar: 'شطافات أنيقة بضغط متوازن وتحكّم سلس ونظافة فائقة.', en: 'Elegant bidet sprays with balanced pressure, smooth control and superior hygiene.' },
-    features: [{ ar: 'ضغط ماء متوازن', en: 'Balanced water pressure' }, { ar: 'تحكّم سلس', en: 'Smooth control' }, { ar: 'تشطيب مقاوم للصدأ', en: 'Rust-resistant finish' }],
-    accent: '#2f6fd6', bg: '#cae1ff', image: '/products/shattaf-gold.webp',
-    cover: '/categories/cat-2.webp',
   },
   {
     id: 'sprays',
@@ -151,14 +117,6 @@ export const COLLECTIONS = [
     features: [{ ar: 'مخرج مزدوج', en: 'Dual outlet' }, { ar: 'محوّل انسيابي', en: 'Smooth diverter' }, { ar: 'تصميم جداري أنيق', en: 'Elegant wall design' }],
     accent: '#2f6fd6', bg: '#e4f0ff', image: '/products/faucet-bath-black.webp',
     cover: '/categories/cat-4.webp',
-  },
-  {
-    id: 'chairs',
-    name: { ar: 'كراسي الحمام', en: 'Toilets' }, short: { ar: 'الكراسي', en: 'Toilets' },
-    intro: { ar: 'كراسي حمّام آمنة ومريحة بمواد مضادة للانزلاق وتحمّل عالٍ.', en: 'Safe, comfortable toilets with anti-slip materials and high durability.' },
-    features: [{ ar: 'مواد مضادة للانزلاق', en: 'Anti-slip materials' }, { ar: 'تحمّل عالٍ', en: 'High durability' }, { ar: 'راحة وأمان', en: 'Comfort & safety' }],
-    accent: '#2f6fd6', bg: '#cae1ff', image: '/products/toilet-white.webp',
-    cover: '/categories/cat-5.webp',
   },
   {
     id: 'jacuzzi',
