@@ -166,7 +166,7 @@ export default function Hero({ reduced }) {
         {/* مؤشر السكرول */}
         <a
           href="#collections"
-          className="absolute inset-inline-0 bottom-8 z-10 mx-auto flex w-full flex-col items-center gap-2 text-white/70"
+          className="absolute start-0 end-0 bottom-8 z-10 mx-auto flex w-full flex-col items-center gap-2 text-white/70"
           style={{ insetInline: 0 }}
           aria-label="مرّر للأسفل"
         >

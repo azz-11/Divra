@@ -180,7 +180,7 @@ export default function BrandStory({ reduced }) {
       </button>
 
       {/* مؤشّرات الشرائح */}
-      <div className="absolute bottom-8 inset-inline-0 z-20 mx-auto flex justify-center gap-2" style={{ insetInline: 0 }}>
+      <div className="absolute bottom-8 start-0 end-0 z-20 mx-auto flex justify-center gap-2" style={{ insetInline: 0 }}>
         {STORY.map((_, i) => (
           <button key={i} onClick={() => change(i)} aria-label={`${i + 1}`}
             className={`h-1.5 rounded-full transition-all ${i === active ? 'w-8 bg-white' : 'w-2.5 bg-white/40 hover:bg-white/70'}`} />

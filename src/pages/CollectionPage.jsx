@@ -38,7 +38,7 @@ export default function CollectionPage({ reduced }) {
           <p className="mx-auto mt-5 max-w-xl text-lg text-white/85 sm:text-xl">{tr(collection.intro)}</p>
         </div>
         {/* مؤشّر تمرير */}
-        <a href="#collection-body" className="absolute inset-inline-0 bottom-8 z-10 mx-auto flex w-full flex-col items-center gap-2 text-white/70" style={{ insetInline: 0 }} aria-label={t('مرّر للأسفل')}>
+        <a href="#collection-body" className="absolute start-0 end-0 bottom-8 z-10 mx-auto flex w-full flex-col items-center gap-2 text-white/70" style={{ insetInline: 0 }} aria-label={t('مرّر للأسفل')}>
           <span className="text-xs">{t('مرّر للأسفل')}</span>
           <span className="flex h-9 w-5 items-start justify-center rounded-full border border-white/30 p-1">
             <span className="scroll-dot h-1.5 w-1.5 rounded-full bg-brand-light" />

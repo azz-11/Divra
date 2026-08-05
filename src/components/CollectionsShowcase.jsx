@@ -93,7 +93,7 @@ export default function CollectionsShowcase({ reduced }) {
       <div className="relative h-screen w-full overflow-hidden">
         {/* توهج لوني يتبدّل مع القسم */}
         <div
-          className="pointer-events-none absolute inset-inline-0 top-1/2 mx-auto h-[85vmin] w-[85vmin] -translate-y-1/2 rounded-full blur-3xl"
+          className="pointer-events-none absolute start-0 end-0 top-1/2 mx-auto h-[85vmin] w-[85vmin] -translate-y-1/2 rounded-full blur-3xl"
           style={{ insetInline: 0, backgroundColor: `${active_c.accent}33`, transition: `background-color ${DUR}ms ${EASE}`, zIndex: 1 }}
         />
 
@@ -107,7 +107,7 @@ export default function CollectionsShowcase({ reduced }) {
         />
 
         {/* اسم القسم كنص شبح عملاق */}
-        <div className="absolute inset-inline-0 flex select-none items-center justify-center" style={{ insetInline: 0, top: '16%', zIndex: 2, pointerEvents: 'none' }}>
+        <div className="absolute start-0 end-0 flex select-none items-center justify-center" style={{ insetInline: 0, top: '16%', zIndex: 2, pointerEvents: 'none' }}>
           <span
             style={{
               fontFamily: 'Aktiv Grotesk Arabic, Readex Pro, sans-serif', fontSize: 'clamp(72px, 22vw, 300px)', fontWeight: 900,

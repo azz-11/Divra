@@ -37,7 +37,7 @@ export default function Header() {
   return (
     <>
       <header
-        className={`fixed inset-inline-0 top-0 z-50 transition-all duration-300 ${
+        className={`fixed start-0 end-0 top-0 z-50 transition-all duration-300 ${
           solid ? 'glass shadow-lg shadow-black/30' : 'bg-transparent'
         }`}
         style={{ insetInline: 0 }}
@@ -46,7 +46,7 @@ export default function Header() {
           {/* الشعار + أيقونات التواصل بجانبه */}
           <div className="flex items-center gap-4">
             <Link to="/" className="flex items-center">
-              <img src={solid ? '/logo.png' : '/logo-light.png'} alt="ديفرا Divra" className="h-9 w-auto" />
+              <img src={solid ? '/logo.png' : '/logo-light.png'} alt="ديفرا Divra" className="h-6 w-auto sm:h-9" />
             </Link>
           </div>
 
@@ -109,9 +109,9 @@ export default function Header() {
                   const bar = open || solid ? 'bg-text' : 'bg-white'
                   return (
                     <>
-                      <span className={`absolute inset-inline-0 top-0 h-0.5 rounded ${bar} transition-all ${open ? 'top-1.5 rotate-45' : ''}`} />
-                      <span className={`absolute inset-inline-0 top-1.5 h-0.5 rounded ${bar} transition-all ${open ? 'opacity-0' : ''}`} />
-                      <span className={`absolute inset-inline-0 top-3 h-0.5 rounded ${bar} transition-all ${open ? 'top-1.5 -rotate-45' : ''}`} />
+                      <span className={`absolute start-0 end-0 top-0 h-0.5 rounded ${bar} transition-all ${open ? 'top-1.5 rotate-45' : ''}`} />
+                      <span className={`absolute start-0 end-0 top-1.5 h-0.5 rounded ${bar} transition-all ${open ? 'opacity-0' : ''}`} />
+                      <span className={`absolute start-0 end-0 top-3 h-0.5 rounded ${bar} transition-all ${open ? 'top-1.5 -rotate-45' : ''}`} />
                     </>
                   )
                 })()}

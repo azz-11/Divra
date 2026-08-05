@@ -62,7 +62,7 @@ export default function ProductGridReveal({ products, accent = '#2f6fd6', reduce
               <span className="font-cairo text-sm font-bold text-text sm:text-base">{tr(p.title)}</span>
               <span className="mt-1 text-xs text-brand-strong">{tr(p.specs[0][1])}</span>
               {/* مؤشّر أن الضغط "يفتح" */}
-              <span className="absolute inset-inline-end-3 top-3 grid h-7 w-7 place-items-center rounded-full bg-brand/12 text-brand-strong transition-all group-hover:bg-brand group-hover:text-white" style={{ insetInlineEnd: '0.75rem' }}>
+              <span className="absolute end-3 top-3 grid h-7 w-7 place-items-center rounded-full bg-brand/12 text-brand-strong transition-all group-hover:bg-brand group-hover:text-white" style={{ insetInlineEnd: '0.75rem' }}>
                 <ChevronDown size={16} strokeWidth={2.5} />
               </span>
             </button>

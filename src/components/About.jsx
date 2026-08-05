@@ -105,8 +105,8 @@ export default function About({ reduced }) {
               key={s.label}
               className={`glass absolute z-20 rounded-xl2 px-5 py-3 text-center ${
                 i === 0
-                  ? 'top-6 inset-inline-start-0'
-                  : 'bottom-6 inset-inline-end-0'
+                  ? 'top-6 start-0'
+                  : 'bottom-6 end-0'
               }`}
               style={i === 0 ? { insetInlineStart: 0 } : { insetInlineEnd: 0 }}
             >
