@@ -1,6 +1,7 @@
 import SocialIcons from './SocialIcons.jsx'
 import { useLang } from '../i18n.jsx'
 
+// أيقونات خطية صغيرة (stroke) بأسلوب أنيق
 const INFO = [
   {
     label: 'الهاتف',
@@ -26,7 +27,7 @@ export default function Contact() {
   const { t } = useLang()
   return (
     <section id="contact" className="relative overflow-hidden bg-surface py-24 md:py-32">
-      <div className="mx-auto max-w-4xl px-6 text-center">
+      <div className="mx-auto max-w-2xl px-6 text-center">
         <span className="mb-4 inline-block rounded-full border border-line bg-brand/10 px-4 py-1.5 text-sm text-brand-strong">
           {t('تواصل معنا')}
         </span>
@@ -37,39 +38,47 @@ export default function Contact() {
           {t('تواصل معنا عبر أيّ من القنوات التالية وسنسعد بخدمتك.')}
         </p>
 
-        {/* زر واتساب مباشر بارز */}
+        {/* زر واتساب مباشر — أنيق صغير */}
         <a
           href="https://wa.me/966566906123"
           target="_blank"
           rel="noopener noreferrer"
-          className="mx-auto mt-8 flex min-h-[48px] w-full max-w-sm items-center justify-center gap-3 rounded-full px-6 text-base font-bold text-white shadow-lg transition-transform hover:-translate-y-0.5"
+          className="mx-auto mt-9 flex min-h-[46px] w-full max-w-xs items-center justify-center gap-2.5 rounded-full px-6 text-sm font-bold text-white shadow-lg transition-transform hover:-translate-y-0.5"
           style={{ background: 'linear-gradient(120deg,#25D366,#128C7E)' }}
         >
-          <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor">
+          <svg viewBox="0 0 24 24" className="h-[18px] w-[18px]" fill="currentColor">
             <path d="M12 2a10 10 0 00-8.6 15.07L2 22l5.05-1.32A10 10 0 1012 2zm0 1.8a8.2 8.2 0 016.96 12.54l-.2.32.78 2.86-2.94-.77-.3.18A8.2 8.2 0 1112 3.8z" />
           </svg>
           {t('تواصل عبر واتساب')}
         </a>
 
-        <div className="mt-8 grid gap-4 sm:mt-10 sm:grid-cols-3 sm:gap-5">
+        {/* قنوات التواصل — صفوف نظيفة بأيقونات خطية صغيرة وفواصل رفيعة */}
+        <div className="mx-auto mt-10 max-w-md divide-y divide-line overflow-hidden rounded-2xl border border-line">
           {INFO.map((item) => (
             <a
               key={item.label}
               href={item.href}
               target={item.href.startsWith('http') ? '_blank' : undefined}
               rel="noopener noreferrer"
-              className="glass flex flex-col items-center gap-3 rounded-xl2 p-7 transition-all hover:-translate-y-1 hover:border-brand-light"
+              className="flex items-center gap-4 px-5 py-4 text-start transition-colors hover:bg-brand/5"
             >
-              <span className="grid h-14 w-14 place-items-center rounded-full bg-brand/15 text-brand-strong">
-                <svg viewBox="0 0 24 24" className="h-7 w-7" fill="currentColor">{item.icon}</svg>
+              <span className="shrink-0 text-brand-strong">
+                <svg viewBox="0 0 24 24" className="h-[20px] w-[20px]" fill="currentColor">
+                  {item.icon}
+                </svg>
               </span>
-              <span className="text-xs text-text-dimmer">{t(item.label)}</span>
-              <span dir="ltr" className="font-cairo font-bold">{item.value}</span>
+              <span className="flex flex-1 flex-col">
+                <span className="text-xs text-text-dimmer">{t(item.label)}</span>
+                <span dir="ltr" className="font-cairo text-sm font-bold text-start">{item.value}</span>
+              </span>
+              <svg viewBox="0 0 24 24" className="h-4 w-4 shrink-0 text-text-dimmer ltr:-scale-x-100" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M15 18l-6-6 6-6" />
+              </svg>
             </a>
           ))}
         </div>
 
-        <div className="mt-12 flex flex-col items-center gap-4">
+        <div className="mt-10 flex flex-col items-center gap-4">
           <span className="text-sm text-text-dim">{t('تابعنا على')}</span>
           <SocialIcons gap="gap-3" />
         </div>
