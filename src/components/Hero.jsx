@@ -135,28 +135,31 @@ export default function Hero({ reduced }) {
           className="absolute inset-0"
           style={{
             background:
-              'linear-gradient(180deg, rgba(3,3,40,.72) 0%, rgba(3,3,40,.45) 40%, rgba(3,3,40,.9) 100%)',
+              'linear-gradient(180deg, rgba(3,3,40,.78) 0%, rgba(3,3,40,.5) 42%, rgba(3,3,40,.94) 100%)',
           }}
         />
 
         {/* المحتوى */}
-        <div ref={contentRef} className="relative z-10 mx-auto max-w-4xl px-6 text-center">
+        <div ref={contentRef} className="relative z-10 mx-auto w-full max-w-4xl px-6 text-center">
           <span className="mb-5 inline-block rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-sm text-white backdrop-blur">
             {t('أدوات صحية فاخرة')}
           </span>
-          <h1 className="font-cairo whitespace-nowrap text-xl font-bold leading-tight text-white sm:text-3xl md:text-4xl">
+          <h1
+            className="font-cairo font-bold leading-tight text-white"
+            style={{ fontSize: 'clamp(1.65rem, 7vw, 3rem)', textWrap: 'balance' }}
+          >
             {t('لحظاتك... تستحق أن تُعاش بجمال')}
           </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-base text-white/85 sm:text-lg">
+          <p className="mx-auto mt-5 max-w-2xl text-base text-white/85 sm:text-lg">
             {t('تفاصيل تنسجم مع إيقاع حياتك.')}
           </p>
-          <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
-            <a href="#collections" className="btn btn-primary">
+          <div className="mx-auto mt-9 flex w-full max-w-sm flex-col items-stretch justify-center gap-3 sm:max-w-none sm:flex-row sm:items-center sm:gap-4">
+            <a href="#switcher" className="btn btn-primary w-full sm:w-auto">
               {t('استكشف المجموعة')}
             </a>
             <a
               href="/about"
-              className="btn border border-white/30 bg-white/10 text-white backdrop-blur hover:bg-white/20"
+              className="btn w-full border border-white/30 bg-white/10 text-white backdrop-blur hover:bg-white/20 sm:w-auto"
             >
               {t('تعرّف على ديفرا')}
             </a>
@@ -165,7 +168,7 @@ export default function Hero({ reduced }) {
 
         {/* مؤشر السكرول */}
         <a
-          href="#collections"
+          href="#switcher"
           className="absolute start-0 end-0 bottom-8 z-10 mx-auto flex w-full flex-col items-center gap-2 text-white/70"
           style={{ insetInline: 0 }}
           aria-label="مرّر للأسفل"

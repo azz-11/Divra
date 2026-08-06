@@ -42,11 +42,11 @@ export default function Header() {
         }`}
         style={{ insetInline: 0 }}
       >
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-3">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-2 sm:px-5 sm:py-3">
           {/* الشعار + أيقونات التواصل بجانبه */}
           <div className="flex items-center gap-4">
             <Link to="/" className="flex items-center">
-              <img src={solid ? '/logo.png' : '/logo-light.png'} alt="ديفرا Divra" className="h-6 w-auto sm:h-9" />
+              <img src={solid ? '/logo.png' : '/logo-light.png'} alt="ديفرا Divra" className="h-7 w-auto sm:h-8" />
             </Link>
           </div>
 
@@ -65,12 +65,12 @@ export default function Header() {
             ))}
           </nav>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5 sm:gap-2">
             {/* زر تبديل اللغة */}
             <button
               onClick={toggle}
               aria-label={lang === 'ar' ? 'Switch to English' : 'التبديل إلى العربية'}
-              className={`grid h-11 min-w-11 place-items-center rounded-full border px-3 text-sm font-bold transition-colors ${
+              className={`grid h-10 min-w-10 place-items-center rounded-full border px-3 text-sm font-bold transition-colors sm:h-11 sm:min-w-11 ${
                 solid
                   ? 'border-line bg-white/10 text-text hover:border-brand hover:text-brand'
                   : 'border-white/40 bg-white/10 text-white hover:border-white'
@@ -83,7 +83,7 @@ export default function Header() {
             <button
               onClick={() => setSearch(true)}
               aria-label={t('بحث')}
-              className={`grid h-11 w-11 place-items-center rounded-full border transition-colors ${
+              className={`grid h-10 w-10 place-items-center rounded-full border transition-colors sm:h-11 sm:w-11 ${
                 solid
                   ? 'border-line bg-white/10 text-text hover:border-brand hover:text-brand'
                   : 'border-white/40 bg-white/10 text-white hover:border-white'
@@ -100,7 +100,7 @@ export default function Header() {
               aria-label={t('القائمة')}
               aria-expanded={open}
               onClick={() => setOpen((v) => !v)}
-              className={`grid h-11 w-11 place-items-center rounded-full border lg:hidden ${
+              className={`grid h-10 w-10 place-items-center rounded-full border sm:h-11 sm:w-11 lg:hidden ${
                 open || solid ? 'border-line' : 'border-white/40'
               }`}
             >

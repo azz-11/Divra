@@ -6,7 +6,8 @@ import { useLang } from '../i18n.jsx'
 // منتجات المبدّل + فيديو loop لكل منتج (التصنيف غير مرتبط بالفيديو — للتجربة)
 const IDS = ['mixer-chrome', 'spray-gold', 'jacuzzi', 'bath', 'basin']
 const VIDEOS = ['/video/switch-1', '/video/switch-2', '/video/switch-3']
-const imgOf = (p) => p.images[p.finishes[0]]
+const FALLBACK_IMG = '/products/mixer-chrome.webp'
+const imgOf = (p) => p.images?.[p.finishes?.[0]] || FALLBACK_IMG
 const ITEMS = IDS.map((id, i) => ({
   ...PRODUCTS.find((p) => p.id === id),
   video: VIDEOS[i % VIDEOS.length],
@@ -80,20 +81,26 @@ export default function ProductSwitcher({ reduced }) {
           </div>
         </div>
 
-        {/* المسميات (أزرار التبديل) تحت الكتابات */}
-        <div className="mt-10 flex flex-wrap gap-3">
+        {/* المسميات (أزرار التبديل) تحت الكتابات — شريط أفقي على الجوال */}
+        <div className="-mx-6 mt-12 flex snap-x gap-3 overflow-x-auto px-6 pb-2 [scrollbar-width:none] sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0 sm:pb-0 [&::-webkit-scrollbar]:hidden">
           {ITEMS.map((it, i) => (
             <button
               key={it.id}
               onClick={() => select(i)}
               aria-label={tr(it.title)}
-              className={`flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-bold backdrop-blur transition-all hover:-translate-y-0.5 ${
+              className={`flex shrink-0 snap-start items-center gap-2 rounded-full border px-4 py-2 text-sm font-bold backdrop-blur transition-all hover:-translate-y-0.5 ${
                 i === active
                   ? 'border-brand-light bg-white/20 text-white shadow-[0_0_0_2px_rgba(149,195,255,.5)]'
                   : 'border-white/25 bg-white/10 text-white/80 hover:border-white/60 hover:text-white'
               }`}
             >
-              <img src={imgOf(it)} alt="" className="h-7 w-7 flex-shrink-0 object-contain" loading="lazy" />
+              <img
+                src={imgOf(it)}
+                alt=""
+                className="h-7 w-7 flex-shrink-0 object-contain"
+                loading="lazy"
+                onError={(e) => { if (e.currentTarget.src !== window.location.origin + FALLBACK_IMG) e.currentTarget.src = FALLBACK_IMG }}
+              />
               {tr(it.title)}
             </button>
           ))}

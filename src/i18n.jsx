@@ -22,7 +22,6 @@ const UI = {
   'DIVRA · أقسامنا': 'DIVRA · Our categories',
   'كل المنتجات': 'All products',
   // من نحن
-  'من نحن': 'About us',
   'نصنع': 'We craft',
   'تفاصيل': 'details',
   'تدوم': 'that last',
@@ -45,6 +44,7 @@ const UI = {
   'منك': 'to you',
   'تواصل معنا عبر أيّ من القنوات التالية وسنسعد بخدمتك.':
     'Reach us through any of the channels below — we’ll be glad to help.',
+  'تواصل عبر واتساب': 'Chat on WhatsApp',
   'البريد الإلكتروني': 'Email',
   'واتساب': 'WhatsApp',
   'الهاتف': 'Phone',

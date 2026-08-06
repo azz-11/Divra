@@ -37,7 +37,21 @@ export default function Contact() {
           {t('تواصل معنا عبر أيّ من القنوات التالية وسنسعد بخدمتك.')}
         </p>
 
-        <div className="mt-12 grid gap-5 sm:grid-cols-3">
+        {/* زر واتساب مباشر بارز */}
+        <a
+          href="https://wa.me/966566906123"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mx-auto mt-8 flex min-h-[48px] w-full max-w-sm items-center justify-center gap-3 rounded-full px-6 text-base font-bold text-white shadow-lg transition-transform hover:-translate-y-0.5"
+          style={{ background: 'linear-gradient(120deg,#25D366,#128C7E)' }}
+        >
+          <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor">
+            <path d="M12 2a10 10 0 00-8.6 15.07L2 22l5.05-1.32A10 10 0 1012 2zm0 1.8a8.2 8.2 0 016.96 12.54l-.2.32.78 2.86-2.94-.77-.3.18A8.2 8.2 0 1112 3.8z" />
+          </svg>
+          {t('تواصل عبر واتساب')}
+        </a>
+
+        <div className="mt-8 grid gap-4 sm:mt-10 sm:grid-cols-3 sm:gap-5">
           {INFO.map((item) => (
             <a
               key={item.label}
