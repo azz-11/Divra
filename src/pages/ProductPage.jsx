@@ -257,11 +257,14 @@ export default function ProductPage({ reduced }) {
         </section>
       )}
 
-      {/* أكمل المجموعة — صورة أجواء + دعوة للاقتناء */}
-      <section className="relative min-h-[80vh] w-full overflow-hidden">
-        <img src="/products/collection-bath.webp" alt="" className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
-        <div className="absolute inset-0" style={{ background: 'linear-gradient(90deg, rgba(3,3,40,.82) 0%, rgba(3,3,40,.5) 45%, rgba(3,3,40,.15) 100%)' }} />
-        <div className="relative z-10 mx-auto flex min-h-[80vh] max-w-7xl items-center px-6">
+      {/* أكمل المجموعة — الصورة بحجمها الطبيعي بجانب النص */}
+      <section className="relative overflow-hidden border-t border-white/[0.06] py-16 md:py-24">
+        <div className="mx-auto grid max-w-7xl items-center gap-10 px-6 md:grid-cols-2 md:gap-14">
+          {/* الصورة بنسبتها الطبيعية 3:4 */}
+          <div className="mx-auto w-full max-w-sm overflow-hidden rounded-3xl border border-white/10 md:mx-0">
+            <img src="/products/collection-bath.webp" alt="" loading="lazy" className="block aspect-[3/4] w-full object-cover" />
+          </div>
+          {/* النص */}
           <div className="max-w-lg">
             <span className="mb-4 inline-flex items-center gap-3 text-xs font-bold uppercase tracking-[0.25em] text-brand-light">
               <span className="h-px w-8 bg-brand-light/50" />
