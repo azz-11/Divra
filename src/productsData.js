@@ -25,6 +25,18 @@ export const PRODUCTS = [
       [yrs, y5],
     ],
     finishes: ['chrome'], images: { chrome: '/products/mixer-chrome.webp' },
+    // معرض صور المنتج (تُستبدل الصور المفقودة تلقائياً — أضف الملفات لتفعيلها)
+    gallery: [
+      '/products/mixer-chrome-1.webp',
+      '/products/mixer-chrome-2.webp',
+      '/products/mixer-chrome-3.webp',
+      '/products/mixer-chrome-4.webp',
+    ],
+    // وصف مطوّل فاخر يظهر أسفل صفحة المنتج
+    story: {
+      ar: 'خلاط نحتيّ بخطوط هندسية صارمة وتشطيب كروم مرآوي يعكس الضوء كأنه جوهرة في حمّامك. صُمّم ليجمع بين صلابة الحضور ونعومة التدفّق، فكل زاوية فيه محسوبة بدقّة، وكل انعكاس مدروس ليمنح مساحتك إحساساً فندقياً راقياً يدوم.',
+      en: 'A sculptural mixer with strict geometric lines and a mirror-chrome finish that catches light like a jewel in your bathroom. Engineered to unite a solid presence with a gentle flow — every edge precisely measured, every reflection considered to give your space a refined, lasting hotel feel.',
+    },
   },
   {
     id: 'basin', collection: 'mixers',
@@ -574,5 +586,6 @@ export const COLLECTIONS = [
 
 export const collectionOf = (id) => COLLECTIONS.find((c) => c.id === id)
 export const productsIn = (id) => PRODUCTS.filter((p) => p.collection === id)
+export const productOf = (id) => PRODUCTS.find((p) => p.id === id)
 
 export { FINISH }

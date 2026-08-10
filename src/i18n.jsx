@@ -64,6 +64,11 @@ const UI = {
   'جميع الحقوق محفوظة.': 'All rights reserved.',
   // البنر
   'من عالم ديفرا': 'From Divra’s world',
+  // صفحة المنتج
+  'استفسر عن المنتج': 'Enquire about this product',
+  'كل منتجات القسم': 'All products in category',
+  'عن المنتج': 'About the product',
+  'تصنع الفرق': 'make the difference',
   // صفحة القسم
   'عن': 'About',
   'منتجات القسم': 'Section products',
