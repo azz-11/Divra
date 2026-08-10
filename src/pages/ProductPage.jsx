@@ -42,7 +42,29 @@ export default function ProductPage({ reduced }) {
   const hasGallery = images.length > 1
 
   return (
-    <div className="overflow-x-hidden bg-ink">
+    <div className="relative overflow-x-hidden bg-ink">
+      {/* خلفية محيطة تكسر الجمود — توهّجان ناعمان + شبكة خافتة جداً */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <span
+          className="absolute -top-24 h-[520px] w-[520px] rounded-full blur-3xl"
+          style={{ insetInlineStart: '-8%', background: `radial-gradient(circle, ${accent}26, transparent 68%)` }}
+        />
+        <span
+          className="absolute top-[42%] h-[460px] w-[460px] rounded-full blur-3xl"
+          style={{ insetInlineEnd: '-10%', background: 'radial-gradient(circle, rgba(149,195,255,.14), transparent 70%)' }}
+        />
+        <div
+          className="absolute inset-0 opacity-[0.5]"
+          style={{
+            backgroundImage:
+              'radial-gradient(1200px 600px at 50% -10%, rgba(120,160,255,.10), transparent 60%), linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px)',
+            backgroundSize: '100% 100%, 46px 46px, 46px 46px',
+            maskImage: 'linear-gradient(180deg, #000 0%, #000 55%, transparent 100%)',
+            WebkitMaskImage: 'linear-gradient(180deg, #000 0%, #000 55%, transparent 100%)',
+          }}
+        />
+      </div>
+
       {/* بطل صفحة المنتج — صورة كبيرة + مبدّل صور + تفاصيل */}
       <section className="relative overflow-hidden pt-20 sm:pt-24">
         <div className="relative z-10 mx-auto grid w-full max-w-7xl items-start gap-6 pb-14 sm:gap-10 sm:px-6 sm:pt-8 lg:grid-cols-2 lg:gap-14 lg:pb-16">
@@ -89,25 +111,26 @@ export default function ProductPage({ reduced }) {
             <h1 className="font-cairo text-3xl font-black leading-tight text-white sm:text-4xl md:text-5xl" style={{ textWrap: 'balance' }}>{tr(product.title)}</h1>
             <p className="mt-3 max-w-md text-base text-white/80 sm:mt-4 sm:text-lg">{tr(product.tagline)}</p>
 
-            {/* المواصفات */}
-            <div className="mt-8 grid max-w-md grid-cols-2 gap-3">
-              {product.specs.map(([k, v], i) => (
-                <div key={i} className="rounded-2xl border border-white/10 bg-white/[0.05] px-4 py-3">
-                  <div className="text-xs text-white/50">{tr(k)}</div>
-                  <div className="mt-0.5 font-cairo font-bold text-brand-light">{tr(v)}</div>
-                </div>
-              ))}
+            {/* عن المنتج — بجانب الصور بعد الاسم والنوع */}
+            <div className="mt-7 max-w-md border-t border-white/10 pt-6">
+              <span className="mb-3 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-brand-light">
+                <span className="h-px w-6 bg-brand-light/50" />
+                {t('عن المنتج')}
+              </span>
+              <p className="text-[15px] leading-relaxed text-white/75 sm:text-base">
+                {tr(product.story || product.desc)}
+              </p>
             </div>
 
             {/* التشطيب */}
-            <div className="mt-7 flex items-center gap-3">
+            <div className="mt-6 flex items-center gap-3">
               <span className="text-sm text-white/60">{t('التشطيب:')}</span>
               <span className="h-8 w-8 rounded-full border-2 border-brand-light" style={{ background: finish.swatch }} />
               <span className="text-sm text-white/80">{tr(finish.name)}</span>
             </div>
 
             {/* أزرار */}
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <a
                 href="https://wa.me/966566906123"
                 target="_blank"
@@ -126,20 +149,26 @@ export default function ProductPage({ reduced }) {
         </div>
       </section>
 
-      {/* وصف فاخر أسفل المنتج */}
-      <section className="relative overflow-hidden bg-surface py-20 md:py-28">
-        <div className="mx-auto max-w-3xl px-6 text-center">
-          <span className="mb-4 inline-flex items-center gap-3 text-xs font-bold uppercase tracking-[0.25em] text-brand-strong">
-            <span className="h-px w-8 bg-brand/40" />
-            {t('عن المنتج')}
-            <span className="h-px w-8 bg-brand/40" />
+      {/* المواصفات — على شكل ورقة مواصفات أنيقة بلا مستطيلات */}
+      <section className="relative overflow-hidden border-t border-white/[0.06] py-16 md:py-24">
+        <div className="mx-auto max-w-3xl px-6">
+          <span className="mb-3 inline-flex items-center gap-3 text-xs font-bold uppercase tracking-[0.25em] text-brand-light">
+            <span className="h-px w-8 bg-brand-light/40" />
+            {t('المواصفات')}
           </span>
-          <h2 className="font-cairo text-3xl font-black leading-snug sm:text-4xl">
+          <h2 className="font-cairo text-2xl font-black leading-snug text-white sm:text-3xl">
             {t('تفاصيل')} <span className="text-gradient">{t('تصنع الفرق')}</span>
           </h2>
-          <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-text-dim">
-            {tr(product.story || product.desc)}
-          </p>
+
+          {/* جدول مواصفات بخطوط فاصلة رفيعة */}
+          <dl className="mt-8 divide-y divide-white/[0.08]">
+            {product.specs.map(([k, v], i) => (
+              <div key={i} className="flex items-baseline justify-between gap-6 py-4">
+                <dt className="text-sm text-white/55 sm:text-base">{tr(k)}</dt>
+                <dd className="text-end font-cairo text-base font-bold text-white sm:text-lg">{tr(v)}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </section>
     </div>

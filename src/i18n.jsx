@@ -65,6 +65,7 @@ const UI = {
   // البنر
   'من عالم ديفرا': 'From Divra’s world',
   // صفحة المنتج
+  'المواصفات': 'Specifications',
   'استفسر عن المنتج': 'Enquire about this product',
   'كل منتجات القسم': 'All products in category',
   'عن المنتج': 'About the product',
