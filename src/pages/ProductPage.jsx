@@ -70,26 +70,16 @@ export default function ProductPage({ reduced }) {
   const hasGallery = images.length > 1
 
   return (
-    <div className="relative overflow-x-hidden bg-ink">
-      {/* خلفية محيطة تكسر الجمود — توهّجان ناعمان + شبكة خافتة جداً */}
+    <div className="relative overflow-x-hidden bg-white text-[#0f1f3d]">
+      {/* خلفية فاتحة ناعمة تكسر الجمود */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <span
           className="absolute -top-24 h-[520px] w-[520px] rounded-full blur-3xl"
-          style={{ insetInlineStart: '-8%', background: `radial-gradient(circle, ${accent}26, transparent 68%)` }}
+          style={{ insetInlineStart: '-8%', background: `radial-gradient(circle, ${accent}14, transparent 68%)` }}
         />
         <span
-          className="absolute top-[42%] h-[460px] w-[460px] rounded-full blur-3xl"
-          style={{ insetInlineEnd: '-10%', background: 'radial-gradient(circle, rgba(149,195,255,.14), transparent 70%)' }}
-        />
-        <div
-          className="absolute inset-0 opacity-[0.5]"
-          style={{
-            backgroundImage:
-              'radial-gradient(1200px 600px at 50% -10%, rgba(120,160,255,.10), transparent 60%), linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px)',
-            backgroundSize: '100% 100%, 46px 46px, 46px 46px',
-            maskImage: 'linear-gradient(180deg, #000 0%, #000 55%, transparent 100%)',
-            WebkitMaskImage: 'linear-gradient(180deg, #000 0%, #000 55%, transparent 100%)',
-          }}
+          className="absolute top-[40%] h-[460px] w-[460px] rounded-full blur-3xl"
+          style={{ insetInlineEnd: '-10%', background: 'radial-gradient(circle, rgba(149,195,255,.16), transparent 70%)' }}
         />
       </div>
 
@@ -132,29 +122,29 @@ export default function ProductPage({ reduced }) {
           {/* عمود التفاصيل */}
           <div className="min-w-0 px-6 pt-2 sm:px-0 sm:pt-0">
             {collection && (
-              <Link to={`/collection/${collection.id}`} className="mb-3 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-light hover:text-white sm:text-sm">
+              <Link to={`/collection/${collection.id}`} className="mb-3 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-strong hover:text-[#0f1f3d] sm:text-sm">
                 {t('ديفرا')} · {tr(collection.name)}
               </Link>
             )}
-            <h1 className="font-cairo text-3xl font-black leading-tight text-white sm:text-4xl md:text-5xl" style={{ textWrap: 'balance' }}>{tr(product.title)}</h1>
-            <p className="mt-3 max-w-md text-base text-white/80 sm:mt-4 sm:text-lg">{tr(product.tagline)}</p>
+            <h1 className="font-cairo text-3xl font-black leading-tight text-[#0f1f3d] sm:text-4xl md:text-5xl" style={{ textWrap: 'balance' }}>{tr(product.title)}</h1>
+            <p className="mt-3 max-w-md text-base text-[#4a5a72] sm:mt-4 sm:text-lg">{tr(product.tagline)}</p>
 
             {/* عن المنتج — بجانب الصور بعد الاسم والنوع */}
-            <div className="mt-7 max-w-md border-t border-white/10 pt-6">
-              <span className="mb-3 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-brand-light">
-                <span className="h-px w-6 bg-brand-light/50" />
+            <div className="mt-7 max-w-md border-t border-black/[0.08] pt-6">
+              <span className="mb-3 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-brand-strong">
+                <span className="h-px w-6 bg-brand-strong/40" />
                 {t('عن المنتج')}
               </span>
-              <p className="text-[15px] leading-relaxed text-white/75 sm:text-base">
+              <p className="text-[15px] leading-relaxed text-[#4a5a72] sm:text-base">
                 {tr(product.story || product.desc)}
               </p>
             </div>
 
             {/* التشطيب */}
             <div className="mt-6 flex items-center gap-3">
-              <span className="text-sm text-white/60">{t('التشطيب:')}</span>
-              <span className="h-8 w-8 rounded-full border-2 border-brand-light" style={{ background: finish.swatch }} />
-              <span className="text-sm text-white/80">{tr(finish.name)}</span>
+              <span className="text-sm text-[#8894a6]">{t('التشطيب:')}</span>
+              <span className="h-8 w-8 rounded-full border-2 border-brand-strong" style={{ background: finish.swatch }} />
+              <span className="text-sm text-[#4a5a72]">{tr(finish.name)}</span>
             </div>
 
             {/* أزرار */}
@@ -168,7 +158,7 @@ export default function ProductPage({ reduced }) {
                 {t('استفسر عن المنتج')}
               </a>
               {collection && (
-                <Link to={`/collection/${collection.id}`} className="btn w-full border border-white/25 bg-white/10 text-white hover:bg-white/20 sm:w-auto">
+                <Link to={`/collection/${collection.id}`} className="btn w-full border border-black/15 bg-black/[0.03] text-[#0f1f3d] hover:bg-black/[0.06] sm:w-auto">
                   {t('كل منتجات القسم')}
                 </Link>
               )}
@@ -178,16 +168,16 @@ export default function ProductPage({ reduced }) {
       </section>
 
       {/* المواصفات / الأبعاد / دليل التنظيف — تبويبات بلا مستطيلات */}
-      <section className="relative overflow-hidden border-t border-white/[0.06] py-16 md:py-24">
+      <section className="relative overflow-hidden border-t border-black/[0.06] py-16 md:py-24">
         <div className="mx-auto max-w-3xl px-6">
           {/* أزرار التبويب */}
-          <div className="mb-8 flex flex-wrap gap-x-7 gap-y-3 border-b border-white/[0.08]">
+          <div className="mb-8 flex flex-wrap gap-x-7 gap-y-3 border-b border-black/[0.08]">
             {TABS.map((tb) => (
               <button
                 key={tb.id}
                 onClick={() => setTab(tb.id)}
                 className={`-mb-px border-b-2 pb-3 font-cairo text-sm font-bold transition-colors sm:text-base ${
-                  tab === tb.id ? 'border-brand-light text-white' : 'border-transparent text-white/50 hover:text-white/80'
+                  tab === tb.id ? 'border-brand-strong text-[#0f1f3d]' : 'border-transparent text-[#8894a6] hover:text-[#4a5a72]'
                 }`}
               >
                 {t(tb.label)}
@@ -197,11 +187,11 @@ export default function ProductPage({ reduced }) {
 
           {/* المواصفات */}
           {tab === 'specs' && (
-            <dl className="divide-y divide-white/[0.08]">
+            <dl className="divide-y divide-black/[0.08]">
               {product.specs.map(([k, v], i) => (
                 <div key={i} className="flex items-baseline justify-between gap-6 py-4">
-                  <dt className="text-sm text-white/55 sm:text-base">{tr(k)}</dt>
-                  <dd className="text-end font-cairo text-base font-bold text-white sm:text-lg">{tr(v)}</dd>
+                  <dt className="text-sm text-[#8894a6] sm:text-base">{tr(k)}</dt>
+                  <dd className="text-end font-cairo text-base font-bold text-[#0f1f3d] sm:text-lg">{tr(v)}</dd>
                 </div>
               ))}
             </dl>
@@ -209,14 +199,14 @@ export default function ProductPage({ reduced }) {
 
           {/* الأبعاد */}
           {tab === 'dims' && (
-            <dl className="divide-y divide-white/[0.08]">
+            <dl className="divide-y divide-black/[0.08]">
               {GENERAL_DIMS.map(([k, v], i) => (
                 <div key={i} className="flex items-baseline justify-between gap-6 py-4">
-                  <dt className="text-sm text-white/55 sm:text-base">{tr(k)}</dt>
-                  <dd dir="ltr" className="text-end font-cairo text-base font-bold text-white sm:text-lg">{tr(v)}</dd>
+                  <dt className="text-sm text-[#8894a6] sm:text-base">{tr(k)}</dt>
+                  <dd dir="ltr" className="text-end font-cairo text-base font-bold text-[#0f1f3d] sm:text-lg">{tr(v)}</dd>
                 </div>
               ))}
-              <p className="pt-5 text-xs text-white/40">* {t('قريباً')} — {t('المواصفات')} · {t('الأبعاد')}</p>
+              <p className="pt-5 text-xs text-[#8894a6]">* {t('قريباً')} — {t('المواصفات')} · {t('الأبعاد')}</p>
             </dl>
           )}
 
@@ -224,8 +214,8 @@ export default function ProductPage({ reduced }) {
           {tab === 'care' && (
             <ul className="space-y-4">
               {GENERAL_CARE.map((c, i) => (
-                <li key={i} className="flex gap-3 text-white/75">
-                  <span className="mt-1 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-brand/20 font-cairo text-xs font-black text-brand-light">{i + 1}</span>
+                <li key={i} className="flex gap-3 text-[#4a5a72]">
+                  <span className="mt-1 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-brand/15 font-cairo text-xs font-black text-brand-strong">{i + 1}</span>
                   <span className="text-[15px] leading-relaxed sm:text-base">{tr(c)}</span>
                 </li>
               ))}
@@ -234,9 +224,9 @@ export default function ProductPage({ reduced }) {
         </div>
       </section>
 
-      {/* منتجات مشابهة/أخرى */}
+      {/* منتجات مشابهة/أخرى — تبقى بالكحلي */}
       {related.length > 0 && (
-        <section className="relative overflow-hidden border-t border-white/[0.06] py-14 md:py-16">
+        <section className="relative overflow-hidden bg-ink py-14 md:py-16">
           <div className="mx-auto max-w-7xl">
             <div className="mb-6 flex items-end justify-between px-6">
               <h2 className="font-cairo text-xl font-black text-white sm:text-2xl">{t('منتجات أخرى قد تعجبك')}</h2>
@@ -258,22 +248,22 @@ export default function ProductPage({ reduced }) {
       )}
 
       {/* أكمل المجموعة — الصورة بحجمها الطبيعي بجانب النص */}
-      <section className="relative overflow-hidden border-t border-white/[0.06] py-16 md:py-24">
+      <section className="relative overflow-hidden py-16 md:py-24">
         <div className="mx-auto grid max-w-7xl items-center gap-10 px-6 md:grid-cols-2 md:gap-14">
           {/* الصورة بنسبتها الطبيعية 3:4 */}
-          <div className="mx-auto w-full max-w-sm overflow-hidden rounded-3xl border border-white/10 md:mx-0">
+          <div className="mx-auto w-full max-w-sm overflow-hidden rounded-3xl border border-black/10 shadow-[0_24px_60px_-24px_rgba(15,31,61,.3)] md:mx-0">
             <img src="/products/collection-bath.webp" alt="" loading="lazy" className="block aspect-[3/4] w-full object-cover" />
           </div>
           {/* النص */}
           <div className="max-w-lg">
-            <span className="mb-4 inline-flex items-center gap-3 text-xs font-bold uppercase tracking-[0.25em] text-brand-light">
-              <span className="h-px w-8 bg-brand-light/50" />
+            <span className="mb-4 inline-flex items-center gap-3 text-xs font-bold uppercase tracking-[0.25em] text-brand-strong">
+              <span className="h-px w-8 bg-brand-strong/40" />
               {t('من عالم ديفرا')}
             </span>
-            <h2 className="font-cairo text-3xl font-black leading-tight text-white sm:text-4xl md:text-5xl" style={{ textWrap: 'balance' }}>
+            <h2 className="font-cairo text-3xl font-black leading-tight text-[#0f1f3d] sm:text-4xl md:text-5xl" style={{ textWrap: 'balance' }}>
               {t('أكمِل حمّامك بلمسة ديفرا')}
             </h2>
-            <p className="mt-5 max-w-md text-base text-white/85 sm:text-lg">
+            <p className="mt-5 max-w-md text-base text-[#4a5a72] sm:text-lg">
               {t('من الخلّاط إلى الكرسي والشطّاف — اقتنِ المجموعة كاملةً بانسجام تامّ في التصميم والتشطيب.')}
             </p>
             <Link to="/products" className="btn btn-primary mt-8 inline-flex">
@@ -284,10 +274,10 @@ export default function ProductPage({ reduced }) {
       </section>
 
       {/* تواصل مع خبرائنا */}
-      <section className="relative overflow-hidden border-t border-white/[0.06] py-16 md:py-20">
+      <section className="relative overflow-hidden border-t border-black/[0.06] py-16 md:py-20">
         <div className="mx-auto max-w-2xl px-6 text-center">
-          <h2 className="font-cairo text-2xl font-black text-white sm:text-3xl">{t('تحتاج مزيداً من التفاصيل؟')}</h2>
-          <p className="mx-auto mt-3 max-w-md text-white/70">{t('نحن هنا لمساعدتك في اختيار القطع المناسبة لمساحتك.')}</p>
+          <h2 className="font-cairo text-2xl font-black text-[#0f1f3d] sm:text-3xl">{t('تحتاج مزيداً من التفاصيل؟')}</h2>
+          <p className="mx-auto mt-3 max-w-md text-[#4a5a72]">{t('نحن هنا لمساعدتك في اختيار القطع المناسبة لمساحتك.')}</p>
           <a href="https://wa.me/966566906123" target="_blank" rel="noopener noreferrer" className="btn btn-primary mt-7 inline-flex">
             {t('تواصل مع خبرائنا')}
           </a>
