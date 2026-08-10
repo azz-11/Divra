@@ -12,7 +12,9 @@ export default function ProductPage({ reduced }) {
   // قائمة صور المعرض (المعرض إن وُجد وإلا الصورة الأساسية)
   const initial = useMemo(() => {
     const g = product?.gallery?.length ? product.gallery : []
-    const list = [...new Set([...(g.length ? g : []), primary].filter(Boolean))]
+    const finishImgs = product?.images ? Object.values(product.images) : []
+    // معرض المنتج = صور المعرض الصريحة + صورة كل تشطيب (بلا تكرار)
+    const list = [...new Set([...g, ...finishImgs, primary].filter(Boolean))]
     return list
   }, [product, primary])
 
