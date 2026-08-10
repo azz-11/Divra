@@ -42,40 +42,37 @@ export default function ProductPage({ reduced }) {
   const hasGallery = images.length > 1
 
   return (
-    <div className="bg-ink">
+    <div className="overflow-x-hidden bg-ink">
       {/* بطل صفحة المنتج — صورة كبيرة + مبدّل صور + تفاصيل */}
-      <section className="relative overflow-hidden">
-        <span
-          className="pointer-events-none absolute -top-32 start-1/3 h-96 w-96 rounded-full blur-3xl"
-          style={{ insetInlineStart: '33%', background: `radial-gradient(circle, ${accent}2e, transparent 70%)` }}
-        />
-        <div className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-10 px-6 pb-16 pt-28 md:pt-32 lg:grid-cols-2 lg:gap-14">
+      <section className="relative overflow-hidden pt-20 sm:pt-24">
+        <div className="relative z-10 mx-auto grid w-full max-w-7xl items-start gap-6 pb-14 sm:gap-10 sm:px-6 sm:pt-8 lg:grid-cols-2 lg:gap-14 lg:pb-16">
           {/* عمود الصور */}
-          <div className="flex flex-col gap-4">
-            <div className="relative flex aspect-square items-center justify-center overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.06] to-transparent">
-              <span className="absolute inset-0 m-auto h-3/4 w-3/4 rounded-full blur-3xl" style={{ background: `radial-gradient(circle, ${accent}33, transparent 70%)` }} />
+          <div className="flex min-w-0 flex-col gap-3 sm:gap-4">
+            {/* الصورة الكبيرة — ملء العرض على الجوال (حافة إلى حافة) */}
+            <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#0d0d24] sm:aspect-square sm:rounded-3xl sm:border sm:border-white/10">
+              <span className="pointer-events-none absolute inset-0 m-auto h-3/4 w-3/4 rounded-full blur-3xl" style={{ background: `radial-gradient(circle, ${accent}2e, transparent 70%)` }} />
               <img
                 key={shown}
                 src={shown}
                 alt={tr(product.title)}
                 onError={() => onImgError(shown)}
-                className={`relative max-h-[86%] w-auto max-w-[86%] object-contain drop-shadow-2xl ${reduced ? '' : 'floaty'}`}
+                className="absolute inset-0 h-full w-full object-contain p-3 sm:p-8"
               />
             </div>
 
             {/* شريط مصغّرات لتبديل الصور */}
             {hasGallery && (
-              <div className="flex gap-3 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+              <div className="flex min-w-0 gap-2.5 overflow-x-auto px-4 pb-1 [scrollbar-width:none] sm:px-0 [&::-webkit-scrollbar]:hidden">
                 {images.map((src, i) => (
                   <button
                     key={src}
                     onClick={() => setActive(i)}
                     aria-label={`${tr(product.title)} ${i + 1}`}
-                    className={`grid aspect-square w-20 shrink-0 place-items-center overflow-hidden rounded-xl border bg-white/[0.05] p-1.5 transition-all sm:w-24 ${
+                    className={`grid aspect-square w-16 shrink-0 place-items-center overflow-hidden rounded-xl border bg-[#0d0d24] transition-all sm:w-20 ${
                       i === active ? 'border-brand-light shadow-[0_0_0_2px_rgba(149,195,255,.4)]' : 'border-white/12 hover:border-white/40'
                     }`}
                   >
-                    <img src={src} alt="" onError={() => onImgError(src)} className="h-full w-full object-contain" loading="lazy" />
+                    <img src={src} alt="" onError={() => onImgError(src)} className="h-full w-full object-contain p-1" loading="lazy" />
                   </button>
                 ))}
               </div>
@@ -83,14 +80,14 @@ export default function ProductPage({ reduced }) {
           </div>
 
           {/* عمود التفاصيل */}
-          <div>
+          <div className="min-w-0 px-6 pt-2 sm:px-0 sm:pt-0">
             {collection && (
-              <Link to={`/collection/${collection.id}`} className="mb-3 inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-brand-light hover:text-white">
+              <Link to={`/collection/${collection.id}`} className="mb-3 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-light hover:text-white sm:text-sm">
                 {t('ديفرا')} · {tr(collection.name)}
               </Link>
             )}
-            <h1 className="font-cairo text-4xl font-black leading-tight text-white sm:text-5xl md:text-6xl">{tr(product.title)}</h1>
-            <p className="mt-4 max-w-md text-lg text-white/80">{tr(product.tagline)}</p>
+            <h1 className="font-cairo text-3xl font-black leading-tight text-white sm:text-4xl md:text-5xl" style={{ textWrap: 'balance' }}>{tr(product.title)}</h1>
+            <p className="mt-3 max-w-md text-base text-white/80 sm:mt-4 sm:text-lg">{tr(product.tagline)}</p>
 
             {/* المواصفات */}
             <div className="mt-8 grid max-w-md grid-cols-2 gap-3">
