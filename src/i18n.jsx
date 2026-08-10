@@ -66,6 +66,17 @@ const UI = {
   'من عالم ديفرا': 'From Divra’s world',
   // صفحة المنتج
   'المواصفات': 'Specifications',
+  'الأبعاد': 'Dimensions',
+  'دليل التنظيف والصيانة': 'Care & maintenance',
+  'منتجات أخرى قد تعجبك': 'You may also like',
+  'أكمِل حمّامك بلمسة ديفرا': 'Complete your bathroom with a Divra touch',
+  'من الخلّاط إلى الكرسي والشطّاف — اقتنِ المجموعة كاملةً بانسجام تامّ في التصميم والتشطيب.':
+    'From mixer to toilet and bidet spray — own the full collection in perfect harmony of design and finish.',
+  'استكشف المجموعة الكاملة': 'Explore the full collection',
+  'تحتاج مزيداً من التفاصيل؟': 'Need more details?',
+  'نحن هنا لمساعدتك في اختيار القطع المناسبة لمساحتك.':
+    'We’re here to help you choose the right pieces for your space.',
+  'تواصل مع خبرائنا': 'Talk to our experts',
   'استفسر عن المنتج': 'Enquire about this product',
   'كل منتجات القسم': 'All products in category',
   'عن المنتج': 'About the product',
