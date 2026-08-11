@@ -71,174 +71,164 @@ export default function ProductPage({ reduced }) {
 
   return (
     <div className="relative overflow-x-hidden bg-white text-[#0f1f3d]">
-      {/* خلفية فاتحة ناعمة تكسر الجمود */}
-      <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <span
-          className="absolute -top-24 h-[520px] w-[520px] rounded-full blur-3xl"
-          style={{ insetInlineStart: '-8%', background: `radial-gradient(circle, ${accent}14, transparent 68%)` }}
-        />
-        <span
-          className="absolute top-[40%] h-[460px] w-[460px] rounded-full blur-3xl"
-          style={{ insetInlineEnd: '-10%', background: 'radial-gradient(circle, rgba(149,195,255,.16), transparent 70%)' }}
-        />
-      </div>
+      {/* خلفية زخرفة ديفرا الرسمية — علامة مائية خفيفة جداً */}
+      <div
+        className={`pointer-events-none absolute inset-0 ${reduced ? '' : 'divra-drift'}`}
+        style={{
+          backgroundImage: 'url(/pattern-wave.webp)',
+          backgroundRepeat: 'repeat',
+          backgroundSize: '640px auto',
+          opacity: 0.05,
+        }}
+      />
 
-      {/* بطل صفحة المنتج — صورة كبيرة + مبدّل صور + تفاصيل */}
-      <section className="relative overflow-hidden pt-20 sm:pt-24">
-        <div className="relative z-10 mx-auto grid w-full max-w-7xl items-start gap-6 pb-14 sm:gap-10 sm:px-6 sm:pt-8 lg:grid-cols-2 lg:gap-14 lg:pb-16">
-          {/* عمود الصور */}
-          <div className="flex min-w-0 flex-col gap-3 sm:gap-4">
-            {/* الصورة الكبيرة — ملء العرض على الجوال (حافة إلى حافة) */}
-            <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#0d0d24] sm:aspect-square sm:rounded-3xl sm:border sm:border-white/10">
-              <span className="pointer-events-none absolute inset-0 m-auto h-3/4 w-3/4 rounded-full blur-3xl" style={{ background: `radial-gradient(circle, ${accent}2e, transparent 70%)` }} />
-              <img
-                key={shown}
-                src={shown}
-                alt={tr(product.title)}
-                onError={() => onImgError(shown)}
-                className="absolute inset-0 h-full w-full object-contain p-3 sm:p-8"
-              />
-            </div>
-
-            {/* شريط مصغّرات لتبديل الصور */}
-            {hasGallery && (
-              <div className="flex min-w-0 gap-2.5 overflow-x-auto px-4 pb-1 [scrollbar-width:none] sm:px-0 [&::-webkit-scrollbar]:hidden">
-                {images.map((src, i) => (
-                  <button
-                    key={src}
-                    onClick={() => setActive(i)}
-                    aria-label={`${tr(product.title)} ${i + 1}`}
-                    className={`grid aspect-square w-16 shrink-0 place-items-center overflow-hidden rounded-xl border bg-[#0d0d24] transition-all sm:w-20 ${
-                      i === active ? 'border-brand-light shadow-[0_0_0_2px_rgba(149,195,255,.4)]' : 'border-white/12 hover:border-white/40'
-                    }`}
-                  >
-                    <img src={src} alt="" onError={() => onImgError(src)} className="h-full w-full object-contain p-1" loading="lazy" />
-                  </button>
-                ))}
+      {/* بطل صفحة المنتج — صورة كبيرة عمودية + مصغّرات عمودية + تفاصيل */}
+      <section className="relative pt-24 sm:pt-28">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 pb-16 sm:px-6">
+          <div className="grid items-start gap-8 lg:grid-cols-2 lg:gap-12">
+            {/* عمود الصور: مصغّرات عمودية محاذية للشعار + صورة كبيرة بلا إطار */}
+            <div className="flex min-w-0 gap-3 sm:gap-4">
+              {hasGallery && (
+                <div className="flex w-16 shrink-0 flex-col gap-3 sm:w-[88px]">
+                  {images.map((src, i) => (
+                    <button
+                      key={src}
+                      onClick={() => setActive(i)}
+                      aria-label={`${tr(product.title)} ${i + 1}`}
+                      className={`relative aspect-[3/4] w-full overflow-hidden rounded-lg border transition-all ${
+                        i === active ? 'border-brand-strong shadow-[0_0_0_2px_rgba(47,111,214,.25)]' : 'border-black/10 hover:border-brand-strong/50'
+                      }`}
+                    >
+                      <img src={src} alt="" onError={() => onImgError(src)} className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
+                    </button>
+                  ))}
+                </div>
+              )}
+              {/* الصورة الكبيرة 3:4 — بلا إطار كحلي */}
+              <div className="min-w-0 flex-1 overflow-hidden rounded-2xl">
+                <img
+                  key={shown}
+                  src={shown}
+                  alt={tr(product.title)}
+                  onError={() => onImgError(shown)}
+                  className="block aspect-[3/4] w-full object-cover"
+                />
               </div>
-            )}
-          </div>
-
-          {/* عمود التفاصيل */}
-          <div className="min-w-0 px-6 pt-2 sm:px-0 sm:pt-0">
-            {collection && (
-              <Link to={`/collection/${collection.id}`} className="mb-3 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-strong hover:text-[#0f1f3d] sm:text-sm">
-                {t('ديفرا')} · {tr(collection.name)}
-              </Link>
-            )}
-            <h1 className="font-cairo text-3xl font-black leading-tight text-[#0f1f3d] sm:text-4xl md:text-5xl" style={{ textWrap: 'balance' }}>{tr(product.title)}</h1>
-            <p className="mt-3 max-w-md text-base text-[#4a5a72] sm:mt-4 sm:text-lg">{tr(product.tagline)}</p>
-
-            {/* عن المنتج — بجانب الصور بعد الاسم والنوع */}
-            <div className="mt-7 max-w-md border-t border-black/[0.08] pt-6">
-              <span className="mb-3 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-brand-strong">
-                <span className="h-px w-6 bg-brand-strong/40" />
-                {t('عن المنتج')}
-              </span>
-              <p className="text-[15px] leading-relaxed text-[#4a5a72] sm:text-base">
-                {tr(product.story || product.desc)}
-              </p>
             </div>
 
-            {/* التشطيب */}
-            <div className="mt-6 flex items-center gap-3">
-              <span className="text-sm text-[#8894a6]">{t('التشطيب:')}</span>
-              <span className="h-8 w-8 rounded-full border-2 border-brand-strong" style={{ background: finish.swatch }} />
-              <span className="text-sm text-[#4a5a72]">{tr(finish.name)}</span>
-            </div>
-
-            {/* أزرار */}
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <a
-                href="https://wa.me/966566906123"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-primary w-full sm:w-auto"
-              >
-                {t('استفسر عن المنتج')}
-              </a>
+            {/* عمود التفاصيل — محاذٍ لعلامة البحث */}
+            <div className="min-w-0">
               {collection && (
-                <Link to={`/collection/${collection.id}`} className="btn w-full border border-black/15 bg-black/[0.03] text-[#0f1f3d] hover:bg-black/[0.06] sm:w-auto">
-                  {t('كل منتجات القسم')}
+                <Link to={`/collection/${collection.id}`} className="mb-3 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-strong hover:text-[#0f1f3d] sm:text-sm">
+                  {t('ديفرا')} · {tr(collection.name)}
                 </Link>
               )}
+              <h1 className="font-cairo text-3xl font-black leading-tight text-[#0f1f3d] sm:text-4xl md:text-5xl" style={{ textWrap: 'balance' }}>{tr(product.title)}</h1>
+              <p className="mt-3 text-base text-[#4a5a72] sm:mt-4 sm:text-lg">{tr(product.tagline)}</p>
+
+              {/* عن المنتج */}
+              <div className="mt-7 border-t border-black/[0.08] pt-6">
+                <span className="mb-3 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-brand-strong">
+                  <span className="h-px w-6 bg-brand-strong/40" />
+                  {t('عن المنتج')}
+                </span>
+                <p className="text-[15px] leading-relaxed text-[#4a5a72] sm:text-base">
+                  {tr(product.story || product.desc)}
+                </p>
+              </div>
+
+              {/* التشطيب */}
+              <div className="mt-6 flex items-center gap-3">
+                <span className="text-sm text-[#8894a6]">{t('التشطيب:')}</span>
+                <span className="h-8 w-8 rounded-full border-2 border-brand-strong" style={{ background: finish.swatch }} />
+                <span className="text-sm text-[#4a5a72]">{tr(finish.name)}</span>
+              </div>
+
+              {/* أزرار */}
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <a href="https://wa.me/966566906123" target="_blank" rel="noopener noreferrer" className="btn btn-primary w-full sm:w-auto">
+                  {t('استفسر عن المنتج')}
+                </a>
+                {collection && (
+                  <Link to={`/collection/${collection.id}`} className="btn w-full border border-black/15 bg-black/[0.03] text-[#0f1f3d] hover:bg-black/[0.06] sm:w-auto">
+                    {t('كل منتجات القسم')}
+                  </Link>
+                )}
+              </div>
+
+              {/* المواصفات / الأبعاد / دليل التنظيف — تحت معلومات المنتج */}
+              <div className="mt-10 border-t border-black/[0.08] pt-8">
+                <div className="mb-6 flex flex-wrap gap-x-6 gap-y-3 border-b border-black/[0.08]">
+                  {TABS.map((tb) => (
+                    <button
+                      key={tb.id}
+                      onClick={() => setTab(tb.id)}
+                      className={`-mb-px border-b-2 pb-3 font-cairo text-sm font-bold transition-colors ${
+                        tab === tb.id ? 'border-brand-strong text-[#0f1f3d]' : 'border-transparent text-[#8894a6] hover:text-[#4a5a72]'
+                      }`}
+                    >
+                      {t(tb.label)}
+                    </button>
+                  ))}
+                </div>
+
+                {tab === 'specs' && (
+                  <dl className="divide-y divide-black/[0.08]">
+                    {product.specs.map(([k, v], i) => (
+                      <div key={i} className="flex items-baseline justify-between gap-6 py-3.5">
+                        <dt className="text-sm text-[#8894a6]">{tr(k)}</dt>
+                        <dd className="text-end font-cairo text-base font-bold text-[#0f1f3d]">{tr(v)}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                )}
+
+                {tab === 'dims' && (
+                  <dl className="divide-y divide-black/[0.08]">
+                    {GENERAL_DIMS.map(([k, v], i) => (
+                      <div key={i} className="flex items-baseline justify-between gap-6 py-3.5">
+                        <dt className="text-sm text-[#8894a6]">{tr(k)}</dt>
+                        <dd dir="ltr" className="text-end font-cairo text-base font-bold text-[#0f1f3d]">{tr(v)}</dd>
+                      </div>
+                    ))}
+                    <p className="pt-4 text-xs text-[#8894a6]">* {t('قريباً')} — {t('الأبعاد')}</p>
+                  </dl>
+                )}
+
+                {tab === 'care' && (
+                  <ul className="space-y-4">
+                    {GENERAL_CARE.map((c, i) => (
+                      <li key={i} className="flex gap-3 text-[#4a5a72]">
+                        <span className="mt-1 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-brand/15 font-cairo text-xs font-black text-brand-strong">{i + 1}</span>
+                        <span className="text-[15px] leading-relaxed sm:text-base">{tr(c)}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* المواصفات / الأبعاد / دليل التنظيف — تبويبات بلا مستطيلات */}
-      <section className="relative overflow-hidden border-t border-black/[0.06] py-16 md:py-24">
-        <div className="mx-auto max-w-3xl px-6">
-          {/* أزرار التبويب */}
-          <div className="mb-8 flex flex-wrap gap-x-7 gap-y-3 border-b border-black/[0.08]">
-            {TABS.map((tb) => (
-              <button
-                key={tb.id}
-                onClick={() => setTab(tb.id)}
-                className={`-mb-px border-b-2 pb-3 font-cairo text-sm font-bold transition-colors sm:text-base ${
-                  tab === tb.id ? 'border-brand-strong text-[#0f1f3d]' : 'border-transparent text-[#8894a6] hover:text-[#4a5a72]'
-                }`}
-              >
-                {t(tb.label)}
-              </button>
-            ))}
-          </div>
-
-          {/* المواصفات */}
-          {tab === 'specs' && (
-            <dl className="divide-y divide-black/[0.08]">
-              {product.specs.map(([k, v], i) => (
-                <div key={i} className="flex items-baseline justify-between gap-6 py-4">
-                  <dt className="text-sm text-[#8894a6] sm:text-base">{tr(k)}</dt>
-                  <dd className="text-end font-cairo text-base font-bold text-[#0f1f3d] sm:text-lg">{tr(v)}</dd>
-                </div>
-              ))}
-            </dl>
-          )}
-
-          {/* الأبعاد */}
-          {tab === 'dims' && (
-            <dl className="divide-y divide-black/[0.08]">
-              {GENERAL_DIMS.map(([k, v], i) => (
-                <div key={i} className="flex items-baseline justify-between gap-6 py-4">
-                  <dt className="text-sm text-[#8894a6] sm:text-base">{tr(k)}</dt>
-                  <dd dir="ltr" className="text-end font-cairo text-base font-bold text-[#0f1f3d] sm:text-lg">{tr(v)}</dd>
-                </div>
-              ))}
-              <p className="pt-5 text-xs text-[#8894a6]">* {t('قريباً')} — {t('المواصفات')} · {t('الأبعاد')}</p>
-            </dl>
-          )}
-
-          {/* دليل التنظيف والصيانة */}
-          {tab === 'care' && (
-            <ul className="space-y-4">
-              {GENERAL_CARE.map((c, i) => (
-                <li key={i} className="flex gap-3 text-[#4a5a72]">
-                  <span className="mt-1 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-brand/15 font-cairo text-xs font-black text-brand-strong">{i + 1}</span>
-                  <span className="text-[15px] leading-relaxed sm:text-base">{tr(c)}</span>
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-      </section>
-
-      {/* منتجات مشابهة/أخرى — تبقى بالكحلي */}
+      {/* أكمل تصميمك — قطع تُكمّل المنتج (بالكحلي، صور كبيرة محاذية للطرفين) */}
       {related.length > 0 && (
-        <section className="relative overflow-hidden bg-ink py-14 md:py-16">
-          <div className="mx-auto max-w-7xl">
-            <div className="mb-6 flex items-end justify-between px-6">
-              <h2 className="font-cairo text-xl font-black text-white sm:text-2xl">{t('منتجات أخرى قد تعجبك')}</h2>
-              <Link to="/products" className="text-sm font-bold text-brand-light hover:text-white">{t('كل المنتجات')}</Link>
+        <section className="relative overflow-hidden bg-ink py-16 md:py-20">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6">
+            <div className="mb-8 flex items-end justify-between gap-4">
+              <div>
+                <h2 className="font-cairo text-2xl font-black text-white sm:text-3xl">{t('أكمل تصميمك')}</h2>
+                <p className="mt-2 text-sm text-white/60">{t('قطعٌ مختارة تُكمّل هذه القطعة بانسجام تامّ.')}</p>
+              </div>
+              <Link to="/products" className="shrink-0 text-sm font-bold text-brand-light hover:text-white">{t('كل المنتجات')}</Link>
             </div>
-            <div className="flex snap-x gap-4 overflow-x-auto px-6 pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-              {related.map((p) => (
-                <Link key={p.id} to={`/product/${p.id}`} className="group w-40 shrink-0 snap-start sm:w-48">
-                  <div className="relative aspect-square overflow-hidden rounded-2xl border border-white/10 bg-[#0d0d24]">
-                    <img src={p.images[p.finishes[0]]} alt={tr(p.title)} loading="lazy" className="absolute inset-0 h-full w-full object-contain p-3 transition-transform duration-500 group-hover:scale-105" />
+            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-6 lg:grid-cols-4">
+              {related.slice(0, 4).map((p) => (
+                <Link key={p.id} to={`/product/${p.id}`} className="group">
+                  <div className="relative aspect-[3/4] overflow-hidden rounded-2xl border border-white/10 bg-[#0d0d24]">
+                    <img src={p.images[p.finishes[0]]} alt={tr(p.title)} loading="lazy" className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
                   </div>
-                  <div className="mt-3 font-cairo text-sm font-bold text-white">{tr(p.title)}</div>
+                  <div className="mt-3 font-cairo text-sm font-bold text-white sm:text-base">{tr(p.title)}</div>
                   <div className="mt-0.5 text-xs text-brand-light">{tr(collectionOf(p.collection)?.name)}</div>
                 </Link>
               ))}
@@ -247,15 +237,15 @@ export default function ProductPage({ reduced }) {
         </section>
       )}
 
-      {/* أكمل المجموعة — الصورة بحجمها الطبيعي بجانب النص */}
+      {/* أكمل المجموعة — صورة كبيرة محاذية للطرفين بجانب النص */}
       <section className="relative overflow-hidden py-16 md:py-24">
-        <div className="mx-auto grid max-w-7xl items-center gap-10 px-6 md:grid-cols-2 md:gap-14">
-          {/* الصورة بنسبتها الطبيعية 3:4 */}
-          <div className="mx-auto w-full max-w-sm overflow-hidden rounded-3xl border border-black/10 shadow-[0_24px_60px_-24px_rgba(15,31,61,.3)] md:mx-0">
-            <img src="/products/collection-bath.webp" alt="" loading="lazy" className="block aspect-[3/4] w-full object-cover" />
+        <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 sm:px-6 md:grid-cols-2 md:gap-16">
+          {/* الصورة كبيرة تملأ عمودها */}
+          <div className="overflow-hidden rounded-3xl shadow-[0_28px_70px_-24px_rgba(15,31,61,.35)]">
+            <img src="/products/collection-bath.webp" alt="" loading="lazy" className="block aspect-[4/5] w-full object-cover" />
           </div>
           {/* النص */}
-          <div className="max-w-lg">
+          <div>
             <span className="mb-4 inline-flex items-center gap-3 text-xs font-bold uppercase tracking-[0.25em] text-brand-strong">
               <span className="h-px w-8 bg-brand-strong/40" />
               {t('من عالم ديفرا')}

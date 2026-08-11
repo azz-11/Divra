@@ -69,6 +69,8 @@ const UI = {
   'الأبعاد': 'Dimensions',
   'دليل التنظيف والصيانة': 'Care & maintenance',
   'منتجات أخرى قد تعجبك': 'You may also like',
+  'أكمل تصميمك': 'Complete your design',
+  'قطعٌ مختارة تُكمّل هذه القطعة بانسجام تامّ.': 'Curated pieces that complete this one in perfect harmony.',
   'أكمِل حمّامك بلمسة ديفرا': 'Complete your bathroom with a Divra touch',
   'من الخلّاط إلى الكرسي والشطّاف — اقتنِ المجموعة كاملةً بانسجام تامّ في التصميم والتشطيب.':
     'From mixer to toilet and bidet spray — own the full collection in perfect harmony of design and finish.',

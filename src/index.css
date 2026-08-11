@@ -191,6 +191,13 @@ h4 {
 .floaty { animation: floaty 5s ease-in-out infinite; }
 .floaty-slow { animation: floaty 7s ease-in-out infinite; }
 
+/* انزياح بطيء لزخرفة الخلفية (علامة مائية) */
+@keyframes divraDrift {
+  from { background-position: 0 0; }
+  to { background-position: 640px 0; }
+}
+.divra-drift { animation: divraDrift 60s linear infinite; }
+
 /* توهج خلفي */
 .glow-ring {
   position: absolute;
@@ -210,7 +217,8 @@ h4 {
     scroll-behavior: auto;
   }
   .marquee-track,
-  .scroll-dot {
+  .scroll-dot,
+  .divra-drift {
     animation: none !important;
   }
   * {
