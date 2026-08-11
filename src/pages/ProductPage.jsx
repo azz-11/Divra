@@ -71,17 +71,6 @@ export default function ProductPage({ reduced }) {
 
   return (
     <div className="relative overflow-x-hidden bg-white text-[#0f1f3d]">
-      {/* خلفية زخرفة ديفرا الرسمية — علامة مائية خفيفة جداً */}
-      <div
-        className={`pointer-events-none absolute inset-0 ${reduced ? '' : 'divra-drift'}`}
-        style={{
-          backgroundImage: 'url(/pattern-wave.webp)',
-          backgroundRepeat: 'repeat',
-          backgroundSize: '760px auto',
-          opacity: 0.05,
-        }}
-      />
-
       {/* بطل صفحة المنتج — صورة كبيرة عمودية + مصغّرات عمودية + تفاصيل */}
       <section className="relative pt-24 sm:pt-28">
         <div className="relative z-10 mx-auto max-w-7xl px-4 pb-16 sm:px-6">
@@ -214,7 +203,17 @@ export default function ProductPage({ reduced }) {
       {/* أكمل تصميمك — قطع تُكمّل المنتج (بالكحلي، صور كبيرة محاذية للطرفين) */}
       {related.length > 0 && (
         <section className="relative overflow-hidden bg-ink py-16 md:py-20">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6">
+          {/* زخرفة ديفرا الرسمية — علامة مائية خفيفة داخل البار الكحلي فقط */}
+          <div
+            className={`pointer-events-none absolute inset-0 ${reduced ? '' : 'divra-drift'}`}
+            style={{
+              backgroundImage: 'url(/pattern-wave-light.webp)',
+              backgroundRepeat: 'repeat',
+              backgroundSize: '760px auto',
+              opacity: 0.07,
+            }}
+          />
+          <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6">
             <div className="mb-8 flex items-end justify-between gap-4">
               <div>
                 <h2 className="font-cairo text-2xl font-black text-white sm:text-3xl">{t('أكمل تصميمك')}</h2>
