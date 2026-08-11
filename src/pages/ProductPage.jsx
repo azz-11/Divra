@@ -77,7 +77,7 @@ export default function ProductPage({ reduced }) {
         style={{
           backgroundImage: 'url(/pattern-wave.webp)',
           backgroundRepeat: 'repeat',
-          backgroundSize: '640px auto',
+          backgroundSize: '760px auto',
           opacity: 0.05,
         }}
       />

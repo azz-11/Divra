@@ -194,9 +194,9 @@ h4 {
 /* انزياح بطيء لزخرفة الخلفية (علامة مائية) */
 @keyframes divraDrift {
   from { background-position: 0 0; }
-  to { background-position: 640px 0; }
+  to { background-position: 760px 0; }
 }
-.divra-drift { animation: divraDrift 60s linear infinite; }
+.divra-drift { animation: divraDrift 70s linear infinite; }
 
 /* توهج خلفي */
 .glow-ring {
