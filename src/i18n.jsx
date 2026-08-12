@@ -71,6 +71,7 @@ const UI = {
   // المنتج الرسمي
   'المنتج الرسمي': 'The signature product',
   'اكتشف المنتج': 'Discover the product',
+  'فخامةٌ تُصنع لتبقى': 'Luxury made to last',
   // صفحة المنتج
   'المواصفات': 'Specifications',
   'الأبعاد': 'Dimensions',

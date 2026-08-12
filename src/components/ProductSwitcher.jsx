@@ -56,7 +56,7 @@ export default function ProductSwitcher({ reduced }) {
           <h2 className="font-cairo text-4xl font-black leading-[1.05] text-white sm:text-6xl md:text-7xl" style={{ textShadow: '0 2px 24px rgba(0,0,0,.4)' }}>
             {tr(product.title)}
           </h2>
-          <p className="mt-6 max-w-md text-lg leading-relaxed text-white/85 sm:text-xl">{tr(product.tagline)}</p>
+          <p className="mt-6 max-w-md text-lg leading-relaxed text-white/85 sm:text-xl">{t('فخامةٌ تُصنع لتبقى')}</p>
           <Link to={`/product/${product.id}`} className="btn btn-primary mt-9 inline-flex">
             {t('اكتشف المنتج')}
           </Link>

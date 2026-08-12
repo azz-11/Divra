@@ -5,7 +5,6 @@ import DiscoverBreak from '../components/DiscoverBreak.jsx'
 import ProductSwitcher from '../components/ProductSwitcher.jsx'
 import CollectionDuo from '../components/CollectionDuo.jsx'
 import BrandStory from '../components/BrandStory.jsx'
-import ProductMarquee from '../components/ProductMarquee.jsx'
 import Contact from '../components/Contact.jsx'
 
 export default function Home({ reduced }) {
@@ -29,8 +28,6 @@ export default function Home({ reduced }) {
       <CollectionDuo ids={['mixers', 'jacuzzi', 'mixers', 'jacuzzi']} />
       {/* حكاية البراند */}
       <BrandStory reduced={reduced} />
-      {/* القسم الدوّار */}
-      <ProductMarquee reduced={reduced} />
       {/* أربعة أقسام (تكرار مؤقت للتجربة) */}
       <CollectionDuo ids={['sprays', 'bath', 'sprays', 'bath']} />
       {/* التواصل */}
