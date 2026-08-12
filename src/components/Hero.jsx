@@ -48,17 +48,18 @@ export default function Hero({ reduced }) {
           <source src="/video/hero.mp4" type="video/mp4" />
         </video>
 
-        {/* طبقة تدرج داكن للتباين */}
+        {/* تدرّج خفيف جداً أسفل الشاشة فقط لوضوح النص — دون تعتيم الفيديو */}
         <div
-          className="absolute inset-0"
-          style={{
-            background:
-              'linear-gradient(180deg, rgba(3,3,40,.78) 0%, rgba(3,3,40,.5) 42%, rgba(3,3,40,.94) 100%)',
-          }}
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3"
+          style={{ background: 'linear-gradient(180deg, transparent 0%, rgba(3,3,40,.45) 100%)' }}
         />
 
         {/* المحتوى */}
-        <div ref={contentRef} className="relative z-10 mx-auto w-full max-w-4xl px-6 text-center">
+        <div
+          ref={contentRef}
+          className="relative z-10 mx-auto w-full max-w-4xl px-6 text-center"
+          style={{ textShadow: '0 2px 18px rgba(0,0,0,.45)' }}
+        >
           <span className="mb-5 inline-block rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-sm text-white backdrop-blur">
             {t('أدوات صحية فاخرة')}
           </span>
