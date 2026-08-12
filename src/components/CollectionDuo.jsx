@@ -11,8 +11,8 @@ export default function CollectionDuo({ ids = [] }) {
 
   return (
     <section className="w-full bg-white py-14 sm:py-16">
-      {/* أصغر بـ ٢٥٪ عبر حدّ أقصى للعرض مع فراغات متساوية */}
-      <div className="grid w-full grid-cols-1 gap-8 px-8 sm:grid-cols-2">
+      {/* هوامش جانبية أوسع من الأطراف، وفجوة أصغر بين الصور */}
+      <div className="grid w-full grid-cols-1 gap-6 px-10 sm:grid-cols-2 sm:px-16 lg:px-28">
         {cols.map((c, i) => (
           <Link key={i} to={`/collection/${c.id}`} className="group relative block aspect-[4/3] overflow-hidden rounded-3xl shadow-[0_28px_70px_-28px_rgba(15,31,61,.35)]">
             <img
