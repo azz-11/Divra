@@ -10,10 +10,10 @@ export default function CollectionDuo({ ids = [] }) {
   if (!cols.length) return null
 
   return (
-    <section className="flex min-h-screen w-full items-center bg-white py-16">
-      <div className="mx-auto grid w-full max-w-5xl gap-6 px-6 sm:gap-8 md:grid-cols-2">
-        {cols.map((c) => (
-          <Link key={c.id} to={`/collection/${c.id}`} className="group relative block aspect-[3/4] overflow-hidden rounded-3xl shadow-[0_28px_70px_-28px_rgba(15,31,61,.35)]">
+    <section className="flex min-h-screen w-full items-center bg-white py-20">
+      <div className="mx-auto grid w-full max-w-4xl grid-cols-1 gap-10 px-6 sm:grid-cols-2 sm:gap-12">
+        {cols.map((c, i) => (
+          <Link key={i} to={`/collection/${c.id}`} className="group relative block aspect-square overflow-hidden rounded-3xl shadow-[0_28px_70px_-28px_rgba(15,31,61,.35)]">
             <img
               src={c.cover}
               alt={tr(c.name)}
