@@ -24,8 +24,8 @@ export default function Home({ reduced }) {
       <DiscoverBreak reduced={reduced} />
       {/* المنتج الرسمي (فيديو بلا خيارات) */}
       <ProductSwitcher reduced={reduced} />
-      {/* قسمان: الخلاطات + كراسي الحمام */}
-      <CollectionDuo ids={['mixers', 'chairs']} />
+      {/* قسمان: الخلاطات + الجاكوزي */}
+      <CollectionDuo ids={['mixers', 'jacuzzi']} />
       {/* حكاية البراند */}
       <BrandStory reduced={reduced} />
       {/* قسمان: المروش + البانيو */}
