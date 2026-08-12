@@ -12,9 +12,9 @@ export default function CollectionDuo({ ids = [] }) {
   return (
     <section className="w-full bg-white py-14 sm:py-16">
       {/* هوامش جانبية أوسع من الأطراف، وفجوة أصغر بين الصور */}
-      <div className="grid w-full grid-cols-1 gap-6 px-10 sm:grid-cols-2 sm:px-16 lg:px-28">
+      <div className="grid w-full grid-cols-1 gap-6 px-12 sm:grid-cols-2 sm:px-24 lg:px-40">
         {cols.map((c, i) => (
-          <Link key={i} to={`/collection/${c.id}`} className="group relative block aspect-[4/3] overflow-hidden rounded-3xl shadow-[0_28px_70px_-28px_rgba(15,31,61,.35)]">
+          <Link key={i} to={`/collection/${c.id}`} className="group relative block aspect-[4/3] overflow-hidden">
             <img
               src={c.cover}
               alt={tr(c.name)}
@@ -22,7 +22,6 @@ export default function CollectionDuo({ ids = [] }) {
               className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1000ms] ease-out group-hover:scale-105"
             />
             <span className="pointer-events-none absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(3,3,40,.05) 0%, rgba(3,3,40,.15) 45%, rgba(3,3,40,.72) 100%)' }} />
-            <span className="pointer-events-none absolute inset-0 rounded-3xl ring-1 ring-inset ring-white/10" />
             {/* الاسم */}
             <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-6 sm:p-7">
               <h3 className="font-cairo text-2xl font-black text-white drop-shadow sm:text-3xl">{tr(c.name)}</h3>
