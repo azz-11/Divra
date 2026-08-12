@@ -64,12 +64,13 @@ const UI = {
   'جميع الحقوق محفوظة.': 'All rights reserved.',
   // البنر
   'من عالم ديفرا': 'From Divra’s world',
-  // فاصل اكتشاف المنتجات
-  'المجموعة الكاملة': 'The full collection',
-  'اكتشف كل ما يُكمّل حمّامك': 'Discover everything that completes your bathroom',
-  'من الخلّاطات إلى الجاكوزي — تصفّح مجموعات ديفرا كاملةً في مكانٍ واحد.':
-    'From mixers to jacuzzis — browse Divra’s full collections in one place.',
-  'تصفّح جميع المنتجات': 'Browse all products',
+  // فاصل تسويقي
+  'حين تلتقي الهندسة بالفخامة': 'Where engineering meets luxury',
+  'نصمّم كل قطعة لتُضيء تفاصيل يومك بأناقةٍ تدوم.':
+    'We craft every piece to illuminate your everyday with lasting elegance.',
+  // المنتج الرسمي
+  'المنتج الرسمي': 'The signature product',
+  'اكتشف المنتج': 'Discover the product',
   // صفحة المنتج
   'المواصفات': 'Specifications',
   'الأبعاد': 'Dimensions',

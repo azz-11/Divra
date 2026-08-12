@@ -1,10 +1,10 @@
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import Hero from '../components/Hero.jsx'
-import ProductSwitcher from '../components/ProductSwitcher.jsx'
-import ProductMarquee from '../components/ProductMarquee.jsx'
-import BrandStory from '../components/BrandStory.jsx'
 import DiscoverBreak from '../components/DiscoverBreak.jsx'
+import ProductSwitcher from '../components/ProductSwitcher.jsx'
+import CollectionDuo from '../components/CollectionDuo.jsx'
+import BrandStory from '../components/BrandStory.jsx'
 import Contact from '../components/Contact.jsx'
 
 export default function Home({ reduced }) {
@@ -20,10 +20,17 @@ export default function Home({ reduced }) {
   return (
     <>
       <Hero reduced={reduced} />
+      {/* فاصل تسويقي */}
       <DiscoverBreak reduced={reduced} />
+      {/* المنتج الرسمي (فيديو بلا خيارات) */}
       <ProductSwitcher reduced={reduced} />
-      <ProductMarquee reduced={reduced} />
+      {/* قسمان: الخلاطات + كراسي الحمام */}
+      <CollectionDuo ids={['mixers', 'chairs']} />
+      {/* حكاية البراند */}
       <BrandStory reduced={reduced} />
+      {/* قسمان: المروش + البانيو */}
+      <CollectionDuo ids={['sprays', 'bath']} />
+      {/* التواصل */}
       <Contact />
     </>
   )
