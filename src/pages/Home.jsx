@@ -20,10 +20,10 @@ export default function Home({ reduced }) {
   return (
     <>
       <Hero reduced={reduced} />
+      <DiscoverBreak reduced={reduced} />
       <ProductSwitcher reduced={reduced} />
       <ProductMarquee reduced={reduced} />
       <BrandStory reduced={reduced} />
-      <DiscoverBreak reduced={reduced} />
       <Contact />
     </>
   )
