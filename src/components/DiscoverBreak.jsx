@@ -5,7 +5,7 @@ export default function DiscoverBreak({ reduced }) {
   const { t } = useLang()
   return (
     <section
-      className="relative overflow-hidden py-24 md:py-32"
+      className="relative overflow-hidden py-14 md:py-16"
       style={{ background: 'linear-gradient(160deg, #030435 0%, #0a0a3d 55%, #030328 100%)' }}
     >
       {/* زخرفة ديفرا الخفيفة */}
@@ -27,10 +27,10 @@ export default function DiscoverBreak({ reduced }) {
           <span className="h-px w-10 bg-brand-light/40" />
         </span>
 
-        <h2 className="font-cairo text-3xl font-black leading-snug text-white sm:text-4xl md:text-5xl" style={{ textWrap: 'balance' }}>
+        <h2 className="font-cairo text-2xl font-black leading-snug text-white sm:text-3xl md:text-4xl" style={{ textWrap: 'balance' }}>
           {t('حين تلتقي الهندسة بالفخامة')}
         </h2>
-        <p className="mx-auto mt-5 max-w-xl text-base text-white/75 sm:text-lg">
+        <p className="mx-auto mt-4 max-w-xl text-sm text-white/75 sm:text-base">
           {t('نصمّم كل قطعة لتُضيء تفاصيل يومك بأناقةٍ تدوم.')}
         </p>
       </div>

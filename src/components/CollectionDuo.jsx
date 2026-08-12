@@ -10,9 +10,9 @@ export default function CollectionDuo({ ids = [] }) {
   if (!cols.length) return null
 
   return (
-    <section className="w-full bg-white py-8 sm:py-10">
-      {/* الفراغات متساوية: الهامش الجانبي = الفجوة الوسطى = فجوة الصفوف */}
-      <div className="grid grid-cols-1 gap-8 px-8 sm:grid-cols-2">
+    <section className="w-full bg-white py-14 sm:py-16">
+      {/* أصغر بـ ٢٥٪ عبر حدّ أقصى للعرض مع فراغات متساوية */}
+      <div className="mx-auto grid w-full max-w-5xl grid-cols-1 gap-8 px-8 sm:grid-cols-2">
         {cols.map((c, i) => (
           <Link key={i} to={`/collection/${c.id}`} className="group relative block aspect-square overflow-hidden rounded-3xl shadow-[0_28px_70px_-28px_rgba(15,31,61,.35)]">
             <img
