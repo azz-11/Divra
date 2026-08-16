@@ -83,10 +83,12 @@ const UI = {
     'Browse products and add what suits you to inquire about them all at once.',
   'المنتجات المختارة': 'Selected products',
   'أرسل الاستفسار عبر واتساب': 'Send inquiry via WhatsApp',
-  'أنشئ طلب الشراء وأرسله عبر واتساب': 'Create purchase order & send via WhatsApp',
+  'أرسل طلب الشراء بالبريد': 'Send order by email',
   'يتم إنشاء الملف…': 'Generating file…',
-  'سيُنزَّل ملف الطلب PDF ثم يفتح واتساب لإرفاقه.':
-    'The PDF order will download, then WhatsApp opens for you to attach it.',
+  'يُرسَل طلبك مع ملف PDF مرفق إلى فريق ديفرا.': 'Your order is sent with a PDF attached to the Divra team.',
+  'تم إرسال طلبك بنجاح ✓': 'Your order was sent successfully ✓',
+  'نُزّل ملف الطلب PDF وفتح تطبيق البريد — أرفق الملف ثم أرسل.':
+    'The PDF downloaded and your mail app opened — attach the file and send.',
   '(مرفق ملف الطلب PDF)': '(PDF order attached)',
   'تفريغ القائمة': 'Clear list',
   'تصفّح المزيد': 'Browse more',

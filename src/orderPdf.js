@@ -2,8 +2,9 @@ import { jsPDF } from 'jspdf'
 import html2canvas from 'html2canvas'
 import { FINISH } from './productsData.js'
 
-// يبني عنصر HTML بهيئة طلب شراء رسمي ثم يحوّله إلى PDF
-export async function generateOrderPdf(items, { tr, lang = 'ar' } = {}) {
+// يبني عنصر HTML بهيئة طلب شراء رسمي ثم يحوّله إلى PDF.
+// download=true يحفظ الملف؛ ويُعيد دائماً base64 (بلا بادئة) للإرسال بالبريد.
+export async function generateOrderPdf(items, { tr, lang = 'ar', download = false } = {}) {
   const dir = lang === 'ar' ? 'rtl' : 'ltr'
   const L = {
     order: lang === 'ar' ? 'طلب شراء' : 'Purchase order',
@@ -116,7 +117,9 @@ export async function generateOrderPdf(items, { tr, lang = 'ar' } = {}) {
       pdf.addImage(data, 'JPEG', 0, position, imgW, imgH)
       heightLeft -= pageH
     }
-    pdf.save('divra-order.pdf')
+    if (download) pdf.save('divra-order.pdf')
+    const uri = pdf.output('datauristring') // data:application/pdf;base64,XXXX
+    return { base64: uri.split(',')[1], filename: 'divra-order.pdf' }
   } finally {
     document.body.removeChild(el)
   }

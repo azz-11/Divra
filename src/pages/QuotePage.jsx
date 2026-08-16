@@ -5,33 +5,57 @@ import { collectionOf, FINISH } from '../productsData.js'
 import { useQuote } from '../quote.jsx'
 import { useLang } from '../i18n.jsx'
 
-const PHONE = '966566906123'
+const EMAIL = 'y.wazan@almakarem.com.sa'
 
 export default function QuotePage() {
   const { items, remove, inc, dec, clear } = useQuote()
   const { t, tr, lang } = useLang()
   const [busy, setBusy] = useState(false)
+  const [status, setStatus] = useState(null) // 'sent' | 'fallback' | null
 
   useEffect(() => { window.scrollTo(0, 0) }, [])
 
-  // نصّ واتساب (يُرفق ملف الطلب PDF يدوياً بعد تنزيله)
-  const waUrl = () => {
-    const lines = items.map(({ product: p, qty }, i) => {
+  const orderLines = () =>
+    items.map(({ product: p, qty }, i) => {
       const fin = FINISH[p.finishes[0]]
       return `${i + 1}. ${tr(p.title)}${fin ? ` — ${tr(fin.name)}` : ''} × ${qty}`
     })
-    const msg = `${t('مرحباً، أرغب بعرض سعر للمنتجات التالية:')}\n${lines.join('\n')}\n\n${t('(مرفق ملف الطلب PDF)')}`
-    return `https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`
-  }
 
-  // ينشئ ملف PDF لطلب الشراء ثم يفتح واتساب لإرفاقه
+  const summaryHtml = () =>
+    `<h2 style="font-family:sans-serif">طلب شراء جديد — Divra</h2><ol style="font-family:sans-serif;font-size:14px">${items
+      .map(({ product: p, qty }) => {
+        const fin = FINISH[p.finishes[0]]
+        return `<li>${tr(p.title)}${fin ? ` — ${tr(fin.name)}` : ''} × <b>${qty}</b></li>`
+      })
+      .join('')}</ol>`
+
+  // ينشئ PDF ويرسله بالبريد كمرفق عبر الخادم؛ وإن تعذّر يرجع لتنزيله + فتح البريد
   const sendOrder = async () => {
     if (busy || !items.length) return
     setBusy(true)
+    setStatus(null)
     try {
       const { generateOrderPdf } = await import('../orderPdf.js')
-      await generateOrderPdf(items, { tr, lang })
-      window.open(waUrl(), '_blank', 'noopener,noreferrer')
+      const { base64, filename } = await generateOrderPdf(items, { tr, lang })
+      let ok = false
+      try {
+        const r = await fetch('/api/order', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ pdfBase64: base64, filename, summaryHtml: summaryHtml(), subject: 'طلب شراء جديد — Divra' }),
+        })
+        ok = r.ok
+      } catch { ok = false }
+
+      if (ok) {
+        setStatus('sent')
+      } else {
+        // احتياطي: نزّل الملف وافتح تطبيق البريد لإرفاقه يدوياً
+        await generateOrderPdf(items, { tr, lang, download: true })
+        const body = encodeURIComponent(`${t('مرحباً، أرغب بعرض سعر للمنتجات التالية:')}\n${orderLines().join('\n')}\n\n${t('(مرفق ملف الطلب PDF)')}`)
+        window.open(`mailto:${EMAIL}?subject=${encodeURIComponent('طلب شراء — Divra')}&body=${body}`, '_blank')
+        setStatus('fallback')
+      }
     } finally {
       setBusy(false)
     }
@@ -96,9 +120,17 @@ export default function QuotePage() {
             {/* إجراءات */}
             <div className="mt-8 flex flex-col items-center gap-4">
               <button onClick={sendOrder} disabled={busy} className="btn btn-primary w-full max-w-sm disabled:opacity-60">
-                {busy ? t('يتم إنشاء الملف…') : t('أنشئ طلب الشراء وأرسله عبر واتساب')}
+                {busy ? t('يتم إنشاء الملف…') : t('أرسل طلب الشراء بالبريد')}
               </button>
-              <p className="max-w-sm text-center text-xs text-white/45">{t('سيُنزَّل ملف الطلب PDF ثم يفتح واتساب لإرفاقه.')}</p>
+              {status === 'sent' && (
+                <p className="max-w-sm text-center text-sm font-bold text-brand-light">{t('تم إرسال طلبك بنجاح ✓')}</p>
+              )}
+              {status === 'fallback' && (
+                <p className="max-w-sm text-center text-xs text-white/55">{t('نُزّل ملف الطلب PDF وفتح تطبيق البريد — أرفق الملف ثم أرسل.')}</p>
+              )}
+              {!status && (
+                <p className="max-w-sm text-center text-xs text-white/45">{t('يُرسَل طلبك مع ملف PDF مرفق إلى فريق ديفرا.')}</p>
+              )}
               <div className="flex items-center gap-5 text-sm">
                 <Link to="/products" className="font-bold text-brand-light hover:text-white">{t('تصفّح المزيد')}</Link>
                 <button onClick={clear} className="text-white/50 hover:text-white/80">{t('تفريغ القائمة')}</button>
