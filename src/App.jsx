@@ -12,6 +12,7 @@ import ProductPage from './pages/ProductPage.jsx'
 import QuotePage from './pages/QuotePage.jsx'
 import useReducedMotion from './useReducedMotion.js'
 import { LanguageProvider } from './i18n.jsx'
+import { QuoteProvider } from './quote.jsx'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -26,6 +27,7 @@ export default function App() {
 
   return (
     <LanguageProvider>
+      <QuoteProvider>
       <BrowserRouter>
       <Header />
       <main>
@@ -41,6 +43,7 @@ export default function App() {
       </main>
       <Footer />
       </BrowserRouter>
+      </QuoteProvider>
     </LanguageProvider>
   )
 }

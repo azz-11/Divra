@@ -73,6 +73,19 @@ const UI = {
   'المنتج الرسمي': 'The signature product',
   'اكتشف المنتج': 'Discover the product',
   'فخامةٌ تُصنع لتبقى': 'Luxury made to last',
+  // عرض السعر
+  'أضف إلى عرض السعر': 'Add to quote',
+  'في قائمة عرض السعر ✓': 'In your quote ✓',
+  'إزالة': 'Remove',
+  'عناصر': 'items',
+  'قائمة عرض السعر فارغة': 'Your quote list is empty',
+  'تصفّح المنتجات وأضف ما يناسبك للاستفسار عنه دفعةً واحدة.':
+    'Browse products and add what suits you to inquire about them all at once.',
+  'المنتجات المختارة': 'Selected products',
+  'أرسل الاستفسار عبر واتساب': 'Send inquiry via WhatsApp',
+  'تفريغ القائمة': 'Clear list',
+  'تصفّح المزيد': 'Browse more',
+  'مرحباً، أرغب بعرض سعر للمنتجات التالية:': 'Hello, I’d like a quote for the following products:',
   // صفحة المنتج
   'المواصفات': 'Specifications',
   'الأبعاد': 'Dimensions',

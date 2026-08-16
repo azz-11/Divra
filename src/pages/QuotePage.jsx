@@ -1,181 +1,85 @@
-import { useState, useEffect } from 'react'
-import { COLLECTIONS } from '../productsData.js'
+import { useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import { X } from 'lucide-react'
+import { collectionOf, FINISH } from '../productsData.js'
+import { useQuote } from '../quote.jsx'
+import { useLang } from '../i18n.jsx'
 
-const PROJECT_SIZES = ['فيلا', 'شقة', 'فندق', 'مقاول', 'أخرى']
-const WHATSAPP_NUMBER = '966566906123'
-
-const emptyForm = { name: '', phone: '', category: '', projectSize: '', email: '', notes: '' }
-
-function Field({ label, required, error, children }) {
-  return (
-    <div>
-      <label className="mb-2 block text-sm font-bold text-text">
-        {label} {required && <span className="text-[#ff8a8a]">*</span>}
-      </label>
-      {children}
-      {error && <p className="mt-1.5 text-xs font-bold text-[#ff8a8a]">{error}</p>}
-    </div>
-  )
-}
-
-const inputClass = (hasError) =>
-  `w-full rounded-xl2 border ${hasError ? 'border-[#ff8a8a]/60' : 'border-line'} bg-white/5 px-4 py-3 text-text placeholder:text-text-dimmer outline-none transition-colors focus:border-brand-strong`
-
-// المتصفح يرسم قائمة <select> المنسدلة بألوانه الافتراضية (فاتحة) بغضّ النظر عن
-// كلاسات Tailwind، فيصير التباين ضعيفاً على الثيم الغامق. color-scheme يخبر
-// المتصفح يرسمها بألوان داكنة متّسقة، ونضيف خلفية صريحة على كل <option> لضمان
-// التباين في كل المتصفحات.
-const selectStyle = { colorScheme: 'dark' }
-const optionStyle = { backgroundColor: '#0b0c2a', color: '#f4f4fb' }
+const PHONE = '966566906123'
 
 export default function QuotePage() {
+  const { items, remove, clear } = useQuote()
+  const { t, tr } = useLang()
+
   useEffect(() => { window.scrollTo(0, 0) }, [])
-  const [form, setForm] = useState(emptyForm)
-  const [errors, setErrors] = useState({})
-  const [submitted, setSubmitted] = useState(false)
 
-  const update = (field) => (e) => {
-    let value = e.target.value
-    if (field === 'phone') value = value.replace(/[^0-9]/g, '')
-    setForm((f) => ({ ...f, [field]: value }))
-  }
-
-  const validate = () => {
-    const next = {}
-    if (!form.name.trim()) next.name = 'يرجى إدخال الاسم'
-    if (!form.phone.trim()) next.phone = 'يرجى إدخال رقم الجوال'
-    else if (form.phone.replace(/[^0-9]/g, '').length < 9) next.phone = 'رقم الجوال غير صحيح'
-    if (!form.category) next.category = 'يرجى اختيار نوع المنتج / الفئة'
-    if (form.email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) {
-      next.email = 'صيغة البريد الإلكتروني غير صحيحة'
-    }
-    setErrors(next)
-    return Object.keys(next).length === 0
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    if (!validate()) return
-
-    const categoryName = COLLECTIONS.find((c) => c.id === form.category)?.name?.ar || form.category
-    const lines = [
-      'طلب عرض سعر جديد من موقع ديفرا:',
-      `الاسم: ${form.name.trim()}`,
-      `الجوال: ${form.phone.trim()}`,
-      `نوع المنتج / الفئة: ${categoryName}`,
-    ]
-    if (form.projectSize) lines.push(`حجم المشروع: ${form.projectSize}`)
-    if (form.email.trim()) lines.push(`البريد الإلكتروني: ${form.email.trim()}`)
-    if (form.notes.trim()) lines.push(`ملاحظات: ${form.notes.trim()}`)
-
-    const message = encodeURIComponent(lines.join('\n'))
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, '_blank', 'noopener,noreferrer')
-    setSubmitted(true)
-  }
-
-  const resetForm = () => {
-    setForm(emptyForm)
-    setErrors({})
-    setSubmitted(false)
+  // رسالة واتساب تتضمّن المنتجات المختارة
+  const waHref = () => {
+    const lines = items.map((p, i) => {
+      const fin = FINISH[p.finishes[0]]
+      return `${i + 1}. ${tr(p.title)}${fin ? ` — ${tr(fin.name)}` : ''}`
+    })
+    const msg = `${t('مرحباً، أرغب بعرض سعر للمنتجات التالية:')}\n${lines.join('\n')}`
+    return `https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`
   }
 
   return (
-    <div dir="rtl" className="relative min-h-screen bg-ink px-6 pb-24 pt-28 md:pt-36">
-      <div className="mx-auto max-w-2xl">
-        <div className="mb-10 text-center">
-          <span className="mb-4 inline-block rounded-full border border-line bg-brand/10 px-4 py-1.5 text-sm text-brand-strong">
-            طلب عرض سعر
+    <div className="min-h-screen bg-ink pt-24 sm:pt-28">
+      <div className="mx-auto max-w-4xl px-6 pb-24">
+        <div className="mb-8 text-center">
+          <span className="mb-3 inline-flex items-center gap-3 text-xs font-bold uppercase tracking-[0.25em] text-brand-light">
+            <span className="h-px w-8 bg-brand-light/40" />
+            {t('ديفرا')}
+            <span className="h-px w-8 bg-brand-light/40" />
           </span>
-          <h1 className="font-cairo text-3xl font-black leading-snug sm:text-4xl md:text-5xl">
-            اطلب عرض سعر مخصص
-          </h1>
-          <p className="mx-auto mt-4 max-w-lg text-text-dim">
-            عبّئ البيانات التالية وسنعاود التواصل معك خلال 24 ساعة بعرض سعر يناسب مشروعك.
-          </p>
+          <h1 className="font-cairo text-3xl font-black text-white sm:text-4xl md:text-5xl">{t('اطلب عرض سعر')}</h1>
+          {items.length > 0 && (
+            <p className="mt-3 text-white/70">{items.length} {t('عناصر')}</p>
+          )}
         </div>
 
-        {!submitted ? (
-          <form onSubmit={handleSubmit} noValidate className="glass space-y-5 rounded-xl2 p-6 md:p-10">
-            <Field label="الاسم" required error={errors.name}>
-              <input
-                type="text"
-                value={form.name}
-                onChange={update('name')}
-                placeholder="اكتب اسمك الكامل"
-                className={inputClass(errors.name)}
-              />
-            </Field>
-
-            <Field label="رقم الجوال" required error={errors.phone}>
-              <input
-                type="tel"
-                inputMode="numeric"
-                dir="ltr"
-                value={form.phone}
-                onChange={update('phone')}
-                placeholder="05xxxxxxxx"
-                className={inputClass(errors.phone) + ' text-end'}
-              />
-            </Field>
-
-            <Field label="نوع المنتج / الفئة" required error={errors.category}>
-              <select value={form.category} onChange={update('category')} className={inputClass(errors.category)} style={selectStyle}>
-                <option value="" disabled style={optionStyle}>اختر الفئة المطلوبة</option>
-                {COLLECTIONS.map((c) => (
-                  <option key={c.id} value={c.id} style={optionStyle}>{c.name.ar}</option>
-                ))}
-              </select>
-            </Field>
-
-            <Field label="حجم المشروع">
-              <select value={form.projectSize} onChange={update('projectSize')} className={inputClass(false)} style={selectStyle}>
-                <option value="" style={optionStyle}>اختر (اختياري)</option>
-                {PROJECT_SIZES.map((s) => (
-                  <option key={s} value={s} style={optionStyle}>{s}</option>
-                ))}
-              </select>
-            </Field>
-
-            <Field label="البريد الإلكتروني" error={errors.email}>
-              <input
-                type="email"
-                dir="ltr"
-                value={form.email}
-                onChange={update('email')}
-                placeholder="example@email.com"
-                className={inputClass(errors.email) + ' text-end'}
-              />
-            </Field>
-
-            <Field label="ملاحظات">
-              <textarea
-                value={form.notes}
-                onChange={update('notes')}
-                rows={4}
-                placeholder="أي تفاصيل إضافية تودّ مشاركتها معنا"
-                className={inputClass(false) + ' resize-none'}
-              />
-            </Field>
-
-            <button type="submit" className="btn btn-primary mt-2 w-full">
-              إرسال الطلب عبر واتساب
-            </button>
-          </form>
-        ) : (
-          <div className="glass rounded-xl2 p-10 text-center">
-            <div className="mx-auto mb-5 grid h-16 w-16 place-items-center rounded-full bg-brand/15 text-brand-strong">
-              <svg viewBox="0 0 24 24" className="h-8 w-8" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M20 6L9 17l-5-5" />
-              </svg>
-            </div>
-            <h2 className="font-cairo text-2xl font-black sm:text-3xl">تم استلام طلبك بنجاح!</h2>
-            <p className="mx-auto mt-3 max-w-md text-text-dim">
-              شكراً لثقتك بديفرا. فريقنا سيراجع طلبك ويتواصل معك خلال 24 ساعة بعرض السعر المناسب لمشروعك.
-            </p>
-            <button onClick={resetForm} className="btn btn-ghost mt-7">
-              إرسال طلب آخر
-            </button>
+        {items.length === 0 ? (
+          <div className="mx-auto max-w-lg rounded-2xl border border-white/10 bg-white/[0.04] p-10 text-center">
+            <p className="font-cairo text-xl font-bold text-white">{t('قائمة عرض السعر فارغة')}</p>
+            <p className="mt-2 text-white/65">{t('تصفّح المنتجات وأضف ما يناسبك للاستفسار عنه دفعةً واحدة.')}</p>
+            <Link to="/products" className="btn btn-primary mt-7 inline-flex">{t('تصفّح المنتجات')}</Link>
           </div>
+        ) : (
+          <>
+            {/* قائمة المنتجات المختارة */}
+            <ul className="divide-y divide-white/[0.08] overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04]">
+              {items.map((p) => (
+                <li key={p.id} className="flex items-center gap-4 p-4">
+                  <Link to={`/product/${p.id}`} className="relative h-20 w-20 shrink-0 overflow-hidden rounded-xl bg-[#0d0d24]">
+                    <img src={p.images[p.finishes[0]]} alt={tr(p.title)} className="absolute inset-0 h-full w-full object-cover" />
+                  </Link>
+                  <div className="min-w-0 flex-1">
+                    <Link to={`/product/${p.id}`} className="font-cairo text-base font-bold text-white hover:text-brand-light">{tr(p.title)}</Link>
+                    <div className="mt-0.5 text-xs text-brand-light">{tr(collectionOf(p.collection)?.name)}</div>
+                    <div className="mt-0.5 text-xs text-white/50">{tr(FINISH[p.finishes[0]]?.name)}</div>
+                  </div>
+                  <button
+                    onClick={() => remove(p.id)}
+                    aria-label={t('إزالة')}
+                    className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-white/15 text-white/70 transition-colors hover:border-white/50 hover:text-white"
+                  >
+                    <X size={16} strokeWidth={2.25} />
+                  </button>
+                </li>
+              ))}
+            </ul>
+
+            {/* إجراءات */}
+            <div className="mt-8 flex flex-col items-center gap-4">
+              <a href={waHref()} target="_blank" rel="noopener noreferrer" className="btn btn-primary w-full max-w-sm">
+                {t('أرسل الاستفسار عبر واتساب')}
+              </a>
+              <div className="flex items-center gap-5 text-sm">
+                <Link to="/products" className="font-bold text-brand-light hover:text-white">{t('تصفّح المزيد')}</Link>
+                <button onClick={clear} className="text-white/50 hover:text-white/80">{t('تفريغ القائمة')}</button>
+              </div>
+            </div>
+          </>
         )}
       </div>
     </div>

@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { useParams, Link, Navigate } from 'react-router-dom'
 import { productOf, collectionOf, productsIn, PRODUCTS, FINISH } from '../productsData.js'
 import { useLang } from '../i18n.jsx'
+import { useQuote } from '../quote.jsx'
 
 // محتوى عام للتجربة — الأبعاد ودليل العناية (يُخصّص لاحقاً لكل منتج)
 const GENERAL_DIMS = [
@@ -21,6 +22,7 @@ export default function ProductPage({ reduced }) {
   const { id } = useParams()
   const product = productOf(id)
   const { t, tr } = useLang()
+  const quote = useQuote()
 
   const primary = product?.images?.[product?.finishes?.[0]]
   // قائمة صور المعرض (المعرض إن وُجد وإلا الصورة الأساسية)
@@ -133,16 +135,18 @@ export default function ProductPage({ reduced }) {
                 <span className="text-sm text-[#4a5a72]">{tr(finish.name)}</span>
               </div>
 
-              {/* أزرار */}
+              {/* أزرار — إضافة المنتج لقائمة عرض السعر */}
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <a href="https://wa.me/966566906123" target="_blank" rel="noopener noreferrer" className="btn btn-primary w-full sm:w-auto">
-                  {t('استفسر عن المنتج')}
-                </a>
-                {collection && (
-                  <Link to={`/collection/${collection.id}`} className="btn w-full border border-black/15 bg-black/[0.03] text-[#0f1f3d] hover:bg-black/[0.06] sm:w-auto">
-                    {t('كل منتجات القسم')}
-                  </Link>
-                )}
+                <button
+                  onClick={() => quote.add(product.id)}
+                  disabled={quote.has(product.id)}
+                  className={`btn w-full sm:w-auto ${quote.has(product.id) ? 'cursor-default border border-brand-strong/30 bg-brand/10 text-brand-strong' : 'btn-primary'}`}
+                >
+                  {quote.has(product.id) ? t('في قائمة عرض السعر ✓') : t('أضف إلى عرض السعر')}
+                </button>
+                <Link to="/quote" className="btn w-full border border-black/15 bg-black/[0.03] text-[#0f1f3d] hover:bg-black/[0.06] sm:w-auto">
+                  {t('اطلب عرض سعر')}{quote.count ? ` (${quote.count})` : ''}
+                </Link>
               </div>
 
               {/* المواصفات / الأبعاد / دليل التنظيف — تحت معلومات المنتج */}

@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom'
 import SocialIcons from './SocialIcons.jsx'
 import SearchOverlay from './SearchOverlay.jsx'
 import { useLang } from '../i18n.jsx'
+import { useQuote } from '../quote.jsx'
 
 const NAV = [
   { label: 'الرئيسية', to: '/' },
@@ -26,6 +27,7 @@ export default function Header() {
   const [search, setSearch] = useState(false)
   const { pathname } = useLocation()
   const { t, lang, toggle } = useLang()
+  const { count } = useQuote()
 
   const lastY = useRef(0)
   const ticking = useRef(false)
@@ -118,6 +120,21 @@ export default function Header() {
                 <path d="M21 21l-4-4" strokeLinecap="round" />
               </svg>
             </button>
+
+            {/* عرض السعر مع عدّاد */}
+            <Link to="/quote" aria-label={t('اطلب عرض سعر')} className="relative text-white/85 transition-colors hover:text-white">
+              <svg viewBox="0 0 24 24" className="h-[22px] w-[22px]" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M9 5h9l1.5 9H10.5L9 5z" />
+                <path d="M9 5 8 3H5" />
+                <circle cx="11" cy="19" r="1.4" fill="currentColor" stroke="none" />
+                <circle cx="17" cy="19" r="1.4" fill="currentColor" stroke="none" />
+              </svg>
+              {count > 0 && (
+                <span className="absolute -top-2 grid h-4 min-w-4 place-items-center rounded-full bg-brand px-1 text-[10px] font-bold text-white" style={{ insetInlineEnd: '-8px' }}>
+                  {count}
+                </span>
+              )}
+            </Link>
 
             {/* القائمة — جوال */}
             <button
