@@ -557,6 +557,7 @@ export const COLLECTIONS = [
     features: [{ ar: 'تحكّم دقيق بالتدفّق', en: 'Precise flow control' }, { ar: 'تشطيب أسود مطفي', en: 'Matte black finish' }, { ar: 'خامات مقاومة للصدأ', en: 'Rust-resistant materials' }],
     accent: '#2f6fd6', bg: '#e4f0ff', image: '/products/mixer-chrome.webp',
     cover: '/categories/cat-1.webp',
+    lifestyle: '/products/mixer-chrome-1.webp',
     types: [
       { id: 'curved', name: { ar: 'منحنى', en: 'Curved' } },
       { id: 'straight', name: { ar: 'مستقيم', en: 'Straight' } },
@@ -571,6 +572,7 @@ export const COLLECTIONS = [
     features: [{ ar: 'رؤوس قابلة للتوجيه', en: 'Adjustable heads' }, { ar: 'ضغط ماء متوازن', en: 'Balanced pressure' }, { ar: 'تركيب سهل', en: 'Easy installation' }],
     accent: '#2f6fd6', bg: '#afd2ff', image: '/products/shower-gold.webp',
     cover: '/categories/cat-3.webp',
+    lifestyle: '/categories/cat-3.webp',
     types: [
       { id: 'rain', name: { ar: 'مطري', en: 'Rain' } },
       { id: 'handheld', name: { ar: 'يدوي', en: 'Handheld' } },
@@ -585,6 +587,7 @@ export const COLLECTIONS = [
     features: [{ ar: 'مخرج مزدوج', en: 'Dual outlet' }, { ar: 'محوّل انسيابي', en: 'Smooth diverter' }, { ar: 'تصميم جداري أنيق', en: 'Elegant wall design' }],
     accent: '#2f6fd6', bg: '#e4f0ff', image: '/products/faucet-bath-black.webp',
     cover: '/categories/cat-4.webp',
+    lifestyle: '/products/collection-bath.webp',
     types: [
       { id: 'wall', name: { ar: 'جداري', en: 'Wall-mounted' } },
       { id: 'freestanding', name: { ar: 'حر قائم', en: 'Freestanding' } },
@@ -599,6 +602,7 @@ export const COLLECTIONS = [
     features: [{ ar: 'نفّاثات تدليك', en: 'Massage jets' }, { ar: 'إضاءة محيطة', en: 'Ambient lighting' }, { ar: 'تحكّم رقمي', en: 'Digital control' }],
     accent: '#2f6fd6', bg: '#d3e6ff', image: '/products/jacuzzi-white.webp',
     cover: '/categories/cat-6.webp',
+    lifestyle: '/categories/cat-6.webp',
     types: [
       { id: 'freestanding', name: { ar: 'حر قائم', en: 'Freestanding' } },
       { id: 'corner', name: { ar: 'زاوية', en: 'Corner' } },

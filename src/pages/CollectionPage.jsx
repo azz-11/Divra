@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useParams, Link, Navigate } from 'react-router-dom'
-import { ArrowUpLeft } from 'lucide-react'
 import { collectionOf, productsIn, FINISH } from '../productsData.js'
 import { useLang } from '../i18n.jsx'
 
@@ -55,6 +54,30 @@ export default function CollectionPage() {
         <p className="mx-auto mt-4 max-w-2xl text-text-dim">{tr(collection.intro)}</p>
       </section>
 
+      {/* لقطة واقعية 1:1 + المواصفات */}
+      <section className="bg-white px-6 py-14 md:py-20">
+        <div className="mx-auto grid max-w-6xl items-center gap-10 md:grid-cols-2 md:gap-14">
+          <div className="aspect-square w-full overflow-hidden bg-[#0d0d24]">
+            <img src={collection.lifestyle || collection.cover} alt={tr(collection.name)} loading="lazy" className="h-full w-full object-cover" />
+          </div>
+          <div>
+            <span className="mb-3 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-brand-strong">
+              <span className="h-px w-6 bg-brand-strong/40" />
+              {t('المواصفات')}
+            </span>
+            <h2 className="font-cairo text-2xl font-black leading-snug sm:text-3xl">{tr(collection.name)}</h2>
+            <ul className="mt-6 divide-y divide-line border-y border-line">
+              {collection.features.map((f, i) => (
+                <li key={i} className="flex items-center gap-3 py-3.5">
+                  <span className="font-cairo text-sm font-black text-brand-strong">{String(i + 1).padStart(2, '0')}</span>
+                  <span className="text-[15px] text-text">{tr(f)}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+
       {/* الأنواع */}
       {collection.types?.length > 0 && (
         <section className="px-6 py-12 md:py-14">
@@ -78,13 +101,13 @@ export default function CollectionPage() {
       )}
 
       {/* النتائج + قائمة التصنيف */}
-      <section id="collection-products" className="px-6 pb-20">
+      <section id="collection-products" className="bg-white px-6 pb-20 pt-6">
         <div className="mx-auto max-w-7xl">
           <div className="grid gap-8 lg:grid-cols-[240px_1fr]">
             {/* قائمة التصنيف (بنود) */}
-            <aside className="lg:sticky lg:top-24 lg:self-start">
-              <div className="mb-4 flex items-center justify-between">
-                <span className="font-cairo text-lg font-black">{t('تصنيف')}</span>
+            <aside className="rounded-2xl border border-line p-5 lg:sticky lg:top-24 lg:self-start">
+              <div className="flex items-center justify-between pb-1">
+                <span className="text-xs font-bold uppercase tracking-[0.2em] text-text">{t('تصنيف')}</span>
                 {hasFilters ? (
                   <button onClick={clearAll} className="text-xs font-bold text-brand-strong hover:underline">{t('مسح الفلاتر')}</button>
                 ) : null}
@@ -146,17 +169,14 @@ export default function CollectionPage() {
                   {t('لا نتائج مطابقة للفلاتر المختارة.')}
                 </div>
               ) : (
-                <div className="grid grid-cols-2 gap-4 sm:gap-5 xl:grid-cols-3">
+                <div className="grid grid-cols-2 gap-x-5 gap-y-8 sm:grid-cols-3 xl:grid-cols-4">
                   {filtered.map((p) => (
-                    <Link key={p.id} to={`/product/${p.id}`} className="group relative flex flex-col rounded-xl2 border border-line bg-white/70 p-4 text-start transition-all hover:-translate-y-1 hover:border-brand-strong hover:shadow-xl">
-                      <div className="relative mb-3 aspect-square w-full overflow-hidden rounded-lg bg-[#0d0d24]">
+                    <Link key={p.id} to={`/product/${p.id}`} className="group flex flex-col text-start">
+                      <div className="relative aspect-square w-full overflow-hidden bg-[#0d0d24]">
                         <img src={p.images[p.finishes[0]]} alt={tr(p.title)} loading="lazy" className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
                       </div>
-                      <span className="font-cairo text-sm font-bold text-text sm:text-base">{tr(p.title)}</span>
-                      <span className="mt-1 text-xs text-brand-strong">{tr(p.specs[0][1])}</span>
-                      <span className="absolute end-3 top-3 grid h-7 w-7 place-items-center rounded-full bg-white/80 text-brand-strong opacity-0 transition-all group-hover:opacity-100" style={{ insetInlineEnd: '0.75rem' }}>
-                        <ArrowUpLeft size={15} strokeWidth={2.5} className="ltr:-scale-x-100" />
-                      </span>
+                      <span className="mt-3 font-cairo text-sm font-bold text-text group-hover:text-brand-strong">{tr(p.title)}</span>
+                      <span className="mt-0.5 text-xs text-text-dimmer">{tr(p.specs[0][1])}</span>
                     </Link>
                   ))}
                 </div>
@@ -176,8 +196,8 @@ export default function CollectionPage() {
 
 function FilterGroup({ title, children }) {
   return (
-    <div className="border-t border-line py-4">
-      <div className="mb-3 font-cairo text-sm font-bold text-text">{title}</div>
+    <div className="border-t border-line pt-4 first:border-t-0">
+      <div className="mb-3 mt-4 text-xs font-bold uppercase tracking-wider text-text-dimmer first:mt-0">{title}</div>
       {children}
     </div>
   )
