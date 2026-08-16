@@ -9,6 +9,7 @@ import AboutPage from './pages/AboutPage.jsx'
 import ProductsIndex from './pages/ProductsIndex.jsx'
 import CollectionPage from './pages/CollectionPage.jsx'
 import ProductPage from './pages/ProductPage.jsx'
+import QuotePage from './pages/QuotePage.jsx'
 import useReducedMotion from './useReducedMotion.js'
 import { LanguageProvider } from './i18n.jsx'
 
@@ -34,6 +35,7 @@ export default function App() {
           <Route path="/products" element={<ProductsIndex />} />
           <Route path="/collection/:id" element={<CollectionPage reduced={reduced} />} />
           <Route path="/product/:id" element={<ProductPage reduced={reduced} />} />
+          <Route path="/quote" element={<QuotePage />} />
           <Route path="*" element={<Home reduced={reduced} />} />
         </Routes>
       </main>

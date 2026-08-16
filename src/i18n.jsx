@@ -7,6 +7,7 @@ const UI = {
   'من نحن': 'About',
   'المنتجات': 'Products',
   'تواصل معنا': 'Contact',
+  'اطلب عرض سعر': 'Request a Quote',
   'بحث': 'Search',
   'القائمة': 'Menu',
   // الهيرو

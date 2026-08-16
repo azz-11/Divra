@@ -8,6 +8,7 @@ const NAV = [
   { label: 'الرئيسية', to: '/' },
   { label: 'من نحن', to: '/about' },
   { label: 'المنتجات', to: '/products' },
+  { label: 'اطلب عرض سعر', to: '/quote' },
   { label: 'تواصل معنا', to: '/#contact' },
 ]
 
