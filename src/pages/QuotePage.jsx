@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { X, Minus, Plus } from 'lucide-react'
 import { collectionOf, FINISH } from '../productsData.js'
@@ -9,18 +9,32 @@ const PHONE = '966566906123'
 
 export default function QuotePage() {
   const { items, remove, inc, dec, clear } = useQuote()
-  const { t, tr } = useLang()
+  const { t, tr, lang } = useLang()
+  const [busy, setBusy] = useState(false)
 
   useEffect(() => { window.scrollTo(0, 0) }, [])
 
-  // رسالة واتساب تتضمّن المنتجات المختارة وكمياتها
-  const waHref = () => {
+  // نصّ واتساب (يُرفق ملف الطلب PDF يدوياً بعد تنزيله)
+  const waUrl = () => {
     const lines = items.map(({ product: p, qty }, i) => {
       const fin = FINISH[p.finishes[0]]
       return `${i + 1}. ${tr(p.title)}${fin ? ` — ${tr(fin.name)}` : ''} × ${qty}`
     })
-    const msg = `${t('مرحباً، أرغب بعرض سعر للمنتجات التالية:')}\n${lines.join('\n')}`
+    const msg = `${t('مرحباً، أرغب بعرض سعر للمنتجات التالية:')}\n${lines.join('\n')}\n\n${t('(مرفق ملف الطلب PDF)')}`
     return `https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`
+  }
+
+  // ينشئ ملف PDF لطلب الشراء ثم يفتح واتساب لإرفاقه
+  const sendOrder = async () => {
+    if (busy || !items.length) return
+    setBusy(true)
+    try {
+      const { generateOrderPdf } = await import('../orderPdf.js')
+      await generateOrderPdf(items, { tr, lang })
+      window.open(waUrl(), '_blank', 'noopener,noreferrer')
+    } finally {
+      setBusy(false)
+    }
   }
 
   return (
@@ -81,9 +95,10 @@ export default function QuotePage() {
 
             {/* إجراءات */}
             <div className="mt-8 flex flex-col items-center gap-4">
-              <a href={waHref()} target="_blank" rel="noopener noreferrer" className="btn btn-primary w-full max-w-sm">
-                {t('أرسل الاستفسار عبر واتساب')}
-              </a>
+              <button onClick={sendOrder} disabled={busy} className="btn btn-primary w-full max-w-sm disabled:opacity-60">
+                {busy ? t('يتم إنشاء الملف…') : t('أنشئ طلب الشراء وأرسله عبر واتساب')}
+              </button>
+              <p className="max-w-sm text-center text-xs text-white/45">{t('سيُنزَّل ملف الطلب PDF ثم يفتح واتساب لإرفاقه.')}</p>
               <div className="flex items-center gap-5 text-sm">
                 <Link to="/products" className="font-bold text-brand-light hover:text-white">{t('تصفّح المزيد')}</Link>
                 <button onClick={clear} className="text-white/50 hover:text-white/80">{t('تفريغ القائمة')}</button>

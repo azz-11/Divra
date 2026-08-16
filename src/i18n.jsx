@@ -83,6 +83,11 @@ const UI = {
     'Browse products and add what suits you to inquire about them all at once.',
   'المنتجات المختارة': 'Selected products',
   'أرسل الاستفسار عبر واتساب': 'Send inquiry via WhatsApp',
+  'أنشئ طلب الشراء وأرسله عبر واتساب': 'Create purchase order & send via WhatsApp',
+  'يتم إنشاء الملف…': 'Generating file…',
+  'سيُنزَّل ملف الطلب PDF ثم يفتح واتساب لإرفاقه.':
+    'The PDF order will download, then WhatsApp opens for you to attach it.',
+  '(مرفق ملف الطلب PDF)': '(PDF order attached)',
   'تفريغ القائمة': 'Clear list',
   'تصفّح المزيد': 'Browse more',
   'مرحباً، أرغب بعرض سعر للمنتجات التالية:': 'Hello, I’d like a quote for the following products:',
