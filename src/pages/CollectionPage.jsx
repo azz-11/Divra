@@ -68,8 +68,33 @@ export default function CollectionPage({ reduced }) {
         </div>
       </section>
 
+      {/* أنواع القسم */}
+      {collection.types?.length > 0 && (
+        <section className="bg-surface pb-12 pt-2 md:pb-16">
+          <div className="mx-auto max-w-6xl px-6">
+            <div className="mb-8 text-center">
+              <span className="text-sm font-bold uppercase tracking-widest text-brand-strong">{t('الأنواع')}</span>
+              <h2 className="mt-2 font-cairo text-2xl font-black sm:text-3xl">
+                {t('اختر النوع الذي يناسب')} <span className="text-gradient">{tr(collection.name)}</span>
+              </h2>
+            </div>
+            <div className="grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-4">
+              {collection.types.map((ty) => (
+                <a key={ty.id} href="#collection-products" className="group block">
+                  <div className="relative aspect-square overflow-hidden rounded-2xl border border-line bg-ink">
+                    <img src={ty.image || collection.cover} alt={tr(ty.name)} loading="lazy" className="absolute inset-0 h-full w-full object-cover opacity-90 transition-transform duration-500 group-hover:scale-105" />
+                    <span className="pointer-events-none absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(3,3,40,.1) 0%, rgba(3,3,40,.55) 100%)' }} />
+                    <span className="absolute inset-x-0 bottom-0 p-4 text-center font-cairo text-base font-bold text-white sm:text-lg">{tr(ty.name)}</span>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* منتجات القسم */}
-      <section className="bg-ink pb-8 pt-4">
+      <section id="collection-products" className="bg-ink pb-8 pt-4">
         <div className="mx-auto max-w-7xl px-6 pt-10 text-center">
           <span className="text-sm font-bold uppercase tracking-widest text-brand-strong">{t('منتجات القسم')}</span>
         </div>

@@ -116,6 +116,8 @@ const UI = {
   'عن': 'About',
   'منتجات القسم': 'Section products',
   'كل الأقسام': 'All categories',
+  'الأنواع': 'Types',
+  'اختر النوع الذي يناسب': 'Choose the type that suits',
   // اللغة
   'English': 'العربية',
 }
