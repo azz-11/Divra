@@ -45,8 +45,10 @@ export default function CollectionPage() {
 
   return (
     <div className="bg-white text-[#0f1f3d]">
-      {/* رأس نصّي — خلفية زرقاء سماوية */}
-      <section className="px-6 pb-12 pt-28 text-center md:pt-32" style={{ background: 'linear-gradient(180deg, #bcdcff 0%, #dcecff 60%, #ffffff 100%)' }}>
+      {/* تدرّج واحد متواصل: من العنوان حتى نهاية المواصفات */}
+      <div style={{ background: 'linear-gradient(180deg, #bcdcff 0%, #d6e8ff 35%, #eaf2fd 70%, #ffffff 100%)' }}>
+      {/* رأس نصّي */}
+      <section className="px-6 pb-12 pt-28 text-center md:pt-32">
         <span className="mb-3 inline-flex items-center gap-3 text-xs font-bold uppercase tracking-[0.25em] text-brand-strong">
           <span className="h-px w-8 bg-brand-strong/40" />
           {t('ديفرا')} · {t('المجموعة')}
@@ -56,8 +58,8 @@ export default function CollectionPage() {
         <p className="mx-auto mt-4 max-w-2xl text-[#4a5a72]">{tr(collection.intro)}</p>
       </section>
 
-      {/* لقطة واقعية 1:1 + المواصفات (مصغّرة) — خلفية متدرّجة فقط */}
-      <section className="relative overflow-hidden px-6 py-12 md:py-16" style={{ background: 'linear-gradient(180deg, #eef4fd 0%, #ffffff 100%)' }}>
+      {/* لقطة واقعية 1:1 + المواصفات (مصغّرة) */}
+      <section className="relative overflow-hidden px-6 py-12 md:py-16">
         <div className="relative z-10 mx-auto grid max-w-4xl items-center gap-8 md:grid-cols-2 md:gap-12">
           <div className="mx-auto aspect-square w-full max-w-xs overflow-hidden bg-[#0d0d24] md:max-w-none">
             <img src={collection.lifestyle || collection.cover} alt={tr(collection.name)} loading="lazy" className="h-full w-full object-cover" />
@@ -79,6 +81,7 @@ export default function CollectionPage() {
           </div>
         </div>
       </section>
+      </div>
 
       {/* الأنواع */}
       {collection.types?.length > 0 && (
