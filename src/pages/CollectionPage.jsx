@@ -1,82 +1,66 @@
-import { useEffect } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useParams, Link, Navigate } from 'react-router-dom'
-import ProductGridReveal from '../components/ProductGridReveal.jsx'
-import { collectionOf, productsIn } from '../productsData.js'
+import { ArrowUpLeft } from 'lucide-react'
+import { collectionOf, productsIn, FINISH } from '../productsData.js'
 import { useLang } from '../i18n.jsx'
 
-export default function CollectionPage({ reduced }) {
+// خامة المنتج من المواصفات (المفتاح العربي «الخامة»)
+const materialSpec = (p) => p.specs.find((s) => s[0]?.ar === 'الخامة')?.[1]
+
+export default function CollectionPage() {
   const { id } = useParams()
   const collection = collectionOf(id)
   const { t, tr } = useLang()
 
-  useEffect(() => { window.scrollTo(0, 0) }, [id])
+  const [fSel, setFSel] = useState(() => new Set())   // التشطيب/اللون
+  const [mSel, setMSel] = useState(() => new Set())   // الخامة
+  const [tSel, setTSel] = useState(() => new Set())   // النوع (placeholder حتى وسم المنتجات)
+
+  useEffect(() => { window.scrollTo(0, 0); setFSel(new Set()); setMSel(new Set()); setTSel(new Set()) }, [id])
+
+  const products = useMemo(() => (collection ? productsIn(id) : []), [id, collection])
+
+  // خيارات الفلاتر المشتقّة من المنتجات
+  const finishOpts = useMemo(() => [...new Set(products.flatMap((p) => p.finishes))], [products])
+  const materialOpts = useMemo(() => {
+    const m = new Map()
+    products.forEach((p) => { const v = materialSpec(p); if (v) m.set(v.ar, v) })
+    return [...m.values()]
+  }, [products])
+
+  const filtered = useMemo(() => products.filter((p) => {
+    const okFinish = fSel.size === 0 || p.finishes.some((f) => fSel.has(f))
+    const mat = materialSpec(p)
+    const okMat = mSel.size === 0 || (mat && mSel.has(mat.ar))
+    return okFinish && okMat
+  }), [products, fSel, mSel])
 
   if (!collection) return <Navigate to="/collection/mixers" replace />
 
-  const products = productsIn(id)
+  const accent = collection.accent
+  const toggle = (setter) => (key) => setter((s) => { const n = new Set(s); n.has(key) ? n.delete(key) : n.add(key); return n })
+  const clearAll = () => { setFSel(new Set()); setMSel(new Set()); setTSel(new Set()) }
+  const hasFilters = fSel.size || mSel.size || tSel.size
 
   return (
-    <div>
-      {/* هيرو القسم — صورة القسم الأساسية بملء الشاشة */}
-      <section className="relative flex min-h-[88vh] items-center justify-center overflow-hidden">
-        <img
-          src={collection.cover}
-          alt={tr(collection.name)}
-          className={`absolute inset-0 h-full w-full object-cover ${reduced ? '' : 'kenburns'}`}
-        />
-        <div
-          className="absolute inset-0"
-          style={{ background: 'linear-gradient(180deg, rgba(3,3,40,.6) 0%, rgba(3,3,40,.35) 40%, rgba(3,3,40,.85) 100%)' }}
-        />
-        <div className="relative z-10 mx-auto max-w-3xl px-6 pt-20 text-center">
-          <span className="mb-4 inline-flex items-center gap-3 text-xs font-bold uppercase tracking-[0.25em] text-brand-light">
-            <span className="h-px w-8 bg-white/30" />
-            {t('ديفرا')} · {t('المجموعة')}
-            <span className="h-px w-8 bg-white/30" />
-          </span>
-          <h1 className="font-cairo text-5xl font-black text-white sm:text-6xl md:text-7xl">{tr(collection.name)}</h1>
-          <p className="mx-auto mt-5 max-w-xl text-lg text-white/85 sm:text-xl">{tr(collection.intro)}</p>
-        </div>
-        {/* مؤشّر تمرير */}
-        <a href="#collection-body" className="absolute start-0 end-0 bottom-8 z-10 mx-auto flex w-full flex-col items-center gap-2 text-white/70" style={{ insetInline: 0 }} aria-label={t('مرّر للأسفل')}>
-          <span className="text-xs">{t('مرّر للأسفل')}</span>
-          <span className="flex h-9 w-5 items-start justify-center rounded-full border border-white/30 p-1">
-            <span className="scroll-dot h-1.5 w-1.5 rounded-full bg-brand-light" />
-          </span>
-        </a>
+    <div className="bg-surface">
+      {/* رأس نصّي — بلا صورة كبيرة */}
+      <section className="border-b border-line px-6 pb-10 pt-28 text-center md:pt-32">
+        <span className="mb-3 inline-flex items-center gap-3 text-xs font-bold uppercase tracking-[0.25em] text-brand-strong">
+          <span className="h-px w-8 bg-brand-strong/40" />
+          {t('ديفرا')} · {t('المجموعة')}
+          <span className="h-px w-8 bg-brand-strong/40" />
+        </span>
+        <h1 className="font-cairo text-4xl font-black sm:text-5xl md:text-6xl">{tr(collection.name)}</h1>
+        <p className="mx-auto mt-4 max-w-2xl text-text-dim">{tr(collection.intro)}</p>
       </section>
 
-      {/* وصف فاخر للقسم */}
-      <section id="collection-body" className="relative overflow-hidden bg-surface py-20 md:py-28">
-        <div className="mx-auto max-w-4xl px-6 text-center">
-          <h2 className="font-cairo text-3xl font-black leading-snug sm:text-4xl">
-            {t('عن')} <span className="text-gradient">{tr(collection.name)}</span>
-          </h2>
-          <p className="mx-auto mt-5 max-w-2xl text-lg text-text-dim">{tr(collection.intro)}</p>
-
-          {/* المميزات */}
-          <div className="mt-12 grid gap-5 sm:grid-cols-3">
-            {collection.features.map((f, i) => (
-              <div key={i} className="glass rounded-xl2 p-6 text-center">
-                <div className="mx-auto mb-3 grid h-11 w-11 place-items-center rounded-full bg-brand/12 font-cairo text-lg font-black text-brand-strong">
-                  {String(i + 1).padStart(2, '0')}
-                </div>
-                <p className="font-cairo font-bold text-text">{tr(f)}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* أنواع القسم */}
+      {/* الأنواع */}
       {collection.types?.length > 0 && (
-        <section className="bg-surface pb-12 pt-2 md:pb-16">
-          <div className="mx-auto max-w-6xl px-6">
-            <div className="mb-8 text-center">
+        <section className="px-6 py-12 md:py-14">
+          <div className="mx-auto max-w-6xl">
+            <div className="mb-7 text-center">
               <span className="text-sm font-bold uppercase tracking-widest text-brand-strong">{t('الأنواع')}</span>
-              <h2 className="mt-2 font-cairo text-2xl font-black sm:text-3xl">
-                {t('اختر النوع الذي يناسب')} <span className="text-gradient">{tr(collection.name)}</span>
-              </h2>
             </div>
             <div className="grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-4">
               {collection.types.map((ty) => (
@@ -93,27 +77,119 @@ export default function CollectionPage({ reduced }) {
         </section>
       )}
 
-      {/* منتجات القسم */}
-      <section id="collection-products" className="bg-ink pb-8 pt-4">
-        <div className="mx-auto max-w-7xl px-6 pt-10 text-center">
-          <span className="text-sm font-bold uppercase tracking-widest text-brand-strong">{t('منتجات القسم')}</span>
-        </div>
-        {products.length > 0 ? (
-          <ProductGridReveal products={products} accent={collection.accent} reduced={reduced} />
-        ) : (
-          <div className="glass mx-auto my-16 max-w-xl rounded-xl2 p-10 text-center">
-            <p className="font-cairo text-xl font-bold text-brand-strong">{t('قريباً')}</p>
-            <p className="mt-2 text-text-dim">
-              {t('منتجات قسم')} «{tr(collection.name)}» {t('في طريقها إليك — تابعنا لأحدث الإضافات.')}
-            </p>
-          </div>
-        )}
-      </section>
+      {/* النتائج + قائمة التصنيف */}
+      <section id="collection-products" className="px-6 pb-20">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid gap-8 lg:grid-cols-[240px_1fr]">
+            {/* قائمة التصنيف (بنود) */}
+            <aside className="lg:sticky lg:top-24 lg:self-start">
+              <div className="mb-4 flex items-center justify-between">
+                <span className="font-cairo text-lg font-black">{t('تصنيف')}</span>
+                {hasFilters ? (
+                  <button onClick={clearAll} className="text-xs font-bold text-brand-strong hover:underline">{t('مسح الفلاتر')}</button>
+                ) : null}
+              </div>
 
-      {/* رجوع */}
-      <div className="bg-ink pb-20 text-center">
-        <Link to="/products" className="btn btn-ghost">{t('كل الأقسام')}</Link>
-      </div>
+              {/* النوع */}
+              {collection.types?.length > 0 && (
+                <FilterGroup title={t('النوع')}>
+                  <div className="flex flex-wrap gap-2">
+                    {collection.types.map((ty) => (
+                      <Pill key={ty.id} active={tSel.has(ty.id)} onClick={() => toggle(setTSel)(ty.id)}>{tr(ty.name)}</Pill>
+                    ))}
+                  </div>
+                </FilterGroup>
+              )}
+
+              {/* اللون / التشطيب */}
+              {finishOpts.length > 0 && (
+                <FilterGroup title={t('اللون')}>
+                  <div className="flex flex-wrap gap-2.5">
+                    {finishOpts.map((f) => (
+                      <button
+                        key={f}
+                        onClick={() => toggle(setFSel)(f)}
+                        aria-label={tr(FINISH[f]?.name)}
+                        title={tr(FINISH[f]?.name)}
+                        className={`h-8 w-8 rounded-full border-2 transition-all ${fSel.has(f) ? 'border-brand-strong ring-2 ring-brand/30' : 'border-line hover:border-brand-strong/50'}`}
+                        style={{ background: FINISH[f]?.swatch }}
+                      />
+                    ))}
+                  </div>
+                </FilterGroup>
+              )}
+
+              {/* الخامة */}
+              {materialOpts.length > 0 && (
+                <FilterGroup title={t('الخامة')}>
+                  <div className="flex flex-col gap-2">
+                    {materialOpts.map((m) => (
+                      <label key={m.ar} className="flex cursor-pointer items-center gap-2 text-sm text-text-dim">
+                        <input type="checkbox" checked={mSel.has(m.ar)} onChange={() => toggle(setMSel)(m.ar)} className="accent-[#2f6fd6]" />
+                        {tr(m)}
+                      </label>
+                    ))}
+                  </div>
+                </FilterGroup>
+              )}
+            </aside>
+
+            {/* النتائج */}
+            <div>
+              <div className="mb-5 flex items-baseline gap-2 border-b border-line pb-3">
+                <span className="font-cairo text-lg font-black">{t('النتائج')}</span>
+                <span className="text-sm text-text-dimmer">({filtered.length})</span>
+              </div>
+
+              {filtered.length === 0 ? (
+                <div className="rounded-2xl border border-line bg-white/60 p-10 text-center text-text-dim">
+                  {t('لا نتائج مطابقة للفلاتر المختارة.')}
+                </div>
+              ) : (
+                <div className="grid grid-cols-2 gap-4 sm:gap-5 xl:grid-cols-3">
+                  {filtered.map((p) => (
+                    <Link key={p.id} to={`/product/${p.id}`} className="group relative flex flex-col rounded-xl2 border border-line bg-white/70 p-4 text-start transition-all hover:-translate-y-1 hover:border-brand-strong hover:shadow-xl">
+                      <div className="relative mb-3 aspect-square w-full overflow-hidden rounded-lg bg-[#0d0d24]">
+                        <img src={p.images[p.finishes[0]]} alt={tr(p.title)} loading="lazy" className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                      </div>
+                      <span className="font-cairo text-sm font-bold text-text sm:text-base">{tr(p.title)}</span>
+                      <span className="mt-1 text-xs text-brand-strong">{tr(p.specs[0][1])}</span>
+                      <span className="absolute end-3 top-3 grid h-7 w-7 place-items-center rounded-full bg-white/80 text-brand-strong opacity-0 transition-all group-hover:opacity-100" style={{ insetInlineEnd: '0.75rem' }}>
+                        <ArrowUpLeft size={15} strokeWidth={2.5} className="ltr:-scale-x-100" />
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* رجوع */}
+          <div className="mt-14 text-center">
+            <Link to="/products" className="btn btn-ghost">{t('كل الأقسام')}</Link>
+          </div>
+        </div>
+      </section>
     </div>
+  )
+}
+
+function FilterGroup({ title, children }) {
+  return (
+    <div className="border-t border-line py-4">
+      <div className="mb-3 font-cairo text-sm font-bold text-text">{title}</div>
+      {children}
+    </div>
+  )
+}
+
+function Pill({ active, onClick, children }) {
+  return (
+    <button
+      onClick={onClick}
+      className={`rounded-full border px-3 py-1.5 text-xs font-bold transition-all ${active ? 'border-brand-strong bg-brand/10 text-brand-strong' : 'border-line text-text-dim hover:border-brand-strong/50'}`}
+    >
+      {children}
+    </button>
   )
 }

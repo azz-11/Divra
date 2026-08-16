@@ -118,6 +118,13 @@ const UI = {
   'كل الأقسام': 'All categories',
   'الأنواع': 'Types',
   'اختر النوع الذي يناسب': 'Choose the type that suits',
+  'تصنيف': 'Filter',
+  'النوع': 'Type',
+  'اللون': 'Color',
+  'الخامة': 'Material',
+  'النتائج': 'Results',
+  'مسح الفلاتر': 'Clear filters',
+  'لا نتائج مطابقة للفلاتر المختارة.': 'No results match the selected filters.',
   // اللغة
   'English': 'العربية',
 }
