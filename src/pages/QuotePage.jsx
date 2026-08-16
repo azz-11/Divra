@@ -21,6 +21,13 @@ function Field({ label, required, error, children }) {
 const inputClass = (hasError) =>
   `w-full rounded-xl2 border ${hasError ? 'border-[#ff8a8a]/60' : 'border-line'} bg-white/5 px-4 py-3 text-text placeholder:text-text-dimmer outline-none transition-colors focus:border-brand-strong`
 
+// المتصفح يرسم قائمة <select> المنسدلة بألوانه الافتراضية (فاتحة) بغضّ النظر عن
+// كلاسات Tailwind، فيصير التباين ضعيفاً على الثيم الغامق. color-scheme يخبر
+// المتصفح يرسمها بألوان داكنة متّسقة، ونضيف خلفية صريحة على كل <option> لضمان
+// التباين في كل المتصفحات.
+const selectStyle = { colorScheme: 'dark' }
+const optionStyle = { backgroundColor: '#0b0c2a', color: '#f4f4fb' }
+
 export default function QuotePage() {
   useEffect(() => { window.scrollTo(0, 0) }, [])
   const [form, setForm] = useState(emptyForm)
@@ -112,19 +119,19 @@ export default function QuotePage() {
             </Field>
 
             <Field label="نوع المنتج / الفئة" required error={errors.category}>
-              <select value={form.category} onChange={update('category')} className={inputClass(errors.category)}>
-                <option value="" disabled>اختر الفئة المطلوبة</option>
+              <select value={form.category} onChange={update('category')} className={inputClass(errors.category)} style={selectStyle}>
+                <option value="" disabled style={optionStyle}>اختر الفئة المطلوبة</option>
                 {COLLECTIONS.map((c) => (
-                  <option key={c.id} value={c.id}>{c.name.ar}</option>
+                  <option key={c.id} value={c.id} style={optionStyle}>{c.name.ar}</option>
                 ))}
               </select>
             </Field>
 
             <Field label="حجم المشروع">
-              <select value={form.projectSize} onChange={update('projectSize')} className={inputClass(false)}>
-                <option value="">اختر (اختياري)</option>
+              <select value={form.projectSize} onChange={update('projectSize')} className={inputClass(false)} style={selectStyle}>
+                <option value="" style={optionStyle}>اختر (اختياري)</option>
                 {PROJECT_SIZES.map((s) => (
-                  <option key={s} value={s}>{s}</option>
+                  <option key={s} value={s} style={optionStyle}>{s}</option>
                 ))}
               </select>
             </Field>
