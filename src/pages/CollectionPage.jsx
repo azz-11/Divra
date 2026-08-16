@@ -45,8 +45,8 @@ export default function CollectionPage() {
 
   return (
     <div className="bg-white text-[#0f1f3d]">
-      {/* رأس نصّي */}
-      <section className="border-b border-black/10 px-6 pb-10 pt-28 text-center md:pt-32">
+      {/* رأس نصّي — خلفية زرقاء سماوية */}
+      <section className="px-6 pb-12 pt-28 text-center md:pt-32" style={{ background: 'linear-gradient(180deg, #bcdcff 0%, #dcecff 60%, #ffffff 100%)' }}>
         <span className="mb-3 inline-flex items-center gap-3 text-xs font-bold uppercase tracking-[0.25em] text-brand-strong">
           <span className="h-px w-8 bg-brand-strong/40" />
           {t('ديفرا')} · {t('المجموعة')}
@@ -56,21 +56,8 @@ export default function CollectionPage() {
         <p className="mx-auto mt-4 max-w-2xl text-[#4a5a72]">{tr(collection.intro)}</p>
       </section>
 
-      {/* لقطة واقعية 1:1 + المواصفات (مصغّرة) — بخلفية أنيقة */}
-      <section className="relative overflow-hidden px-6 py-12 md:py-16" style={{ background: 'linear-gradient(180deg, #f4f7fc 0%, #ffffff 100%)' }}>
-        {/* لمسة زخرفية خفيفة */}
-        <div
-          className="pointer-events-none absolute inset-0"
-          style={{
-            backgroundImage: 'url(/pattern-wave.webp)',
-            backgroundRepeat: 'repeat',
-            backgroundSize: '620px auto',
-            opacity: 0.04,
-            maskImage: 'linear-gradient(180deg, #000 0%, transparent 85%)',
-            WebkitMaskImage: 'linear-gradient(180deg, #000 0%, transparent 85%)',
-          }}
-        />
-        <span className="pointer-events-none absolute -top-20 h-72 w-72 rounded-full blur-3xl" style={{ insetInlineEnd: '-4%', background: 'radial-gradient(circle, rgba(79,143,240,.12), transparent 70%)' }} />
+      {/* لقطة واقعية 1:1 + المواصفات (مصغّرة) — خلفية متدرّجة فقط */}
+      <section className="relative overflow-hidden px-6 py-12 md:py-16" style={{ background: 'linear-gradient(180deg, #eef4fd 0%, #ffffff 100%)' }}>
         <div className="relative z-10 mx-auto grid max-w-4xl items-center gap-8 md:grid-cols-2 md:gap-12">
           <div className="mx-auto aspect-square w-full max-w-xs overflow-hidden bg-[#0d0d24] md:max-w-none">
             <img src={collection.lifestyle || collection.cover} alt={tr(collection.name)} loading="lazy" className="h-full w-full object-cover" />
