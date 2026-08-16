@@ -52,13 +52,26 @@ export default function CollectionPage() {
           {t('ديفرا')} · {t('المجموعة')}
           <span className="h-px w-8 bg-brand-strong/40" />
         </span>
-        <h1 className="font-cairo text-4xl font-black sm:text-5xl md:text-6xl">{tr(collection.name)}</h1>
+        <h1 className="font-cairo text-4xl font-black text-[#0a1430] sm:text-5xl md:text-6xl">{tr(collection.name)}</h1>
         <p className="mx-auto mt-4 max-w-2xl text-[#4a5a72]">{tr(collection.intro)}</p>
       </section>
 
-      {/* لقطة واقعية 1:1 + المواصفات (مصغّرة) */}
-      <section className="px-6 py-10 md:py-14">
-        <div className="mx-auto grid max-w-4xl items-center gap-8 md:grid-cols-2 md:gap-12">
+      {/* لقطة واقعية 1:1 + المواصفات (مصغّرة) — بخلفية أنيقة */}
+      <section className="relative overflow-hidden px-6 py-12 md:py-16" style={{ background: 'linear-gradient(180deg, #f4f7fc 0%, #ffffff 100%)' }}>
+        {/* لمسة زخرفية خفيفة */}
+        <div
+          className="pointer-events-none absolute inset-0"
+          style={{
+            backgroundImage: 'url(/pattern-wave.webp)',
+            backgroundRepeat: 'repeat',
+            backgroundSize: '620px auto',
+            opacity: 0.04,
+            maskImage: 'linear-gradient(180deg, #000 0%, transparent 85%)',
+            WebkitMaskImage: 'linear-gradient(180deg, #000 0%, transparent 85%)',
+          }}
+        />
+        <span className="pointer-events-none absolute -top-20 h-72 w-72 rounded-full blur-3xl" style={{ insetInlineEnd: '-4%', background: 'radial-gradient(circle, rgba(79,143,240,.12), transparent 70%)' }} />
+        <div className="relative z-10 mx-auto grid max-w-4xl items-center gap-8 md:grid-cols-2 md:gap-12">
           <div className="mx-auto aspect-square w-full max-w-xs overflow-hidden bg-[#0d0d24] md:max-w-none">
             <img src={collection.lifestyle || collection.cover} alt={tr(collection.name)} loading="lazy" className="h-full w-full object-cover" />
           </div>
@@ -67,7 +80,7 @@ export default function CollectionPage() {
               <span className="h-px w-6 bg-brand-strong/40" />
               {t('المواصفات')}
             </span>
-            <h2 className="font-cairo text-xl font-black leading-snug sm:text-2xl">{tr(collection.name)}</h2>
+            <h2 className="font-cairo text-xl font-black leading-snug text-[#0a1430] sm:text-2xl">{tr(collection.name)}</h2>
             <ul className="mt-4 divide-y divide-black/10 border-y border-black/10">
               {collection.features.map((f, i) => (
                 <li key={i} className="flex items-center gap-3 py-3">
