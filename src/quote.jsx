@@ -4,28 +4,47 @@ import { productOf } from './productsData.js'
 const QuoteContext = createContext(null)
 const KEY = 'divra_quote'
 
+// إدخالات على شكل { id, qty }؛ مع دعم ترحيل التخزين القديم (مصفوفة معرّفات)
+function load() {
+  try {
+    const raw = JSON.parse(localStorage.getItem(KEY)) || []
+    return raw
+      .map((e) => (typeof e === 'string' ? { id: e, qty: 1 } : { id: e.id, qty: Math.max(1, e.qty || 1) }))
+      .filter((e) => e.id)
+  } catch {
+    return []
+  }
+}
+
 export function QuoteProvider({ children }) {
-  const [ids, setIds] = useState(() => {
-    try { return JSON.parse(localStorage.getItem(KEY)) || [] } catch { return [] }
-  })
+  const [entries, setEntries] = useState(load)
 
   useEffect(() => {
-    try { localStorage.setItem(KEY, JSON.stringify(ids)) } catch {}
-  }, [ids])
+    try { localStorage.setItem(KEY, JSON.stringify(entries)) } catch {}
+  }, [entries])
 
   const api = useMemo(() => {
-    const has = (id) => ids.includes(id)
+    const has = (id) => entries.some((e) => e.id === id)
+    const qtyOf = (id) => entries.find((e) => e.id === id)?.qty || 0
+    const setQty = (id, n) =>
+      setEntries((l) =>
+        n <= 0 ? l.filter((e) => e.id !== id) : l.map((e) => (e.id === id ? { ...e, qty: n } : e)),
+      )
     return {
-      ids,
-      items: ids.map(productOf).filter(Boolean),
-      count: ids.length,
+      entries,
+      items: entries.map((e) => ({ product: productOf(e.id), qty: e.qty })).filter((x) => x.product),
+      count: entries.length,
+      totalQty: entries.reduce((s, e) => s + e.qty, 0),
       has,
-      add: (id) => setIds((l) => (l.includes(id) ? l : [...l, id])),
-      remove: (id) => setIds((l) => l.filter((x) => x !== id)),
-      toggle: (id) => setIds((l) => (l.includes(id) ? l.filter((x) => x !== id) : [...l, id])),
-      clear: () => setIds([]),
+      qtyOf,
+      add: (id) => setEntries((l) => (l.some((e) => e.id === id) ? l : [...l, { id, qty: 1 }])),
+      remove: (id) => setEntries((l) => l.filter((e) => e.id !== id)),
+      setQty,
+      inc: (id) => setQty(id, qtyOf(id) + 1),
+      dec: (id) => setQty(id, qtyOf(id) - 1),
+      clear: () => setEntries([]),
     }
-  }, [ids])
+  }, [entries])
 
   return <QuoteContext.Provider value={api}>{children}</QuoteContext.Provider>
 }

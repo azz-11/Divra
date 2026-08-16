@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { X } from 'lucide-react'
+import { X, Minus, Plus } from 'lucide-react'
 import { collectionOf, FINISH } from '../productsData.js'
 import { useQuote } from '../quote.jsx'
 import { useLang } from '../i18n.jsx'
@@ -8,16 +8,16 @@ import { useLang } from '../i18n.jsx'
 const PHONE = '966566906123'
 
 export default function QuotePage() {
-  const { items, remove, clear } = useQuote()
+  const { items, remove, inc, dec, clear } = useQuote()
   const { t, tr } = useLang()
 
   useEffect(() => { window.scrollTo(0, 0) }, [])
 
-  // رسالة واتساب تتضمّن المنتجات المختارة
+  // رسالة واتساب تتضمّن المنتجات المختارة وكمياتها
   const waHref = () => {
-    const lines = items.map((p, i) => {
+    const lines = items.map(({ product: p, qty }, i) => {
       const fin = FINISH[p.finishes[0]]
-      return `${i + 1}. ${tr(p.title)}${fin ? ` — ${tr(fin.name)}` : ''}`
+      return `${i + 1}. ${tr(p.title)}${fin ? ` — ${tr(fin.name)}` : ''} × ${qty}`
     })
     const msg = `${t('مرحباً، أرغب بعرض سعر للمنتجات التالية:')}\n${lines.join('\n')}`
     return `https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`
@@ -48,7 +48,7 @@ export default function QuotePage() {
           <>
             {/* قائمة المنتجات المختارة */}
             <ul className="divide-y divide-white/[0.08] overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04]">
-              {items.map((p) => (
+              {items.map(({ product: p, qty }) => (
                 <li key={p.id} className="flex items-center gap-4 p-4">
                   <Link to={`/product/${p.id}`} className="relative h-20 w-20 shrink-0 overflow-hidden rounded-xl bg-[#0d0d24]">
                     <img src={p.images[p.finishes[0]]} alt={tr(p.title)} className="absolute inset-0 h-full w-full object-cover" />
@@ -57,11 +57,21 @@ export default function QuotePage() {
                     <Link to={`/product/${p.id}`} className="font-cairo text-base font-bold text-white hover:text-brand-light">{tr(p.title)}</Link>
                     <div className="mt-0.5 text-xs text-brand-light">{tr(collectionOf(p.collection)?.name)}</div>
                     <div className="mt-0.5 text-xs text-white/50">{tr(FINISH[p.finishes[0]]?.name)}</div>
+                    {/* عدّاد الكمية */}
+                    <div className="mt-2 inline-flex items-center gap-3 rounded-full border border-white/15 px-1.5 py-1">
+                      <button onClick={() => dec(p.id)} aria-label="-" className="grid h-6 w-6 place-items-center rounded-full text-white/70 transition-colors hover:bg-white/10 hover:text-white">
+                        <Minus size={14} strokeWidth={2.5} />
+                      </button>
+                      <span className="min-w-5 text-center font-cairo text-sm font-bold text-white">{qty}</span>
+                      <button onClick={() => inc(p.id)} aria-label="+" className="grid h-6 w-6 place-items-center rounded-full text-white/70 transition-colors hover:bg-white/10 hover:text-white">
+                        <Plus size={14} strokeWidth={2.5} />
+                      </button>
+                    </div>
                   </div>
                   <button
                     onClick={() => remove(p.id)}
                     aria-label={t('إزالة')}
-                    className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-white/15 text-white/70 transition-colors hover:border-white/50 hover:text-white"
+                    className="grid h-9 w-9 shrink-0 place-items-center self-start rounded-full border border-white/15 text-white/70 transition-colors hover:border-white/50 hover:text-white"
                   >
                     <X size={16} strokeWidth={2.25} />
                   </button>
