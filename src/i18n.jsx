@@ -125,6 +125,17 @@ const UI = {
   'النتائج': 'Results',
   'مسح الفلاتر': 'Clear filters',
   'لا نتائج مطابقة للفلاتر المختارة.': 'No results match the selected filters.',
+  'اكتشف منتجات ذات صلة': 'Discover related products',
+  'الأكثر رواجاً': 'Most popular',
+  'رائج': 'Popular',
+  'اعثر على الأنسب لحمّامك': 'Find the best fit for your bathroom',
+  'استكشف الأشكال والتشطيبات وخيارات التركيب لتختار ما يُكمّل تصميم حمّامك ويرتقي بتجربتك اليومية.':
+    'Explore shapes, finishes and installation options to choose what complements your bathroom design and elevates your daily experience.',
+  'الأنواع وخيارات التركيب': 'Types & installation options',
+  'تشطيبات متعددة: كروم، أسود، ذهبي ورمادي.': 'Multiple finishes: chrome, black, gold and gray.',
+  'تركيب جداري أو على المغسلة حسب الطراز.': 'Wall or basin mounting depending on the model.',
+  'خامات نحاسية مقاومة للصدأ بضمان 5 سنوات.': 'Rust-resistant brass materials with a 5-year warranty.',
+  'عرض المزيد': 'View more',
   // اللغة
   'English': 'العربية',
 }
