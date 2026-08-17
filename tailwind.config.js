@@ -19,8 +19,8 @@ export default {
         line: 'var(--line)',
       },
       fontFamily: {
-        cairo: ['Cairo', 'sans-serif'],
-        tajawal: ['Cairo', 'sans-serif'],
+        cairo: ['Dima Naskh Arabic', 'Cairo', 'sans-serif'],
+        tajawal: ['Dima Naskh Arabic', 'Cairo', 'sans-serif'],
       },
       borderRadius: {
         xl2: '22px',
