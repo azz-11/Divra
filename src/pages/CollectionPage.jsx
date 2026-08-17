@@ -83,28 +83,6 @@ export default function CollectionPage() {
       </section>
       </div>
 
-      {/* الأنواع */}
-      {collection.types?.length > 0 && (
-        <section className="px-6 pb-4 pt-4 md:pb-6">
-          <div className="mx-auto max-w-6xl">
-            <div className="mb-7 text-center">
-              <span className="text-sm font-bold uppercase tracking-widest text-brand-strong">{t('الأنواع')}</span>
-            </div>
-            <div className="grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-4">
-              {collection.types.map((ty) => (
-                <a key={ty.id} href="#collection-products" className="group block">
-                  <div className="relative aspect-square overflow-hidden bg-[#0d0d24]">
-                    <img src={ty.image || collection.cover} alt={tr(ty.name)} loading="lazy" className="absolute inset-0 h-full w-full object-cover opacity-90 transition-transform duration-500 group-hover:scale-105" />
-                    <span className="pointer-events-none absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(3,3,40,.1) 0%, rgba(3,3,40,.55) 100%)' }} />
-                    <span className="absolute inset-x-0 bottom-0 p-4 text-center font-cairo text-base font-bold text-white sm:text-lg">{tr(ty.name)}</span>
-                  </div>
-                </a>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
       {/* النتائج + قائمة التصنيف */}
       <section id="collection-products" className="px-6 pb-20 pt-10">
         <div className="mx-auto max-w-7xl">
