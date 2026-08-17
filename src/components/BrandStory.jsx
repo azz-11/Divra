@@ -9,6 +9,15 @@ const FADE = 750 // مدة الانتقال (crossfade)
 // شرائح حكاية العلامة — فيديوهات الحكاية
 const STORY = [
   {
+    video: '/video/story-5',
+    tag: { ar: 'حكايتنا', en: 'Our story' },
+    title: { ar: 'ديفرا... حيث تبدأ التفاصيل الفاخرة', en: 'Divra… where luxury details begin' },
+    text: {
+      ar: 'لحظاتٌ يومية تتحوّل إلى تجربة استثنائية بلمسة ديفرا.',
+      en: 'Everyday moments transformed into an exceptional experience with a Divra touch.',
+    },
+  },
+  {
     video: '/video/story-1',
     tag: { ar: 'حكايتنا', en: 'Our story' },
     title: { ar: 'كل قطرة تبدأ بفكرة', en: 'Every drop begins with an idea' },
