@@ -27,15 +27,6 @@ const STORY = [
     },
   },
   {
-    video: '/video/story-2',
-    tag: { ar: 'الحِرفة', en: 'Craft' },
-    title: { ar: 'نَنحت المعدن كما تُكتب القصيدة', en: 'We sculpt metal the way a poem is written' },
-    text: {
-      ar: 'خطوطٌ انسيابية ودقّةٌ لا تُهادن، لأن ما تلمسه كل يوم يستحق أن يكون استثنائياً.',
-      en: 'Flowing lines and uncompromising precision — because what you touch every day deserves to be exceptional.',
-    },
-  },
-  {
     video: '/video/story-3',
     tag: { ar: 'التصميم', en: 'Design' },
     title: { ar: 'الجمال في أبسط تفصيل', en: 'Beauty in the simplest detail' },
