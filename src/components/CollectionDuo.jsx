@@ -5,7 +5,7 @@ import { useLang } from '../i18n.jsx'
 
 // قسمان من المنتجات كصورتين أنيقتين تقودان لصفحتيهما
 export default function CollectionDuo({ ids = [] }) {
-  const { tr, lp } = useLang()
+  const { tr } = useLang()
   const cols = ids.map(collectionOf).filter(Boolean)
   if (!cols.length) return null
 
@@ -14,7 +14,7 @@ export default function CollectionDuo({ ids = [] }) {
       {/* هوامش جانبية أوسع من الأطراف، وفجوة أصغر بين الصور */}
       <div className="grid w-full grid-cols-1 gap-6 px-6 sm:grid-cols-2 sm:px-32 lg:px-52">
         {cols.map((c, i) => (
-          <Link key={i} to={lp(`/collection/${c.id}`)} className="group relative block aspect-[4/3] overflow-hidden">
+          <Link key={i} to={`/collection/${c.id}`} className="group relative block aspect-[4/3] overflow-hidden">
             <img
               src={c.cover}
               alt={tr(c.name)}

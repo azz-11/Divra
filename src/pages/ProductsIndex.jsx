@@ -3,21 +3,13 @@ import { Link } from 'react-router-dom'
 import { ArrowUpLeft } from 'lucide-react'
 import { COLLECTIONS } from '../productsData.js'
 import { useLang } from '../i18n.jsx'
-import Seo from '../components/Seo.jsx'
 
 export default function ProductsIndex() {
-  const { t, tr, lp } = useLang()
+  const { t, tr } = useLang()
   useEffect(() => { window.scrollTo(0, 0) }, [])
 
   return (
     <section className="relative min-h-screen w-full overflow-hidden bg-[#0a0a2e]">
-      <Seo
-        title={{ ar: 'المنتجات', en: 'Products' }}
-        description={{
-          ar: 'تصفّح تشكيلة ديفرا من الخلاطات والمروش والبانيو والجاكوزي — أدوات صحية فاخرة بتصميم نحتي راقٍ.',
-          en: 'Browse Divra’s range of mixers, sprays, baths and jacuzzis — luxury sanitary ware with a refined sculptural design.',
-        }}
-      />
       {/* خلفية فيديو لوب معتمة */}
       <video className="absolute inset-0 h-full w-full object-cover" autoPlay muted loop playsInline preload="auto">
         <source src="/video/story-1.webm" type="video/webm" />
@@ -39,7 +31,7 @@ export default function ProductsIndex() {
         {/* شبكة الأقسام — بطاقات صور 3:4 (أصغر قليلاً) */}
         <div className="mx-auto grid max-w-5xl grid-cols-2 gap-4 sm:gap-5 md:grid-cols-3">
           {COLLECTIONS.map((c) => (
-            <Link key={c.id} to={lp(`/collection/${c.id}`)} className="group flex flex-col items-center">
+            <Link key={c.id} to={`/collection/${c.id}`} className="group flex flex-col items-center">
               <div className="relative aspect-[3/4] w-full overflow-hidden rounded-2xl border border-white/15 shadow-[0_18px_50px_-18px_rgba(0,0,0,.7)] transition-all duration-500 group-hover:-translate-y-1.5 group-hover:border-brand-light/70 group-hover:shadow-[0_26px_60px_-16px_rgba(79,143,240,.55)]">
                 <img
                   src={c.cover}

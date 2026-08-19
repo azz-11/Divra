@@ -2,7 +2,6 @@ import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useLang } from '../i18n.jsx'
-import { PRODUCTS } from '../productsData.js'
 
 const FEATURES = [
   {
@@ -30,7 +29,7 @@ const FEATURES = [
 
 const STATS = [
   { value: '15+', label: 'عاماً من الخبرة' },
-  { value: String(PRODUCTS.length), label: 'قطع منتقاة' },
+  { value: '4', label: 'قطع منتقاة' },
 ]
 
 export default function About({ reduced }) {

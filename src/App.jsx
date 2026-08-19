@@ -10,7 +10,6 @@ import ProductsIndex from './pages/ProductsIndex.jsx'
 import CollectionPage from './pages/CollectionPage.jsx'
 import ProductPage from './pages/ProductPage.jsx'
 import QuotePage from './pages/QuotePage.jsx'
-import NotFoundPage from './pages/NotFoundPage.jsx'
 import useReducedMotion from './useReducedMotion.js'
 import { LanguageProvider } from './i18n.jsx'
 import { QuoteProvider } from './quote.jsx'
@@ -26,36 +25,25 @@ export default function App() {
     return () => window.removeEventListener('load', refresh)
   }, [])
 
-  // مسارات الموقع — تُعرَّف مرة واحدة وتُكرَّر ببادئة /en لنسخة الإنجليزية،
-  // بحيث تكون اللغة جزءاً من الرابط نفسه (قابل للمشاركة والفهرسة)
-  const ROUTES = [
-    { path: '/', element: <Home reduced={reduced} /> },
-    { path: '/about', element: <AboutPage reduced={reduced} /> },
-    { path: '/products', element: <ProductsIndex /> },
-    { path: '/collection/:id', element: <CollectionPage reduced={reduced} /> },
-    { path: '/product/:id', element: <ProductPage reduced={reduced} /> },
-    { path: '/quote', element: <QuotePage /> },
-  ]
-
   return (
-    <BrowserRouter>
-      <LanguageProvider>
+    <LanguageProvider>
       <QuoteProvider>
+      <BrowserRouter>
       <Header />
       <main>
         <Routes>
-          {ROUTES.map((r) => (
-            <Route key={`ar${r.path}`} path={r.path} element={r.element} />
-          ))}
-          {ROUTES.map((r) => (
-            <Route key={`en${r.path}`} path={r.path === '/' ? '/en' : `/en${r.path}`} element={r.element} />
-          ))}
-          <Route path="*" element={<NotFoundPage />} />
+          <Route path="/" element={<Home reduced={reduced} />} />
+          <Route path="/about" element={<AboutPage reduced={reduced} />} />
+          <Route path="/products" element={<ProductsIndex />} />
+          <Route path="/collection/:id" element={<CollectionPage reduced={reduced} />} />
+          <Route path="/product/:id" element={<ProductPage reduced={reduced} />} />
+          <Route path="/quote" element={<QuotePage />} />
+          <Route path="*" element={<Home reduced={reduced} />} />
         </Routes>
       </main>
       <Footer />
+      </BrowserRouter>
       </QuoteProvider>
-      </LanguageProvider>
-    </BrowserRouter>
+    </LanguageProvider>
   )
 }

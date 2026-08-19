@@ -3,7 +3,6 @@ import { useParams, Link, Navigate } from 'react-router-dom'
 import { productOf, collectionOf, productsIn, PRODUCTS, FINISH } from '../productsData.js'
 import { useLang } from '../i18n.jsx'
 import { useQuote } from '../quote.jsx'
-import Seo, { SITE_URL } from '../components/Seo.jsx'
 
 // محتوى عام للتجربة — الأبعاد ودليل العناية (يُخصّص لاحقاً لكل منتج)
 const GENERAL_DIMS = [
@@ -22,7 +21,7 @@ const GENERAL_CARE = [
 export default function ProductPage({ reduced }) {
   const { id } = useParams()
   const product = productOf(id)
-  const { t, tr, lp } = useLang()
+  const { t, tr } = useLang()
   const quote = useQuote()
 
   const primary = product?.images?.[product?.finishes?.[0]]
@@ -49,7 +48,7 @@ export default function ProductPage({ reduced }) {
     return [...same, ...others].slice(0, 10)
   }, [product])
 
-  if (!product) return <Navigate to={lp('/products')} replace />
+  if (!product) return <Navigate to="/products" replace />
 
   const collection = collectionOf(product.collection)
   const accent = collection?.accent || '#2f6fd6'
@@ -74,7 +73,6 @@ export default function ProductPage({ reduced }) {
 
   return (
     <div className="relative overflow-x-hidden bg-white text-[#0f1f3d]">
-      <Seo title={product.title} description={product.tagline || product.desc} image={primary ? `${SITE_URL}${primary}` : undefined} />
       {/* بطل صفحة المنتج — صورة كبيرة عمودية + مصغّرات عمودية + تفاصيل */}
       <section className="relative pt-24 sm:pt-28">
         <div className="relative z-10 mx-auto max-w-7xl px-4 pb-16 sm:px-6">
@@ -112,7 +110,7 @@ export default function ProductPage({ reduced }) {
             {/* عمود التفاصيل — محاذٍ لعلامة البحث */}
             <div className="min-w-0">
               {collection && (
-                <Link to={lp(`/collection/${collection.id}`)} className="mb-3 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-strong hover:text-[#0f1f3d] sm:text-sm">
+                <Link to={`/collection/${collection.id}`} className="mb-3 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-strong hover:text-[#0f1f3d] sm:text-sm">
                   {t('ديفرا')} · {tr(collection.name)}
                 </Link>
               )}
@@ -146,7 +144,7 @@ export default function ProductPage({ reduced }) {
                 >
                   {quote.has(product.id) ? t('في قائمة عرض السعر ✓') : t('أضف إلى عرض السعر')}
                 </button>
-                <Link to={lp('/quote')} className="btn w-full border border-black/15 bg-black/[0.03] text-[#0f1f3d] hover:bg-black/[0.06] sm:w-auto">
+                <Link to="/quote" className="btn w-full border border-black/15 bg-black/[0.03] text-[#0f1f3d] hover:bg-black/[0.06] sm:w-auto">
                   {t('اطلب عرض سعر')}{quote.count ? ` (${quote.count})` : ''}
                 </Link>
               </div>
@@ -225,11 +223,11 @@ export default function ProductPage({ reduced }) {
                 <h2 className="font-cairo text-2xl font-black text-white sm:text-3xl">{t('أكمل تصميمك')}</h2>
                 <p className="mt-2 text-sm text-white/60">{t('قطعٌ مختارة تُكمّل هذه القطعة بانسجام تامّ.')}</p>
               </div>
-              <Link to={lp('/products')} className="shrink-0 text-sm font-bold text-brand-light hover:text-white">{t('كل المنتجات')}</Link>
+              <Link to="/products" className="shrink-0 text-sm font-bold text-brand-light hover:text-white">{t('كل المنتجات')}</Link>
             </div>
             <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-6 lg:grid-cols-4">
               {related.slice(0, 4).map((p) => (
-                <Link key={p.id} to={lp(`/product/${p.id}`)} className="group">
+                <Link key={p.id} to={`/product/${p.id}`} className="group">
                   <div className="relative aspect-[3/4] overflow-hidden rounded-2xl border border-white/10 bg-[#0d0d24]">
                     <img src={p.images[p.finishes[0]]} alt={tr(p.title)} loading="lazy" className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
                   </div>
@@ -261,7 +259,7 @@ export default function ProductPage({ reduced }) {
             <p className="mt-5 max-w-md text-base text-[#4a5a72] sm:text-lg">
               {t('من الخلّاط إلى الكرسي والشطّاف — اقتنِ المجموعة كاملةً بانسجام تامّ في التصميم والتشطيب.')}
             </p>
-            <Link to={lp('/products')} className="btn btn-primary mt-8 inline-flex">
+            <Link to="/products" className="btn btn-primary mt-8 inline-flex">
               {t('استكشف المجموعة الكاملة')}
             </Link>
           </div>

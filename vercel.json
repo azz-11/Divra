@@ -2,22 +2,5 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "framework": "vite",
-  "redirects": [
-    { "source": "/products/:slug", "destination": "/collection/:slug", "permanent": true },
-    { "source": "/en/products/:slug", "destination": "/en/collection/:slug", "permanent": true }
-  ],
-  "rewrites": [
-    { "source": "/", "destination": "/index.html" },
-    { "source": "/about", "destination": "/index.html" },
-    { "source": "/products", "destination": "/index.html" },
-    { "source": "/collection/:id", "destination": "/index.html" },
-    { "source": "/product/:id", "destination": "/index.html" },
-    { "source": "/quote", "destination": "/index.html" },
-    { "source": "/en", "destination": "/index.html" },
-    { "source": "/en/about", "destination": "/index.html" },
-    { "source": "/en/products", "destination": "/index.html" },
-    { "source": "/en/collection/:id", "destination": "/index.html" },
-    { "source": "/en/product/:id", "destination": "/index.html" },
-    { "source": "/en/quote", "destination": "/index.html" }
-  ]
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }

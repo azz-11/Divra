@@ -9,7 +9,7 @@ export default function SearchOverlay({ open, onClose }) {
   const [q, setQ] = useState('')
   const inputRef = useRef(null)
   const navigate = useNavigate()
-  const { t, tr, lp } = useLang()
+  const { t, tr } = useLang()
 
   useEffect(() => {
     if (open) {
@@ -37,7 +37,7 @@ export default function SearchOverlay({ open, onClose }) {
 
   const go = (p) => {
     onClose()
-    navigate(lp(`/collection/${p.collection}#${p.id}`))
+    navigate(`/collection/${p.collection}#${p.id}`)
   }
 
   if (!open) return null

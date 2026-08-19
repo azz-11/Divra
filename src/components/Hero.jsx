@@ -6,7 +6,7 @@ export default function Hero({ reduced }) {
   const sectionRef = useRef(null)
   const videoRef = useRef(null)
   const contentRef = useRef(null)
-  const { t, lp } = useLang()
+  const { t } = useLang()
 
   // فيديو لوب يعاد تلقائياً (حركة لايف ستايل)
   useEffect(() => {
@@ -77,7 +77,7 @@ export default function Hero({ reduced }) {
               {t('استكشف المجموعة')}
             </a>
             <a
-              href={lp('/about')}
+              href="/about"
               className="btn w-full border border-white/30 bg-white/10 text-white backdrop-blur hover:bg-white/20 sm:w-auto"
             >
               {t('تعرّف على ديفرا')}

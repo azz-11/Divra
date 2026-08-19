@@ -10,17 +10,17 @@ const LINKS = [
 ]
 
 export default function Footer() {
-  const { t, lp } = useLang()
+  const { t } = useLang()
   return (
     <footer className="border-t border-line bg-surface-2 py-12">
       <div className="mx-auto flex max-w-7xl flex-col items-center gap-7 px-6 md:flex-row md:justify-between">
-        <Link to={lp('/')} className="flex items-center">
+        <Link to="/" className="flex items-center">
           <img src="/logo.png" alt="ديفرا Divra" className="h-9 w-auto" />
         </Link>
 
         <nav className="flex flex-wrap justify-center gap-6">
           {LINKS.map((l) => (
-            <Link key={l.to} to={lp(l.to)} className="text-sm text-text-dim transition-colors hover:text-text">
+            <Link key={l.to} to={l.to} className="text-sm text-text-dim transition-colors hover:text-text">
               {t(l.label)}
             </Link>
           ))}

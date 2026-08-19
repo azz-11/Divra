@@ -1,11 +1,8 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useParams, Link, Navigate } from 'react-router-dom'
-import { Plus, Check } from 'lucide-react'
 import { collectionOf, productsIn, PRODUCTS, FINISH } from '../productsData.js'
 import { useLang } from '../i18n.jsx'
-import { useQuote } from '../quote.jsx'
 import Contact from '../components/Contact.jsx'
-import Seo, { SITE_URL } from '../components/Seo.jsx'
 
 // خامة المنتج من المواصفات (المفتاح العربي «الخامة»)
 const materialSpec = (p) => p.specs.find((s) => s[0]?.ar === 'الخامة')?.[1]
@@ -13,7 +10,7 @@ const materialSpec = (p) => p.specs.find((s) => s[0]?.ar === 'الخامة')?.[1
 export default function CollectionPage() {
   const { id } = useParams()
   const collection = collectionOf(id)
-  const { t, tr, lp } = useLang()
+  const { t, tr } = useLang()
 
   const [fSel, setFSel] = useState(() => new Set())
   const [mSel, setMSel] = useState(() => new Set())
@@ -37,14 +34,10 @@ export default function CollectionPage() {
     return okFinish && okMat
   }), [products, fSel, mSel])
 
-  // الأكثر رواجاً — منتجات القسم نفسه أولاً، ثم أقسام أخرى فقط إن لم تكفِ
-  const popular = useMemo(() => {
-    const same = productsIn(id)
-    const others = PRODUCTS.filter((p) => p.collection !== id)
-    return [...same, ...others].slice(0, 8)
-  }, [id])
+  // الأكثر رواجاً — مجموعة مختارة عبر الأقسام (تجريبي)
+  const popular = useMemo(() => PRODUCTS.filter((p) => p.collection !== id).slice(0, 8), [id])
 
-  if (!collection) return <Navigate to={lp('/collection/mixers')} replace />
+  if (!collection) return <Navigate to="/collection/mixers" replace />
 
   const toggle = (setter) => (key) => setter((s) => { const n = new Set(s); n.has(key) ? n.delete(key) : n.add(key); return n })
   const clearAll = () => { setFSel(new Set()); setMSel(new Set()); setTSel(new Set()) }
@@ -52,7 +45,6 @@ export default function CollectionPage() {
 
   return (
     <div className="bg-white text-[#0f1f3d]">
-      <Seo title={collection.name} description={collection.intro} image={`${SITE_URL}${collection.cover}`} />
       {/* تدرّج واحد متواصل: من العنوان حتى نهاية المواصفات */}
       <div style={{ background: 'linear-gradient(180deg, #bcdcff 0%, #d6e8ff 35%, #eaf2fd 70%, #ffffff 100%)' }}>
       {/* رأس نصّي */}
@@ -177,7 +169,7 @@ export default function CollectionPage() {
                 <span className="text-xs font-bold uppercase tracking-widest text-brand-strong">{t('الأكثر رواجاً')}</span>
                 <h2 className="mt-1 font-cairo text-2xl font-black sm:text-3xl">{t('اكتشف منتجات ذات صلة')}</h2>
               </div>
-              <Link to={lp('/products')} className="shrink-0 text-sm font-bold text-brand-strong hover:underline">{t('كل المنتجات')}</Link>
+              <Link to="/products" className="shrink-0 text-sm font-bold text-brand-strong hover:underline">{t('كل المنتجات')}</Link>
             </div>
             <div className="flex snap-x gap-5 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
               {popular.map((p) => (
@@ -214,7 +206,7 @@ export default function CollectionPage() {
               </li>
             ))}
           </ul>
-          <Link to={lp('/products')} className="mt-9 inline-flex text-sm font-bold text-brand-light underline underline-offset-4 hover:text-white">
+          <Link to="/products" className="mt-9 inline-flex text-sm font-bold text-brand-light underline underline-offset-4 hover:text-white">
             {t('عرض المزيد')}
           </Link>
         </div>
@@ -227,40 +219,13 @@ export default function CollectionPage() {
 }
 
 function ProductCard({ p, tr, badge }) {
-  const { t, lp } = useLang()
-  const quote = useQuote()
-  const [justAdded, setJustAdded] = useState(false)
-  const inQuote = quote.has(p.id) || justAdded
-
-  const quickAdd = (e) => {
-    e.preventDefault()
-    e.stopPropagation()
-    if (quote.has(p.id)) return
-    quote.add(p.id)
-    setJustAdded(true)
-    setTimeout(() => setJustAdded(false), 1600)
-  }
-
   return (
-    <Link to={lp(`/product/${p.id}`)} className="group relative flex flex-col text-start">
+    <Link to={`/product/${p.id}`} className="group flex flex-col text-start">
       <div className="relative aspect-square w-full overflow-hidden bg-[#0d0d24]">
         <img src={p.images[p.finishes[0]]} alt={tr(p.title)} loading="lazy" className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
         {badge && (
           <span className="absolute start-2 top-2 rounded-full bg-brand px-2 py-0.5 text-[10px] font-bold text-white" style={{ insetInlineStart: '0.5rem' }}>{badge}</span>
         )}
-        {/* إضافة سريعة لعرض السعر — تظهر عند التمرير، دائمة الظهور على اللمس */}
-        <button
-          type="button"
-          onClick={quickAdd}
-          aria-label={t(inQuote ? 'في قائمة عرض السعر ✓' : 'أضف إلى عرض السعر')}
-          title={t(inQuote ? 'في قائمة عرض السعر ✓' : 'أضف إلى عرض السعر')}
-          className={`quick-add absolute end-2 bottom-2 grid h-8 w-8 place-items-center rounded-full opacity-0 shadow-lg transition-all duration-200 group-hover:opacity-100 ${
-            inQuote ? 'bg-brand-strong text-white' : 'bg-white text-[#0f1f3d] hover:bg-brand-strong hover:text-white'
-          }`}
-          style={{ insetInlineEnd: '0.5rem' }}
-        >
-          {inQuote ? <Check size={16} strokeWidth={2.5} /> : <Plus size={16} strokeWidth={2.5} />}
-        </button>
       </div>
       <span className="mt-3 font-cairo text-sm font-bold text-[#0f1f3d] group-hover:text-brand-strong">{tr(p.title)}</span>
       <span className="mt-0.5 text-xs text-[#8894a6]">{tr(p.specs[0][1])}</span>

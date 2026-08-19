@@ -20,7 +20,7 @@ export default async function handler(req, res) {
 
   try {
     const body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body || {}
-    const { pdfBase64, filename = 'divra-quote-request.pdf', summaryHtml = '', subject } = body
+    const { pdfBase64, filename = 'divra-order.pdf', summaryHtml = '', subject } = body
     if (!pdfBase64) return res.status(400).json({ error: 'missing_pdf' })
 
     const resp = await fetch('https://api.resend.com/emails', {
@@ -32,8 +32,8 @@ export default async function handler(req, res) {
       body: JSON.stringify({
         from,
         to: [TO],
-        subject: subject || 'طلب عرض سعر جديد — Divra',
-        html: summaryHtml || '<p>طلب عرض سعر جديد من موقع ديفرا (مرفق ملف PDF).</p>',
+        subject: subject || 'طلب شراء جديد — Divra',
+        html: summaryHtml || '<p>طلب شراء جديد من موقع ديفرا (مرفق ملف PDF).</p>',
         attachments: [{ filename, content: pdfBase64 }],
       }),
     })

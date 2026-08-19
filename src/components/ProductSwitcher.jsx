@@ -11,24 +11,11 @@ const VIDEO = '/video/switch-1'
 export default function ProductSwitcher({ reduced }) {
   const textRef = useRef(null)
   const videoRef = useRef(null)
-  const sectionRef = useRef(null)
-  const { t, tr, lp } = useLang()
+  const { t, tr } = useLang()
   const product = productOf(HERO_ID)
 
-  // تشغيل الفيديو فقط عند دخول القسم للشاشة (يوقفه عند مغادرته)
   useEffect(() => {
-    const el = sectionRef.current
-    const v = videoRef.current
-    if (!el || !v) return
-    const io = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) v.play?.().catch(() => {})
-      else v.pause?.()
-    }, { threshold: 0.25 })
-    io.observe(el)
-    return () => io.disconnect()
-  }, [])
-
-  useEffect(() => {
+    if (videoRef.current) videoRef.current.play?.().catch(() => {})
     if (reduced || !textRef.current) return
     const tl = gsap.timeline({ scrollTrigger: { trigger: textRef.current, start: 'top 80%' } })
     tl.fromTo(textRef.current.children, { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: 'power3.out' })
@@ -38,16 +25,16 @@ export default function ProductSwitcher({ reduced }) {
   if (!product) return null
 
   return (
-    <section id="switcher" ref={sectionRef} className="relative min-h-screen w-full overflow-hidden">
+    <section id="switcher" className="relative min-h-screen w-full overflow-hidden">
       {/* فيديو ملء الشاشة — لوب */}
       <video
         ref={videoRef}
         className="absolute inset-0 h-full w-full bg-[#0a0a2e] object-cover"
+        autoPlay
         muted
         loop
         playsInline
-        preload="none"
-        poster={`${VIDEO}-poster.webp`}
+        preload="auto"
       >
         <source src={`${VIDEO}.webm`} type="video/webm" />
         <source src={`${VIDEO}.mp4`} type="video/mp4" />
@@ -70,7 +57,7 @@ export default function ProductSwitcher({ reduced }) {
             {tr(product.title)}
           </h2>
           <p className="mt-6 max-w-md text-lg leading-relaxed text-white/85 sm:text-xl">{t('فخامةٌ تُصنع لتبقى')}</p>
-          <Link to={lp(`/product/${product.id}`)} className="btn btn-primary mt-9 inline-flex">
+          <Link to={`/product/${product.id}`} className="btn btn-primary mt-9 inline-flex">
             {t('اكتشف المنتج')}
           </Link>
         </div>

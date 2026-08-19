@@ -58,17 +58,9 @@ const STORY = [
 
 const N = STORY.length
 
-function Slide({ video, videoRef }) {
+function Slide({ video }) {
   return (
-    <video
-      ref={videoRef}
-      className="absolute inset-0 h-full w-full object-cover"
-      muted
-      loop
-      playsInline
-      preload="none"
-      poster={`${video}-poster.webp`}
-    >
+    <video className="absolute inset-0 h-full w-full object-cover" autoPlay muted loop playsInline preload="auto">
       <source src={`${video}.webm`} type="video/webm" />
       <source src={`${video}.mp4`} type="video/mp4" />
     </video>
@@ -78,14 +70,11 @@ function Slide({ video, videoRef }) {
 export default function BrandStory({ reduced }) {
   const [active, setActive] = useState(0)
   const [prev, setPrev] = useState(null) // الشريحة الخارجة أثناء الـ crossfade
-  const [inView, setInView] = useState(false)
   const animating = useRef(false)
   const drag = useRef({ x: 0, on: false })
   const textRef = useRef(null)
   const curVidRef = useRef(null)
-  const sectionRef = useRef(null)
-  const curVideoElRef = useRef(null)
-  const { tr, dir, lp } = useLang()
+  const { tr, dir } = useLang()
   const Prev = dir === 'rtl' ? ArrowRight : ArrowLeft
   const Next = dir === 'rtl' ? ArrowLeft : ArrowRight
 
@@ -123,22 +112,6 @@ export default function BrandStory({ reduced }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [active])
 
-  // تشغيل الفيديو فقط عند ظهور القسم في الشاشة (يوقفه عند مغادرته)
-  useEffect(() => {
-    const el = sectionRef.current
-    if (!el) return
-    const io = new IntersectionObserver(([entry]) => setInView(entry.isIntersecting), { threshold: 0.25 })
-    io.observe(el)
-    return () => io.disconnect()
-  }, [])
-
-  useEffect(() => {
-    const v = curVideoElRef.current
-    if (!v) return
-    if (inView) v.play?.().catch(() => {})
-    else v.pause?.()
-  }, [inView, active])
-
   const change = (idx) => {
     if (idx === active || animating.current) return
     animating.current = true
@@ -160,7 +133,6 @@ export default function BrandStory({ reduced }) {
   return (
     <section
       id="story"
-      ref={sectionRef}
       className="relative min-h-screen w-full overflow-hidden bg-[#0a0a2e]"
       onPointerDown={onDown}
       onPointerUp={onUp}
@@ -174,7 +146,7 @@ export default function BrandStory({ reduced }) {
           </div>
         )}
         <div key={`c-${active}`} ref={curVidRef} className="absolute inset-0" style={{ zIndex: 1, opacity: reduced ? 1 : 0 }}>
-          <Slide video={cur.video} videoRef={curVideoElRef} />
+          <Slide video={cur.video} />
         </div>
       </div>
 
@@ -192,7 +164,7 @@ export default function BrandStory({ reduced }) {
           </h2>
           <p className="mx-auto mt-6 max-w-2xl text-lg text-white/85 sm:text-xl">{tr(cur.text)}</p>
           {cur.cta && (
-            <Link to={lp(cur.cta.to)} className="btn btn-primary mt-9">{tr(cur.cta.label)}</Link>
+            <Link to={cur.cta.to} className="btn btn-primary mt-9">{tr(cur.cta.label)}</Link>
           )}
         </div>
       </div>

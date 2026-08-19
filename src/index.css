@@ -218,13 +218,6 @@ h4 {
   aspect-ratio: 1 / 1;
 }
 
-/* زر الإضافة السريعة لعرض السعر: يظهر عند التمرير، ودائماً على أجهزة اللمس (لا يوجد hover) */
-@media (hover: none) {
-  .quick-add {
-    opacity: 1 !important;
-  }
-}
-
 /* احترام تفضيل تقليل الحركة */
 @media (prefers-reduced-motion: reduce) {
   html {
