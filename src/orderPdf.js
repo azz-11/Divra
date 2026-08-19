@@ -2,12 +2,16 @@ import { jsPDF } from 'jspdf'
 import html2canvas from 'html2canvas'
 import { FINISH } from './productsData.js'
 
+// تفادي حقن HTML عبر حقول العميل النصية (الاسم، المدينة، الملاحظات...) قبل تضمينها في innerHTML
+const escapeHtml = (s) =>
+  String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]))
+
 // يبني عنصر HTML بهيئة طلب شراء رسمي ثم يحوّله إلى PDF.
 // download=true يحفظ الملف؛ ويُعيد دائماً base64 (بلا بادئة) للإرسال بالبريد.
-export async function generateOrderPdf(items, { tr, lang = 'ar', download = false } = {}) {
+export async function generateOrderPdf(items, { tr, lang = 'ar', download = false, customer = null } = {}) {
   const dir = lang === 'ar' ? 'rtl' : 'ltr'
   const L = {
-    order: lang === 'ar' ? 'طلب شراء' : 'Purchase order',
+    order: lang === 'ar' ? 'طلب عرض سعر' : 'Quote request',
     brand: 'DIVRA',
     date: lang === 'ar' ? 'التاريخ' : 'Date',
     no: lang === 'ar' ? 'م' : '#',
@@ -17,6 +21,12 @@ export async function generateOrderPdf(items, { tr, lang = 'ar', download = fals
     qty: lang === 'ar' ? 'الكمية' : 'Qty',
     total: lang === 'ar' ? 'إجمالي القطع' : 'Total items',
     contact: lang === 'ar' ? 'للتواصل' : 'Contact',
+    customer: lang === 'ar' ? 'بيانات العميل' : 'Customer details',
+    name: lang === 'ar' ? 'الاسم' : 'Name',
+    phone: lang === 'ar' ? 'الهاتف' : 'Phone',
+    city: lang === 'ar' ? 'المدينة' : 'City',
+    email: lang === 'ar' ? 'البريد الإلكتروني' : 'Email',
+    notes: lang === 'ar' ? 'ملاحظات' : 'Notes',
   }
   const today = new Date().toLocaleDateString(lang === 'ar' ? 'ar-EG' : 'en-GB')
   const totalQty = items.reduce((s, x) => s + x.qty, 0)
@@ -62,6 +72,10 @@ export async function generateOrderPdf(items, { tr, lang = 'ar', download = fals
       .total { font-size:15px; font-weight:800; }
       .total span { color:#2f6fd6; }
       .contact { font-size:12px; color:#8894a6; }
+      .customer { margin-top:20px; padding:14px 16px; background:#f6f8fc; border-radius:10px; }
+      .customer .ctitle { font-size:13px; font-weight:800; color:#0a0a3d; margin-bottom:8px; }
+      .customer .crow { display:flex; gap:6px; font-size:13px; color:#0f1f3d; margin-top:4px; }
+      .customer .crow b { color:#4a5a72; font-weight:700; }
     </style>
     <div class="po">
       <div class="head">
@@ -71,6 +85,15 @@ export async function generateOrderPdf(items, { tr, lang = 'ar', download = fals
         </div>
         <div class="meta">${L.date}: ${today}</div>
       </div>
+      ${customer ? `
+      <div class="customer">
+        <div class="ctitle">${L.customer}</div>
+        <div class="crow"><b>${L.name}:</b> ${escapeHtml(customer.name)}</div>
+        <div class="crow"><b>${L.phone}:</b> ${escapeHtml(customer.phone)}</div>
+        <div class="crow"><b>${L.city}:</b> ${escapeHtml(customer.city)}</div>
+        ${customer.email ? `<div class="crow"><b>${L.email}:</b> ${escapeHtml(customer.email)}</div>` : ''}
+        ${customer.notes ? `<div class="crow"><b>${L.notes}:</b> ${escapeHtml(customer.notes)}</div>` : ''}
+      </div>` : ''}
       <table>
         <thead>
           <tr>
@@ -117,9 +140,9 @@ export async function generateOrderPdf(items, { tr, lang = 'ar', download = fals
       pdf.addImage(data, 'JPEG', 0, position, imgW, imgH)
       heightLeft -= pageH
     }
-    if (download) pdf.save('divra-order.pdf')
+    if (download) pdf.save('divra-quote-request.pdf')
     const uri = pdf.output('datauristring') // data:application/pdf;base64,XXXX
-    return { base64: uri.split(',')[1], filename: 'divra-order.pdf' }
+    return { base64: uri.split(',')[1], filename: 'divra-quote-request.pdf' }
   } finally {
     document.body.removeChild(el)
   }

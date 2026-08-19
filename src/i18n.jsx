@@ -1,4 +1,5 @@
-import { createContext, useContext, useEffect, useState } from 'react'
+import { createContext, useContext, useEffect } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 // قاموس نصوص الواجهة (المفتاح بالعربية → الإنجليزية)
 const UI = {
@@ -83,7 +84,7 @@ const UI = {
     'Browse products and add what suits you to inquire about them all at once.',
   'المنتجات المختارة': 'Selected products',
   'أرسل الاستفسار عبر واتساب': 'Send inquiry via WhatsApp',
-  'أرسل طلب الشراء بالبريد': 'Send order by email',
+  'أرسل طلب عرض السعر بالبريد': 'Send quote request by email',
   'يتم إنشاء الملف…': 'Generating file…',
   'يُرسَل طلبك مع ملف PDF مرفق إلى فريق ديفرا.': 'Your order is sent with a PDF attached to the Divra team.',
   'تم إرسال طلبك بنجاح ✓': 'Your order was sent successfully ✓',
@@ -136,25 +137,57 @@ const UI = {
   'تركيب جداري أو على المغسلة حسب الطراز.': 'Wall or basin mounting depending on the model.',
   'خامات نحاسية مقاومة للصدأ بضمان 5 سنوات.': 'Rust-resistant brass materials with a 5-year warranty.',
   'عرض المزيد': 'View more',
+  // معلومات التواصل في نموذج طلب عرض السعر
+  'معلومات التواصل': 'Contact details',
+  'الاسم': 'Name',
+  'المدينة': 'City',
+  'ملاحظات': 'Notes',
+  'اختياري': 'Optional',
+  'مثال: 05xxxxxxxx': 'e.g. 05xxxxxxxx',
+  'أضف أي تفاصيل إضافية تساعدنا في تحضير عرض السعر': 'Add any extra details that help us prepare your quote',
+  'يرجى تعبئة الاسم والهاتف والمدينة لإتمام الطلب.': 'Please fill in your name, phone and city to complete the request.',
+  // صفحة غير موجودة
+  'الصفحة غير موجودة': 'Page not found',
+  'الصفحة التي تبحث عنها غير متوفرة أو تم نقلها.': 'The page you’re looking for isn’t available or has been moved.',
+  'العودة إلى الرئيسية': 'Back to homepage',
   // اللغة
   'English': 'العربية',
 }
 
 const LangContext = createContext(null)
 
+// يزيل بادئة /en من المسار (إن وُجدت) للحصول على المسار العربي المطابق
+export function stripLocale(pathname) {
+  if (pathname === '/en') return '/'
+  if (pathname.startsWith('/en/')) return pathname.slice(3) || '/'
+  return pathname
+}
+
 export function LanguageProvider({ children }) {
-  const [lang, setLang] = useState(() =>
-    (typeof localStorage !== 'undefined' && localStorage.getItem('lang')) || 'ar',
-  )
+  const { pathname, search, hash } = useLocation()
+  const navigate = useNavigate()
+  // اللغة تُستمَد من مسار الرابط نفسه (بادئة /en) بدل حالة مخزّنة منفصلة،
+  // لتبقى رابط الصفحة والمحتوى المعروض متطابقين دائماً (قابل للمشاركة والفهرسة)
+  const lang = pathname === '/en' || pathname.startsWith('/en/') ? 'en' : 'ar'
   const dir = lang === 'ar' ? 'rtl' : 'ltr'
 
   useEffect(() => {
     document.documentElement.lang = lang
     document.documentElement.dir = dir
-    try { localStorage.setItem('lang', lang) } catch {}
   }, [lang, dir])
 
-  const toggle = () => setLang((l) => (l === 'ar' ? 'en' : 'ar'))
+  // يبني مسار الرابط بنفس اللغة الحالية (يضيف /en تلقائياً في وضع الإنجليزية)
+  const lp = (path) => {
+    if (lang !== 'en') return path
+    return path === '/' ? '/en' : `/en${path}`
+  }
+
+  // التبديل بين العربية والإنجليزية عبر التنقّل إلى المسار المقابل (يغيّر الرابط فعلياً)
+  const toggle = () => {
+    const basePath = stripLocale(pathname)
+    const target = lang === 'ar' ? (basePath === '/' ? '/en' : `/en${basePath}`) : basePath
+    navigate(`${target}${search}${hash}`)
+  }
 
   // نص واجهة: يرجع الإنجليزية عند en وإلا العربية
   const t = (s) => (lang === 'en' ? UI[s] ?? s : s)
@@ -167,7 +200,7 @@ export function LanguageProvider({ children }) {
   }
 
   return (
-    <LangContext.Provider value={{ lang, dir, toggle, t, tr }}>
+    <LangContext.Provider value={{ lang, dir, toggle, t, tr, lp }}>
       {children}
     </LangContext.Provider>
   )

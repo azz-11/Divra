@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <title>الصفحة غير موجودة | ديفرا Divra</title>
+    <style>
+      @font-face {
+        font-family: 'Cairo';
+        src: url('/fonts/Cairo-Regular.ttf') format('truetype');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: 'Cairo';
+        src: url('/fonts/Cairo-Bold.ttf') format('truetype');
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+      }
+      * { box-sizing: border-box; }
+      html, body {
+        margin: 0;
+        min-height: 100vh;
+        background: #030435;
+        color: #f4f4fb;
+        font-family: 'Cairo', sans-serif;
+      }
+      .wrap {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 2rem 1.5rem;
+      }
+      .code {
+        font-weight: 800;
+        font-size: clamp(3.5rem, 10vw, 5.5rem);
+        color: #7aa9f5;
+        margin: 0;
+      }
+      h1 {
+        font-weight: 800;
+        font-size: clamp(1.4rem, 4vw, 1.8rem);
+        margin: 0.75rem 0 0;
+      }
+      p {
+        max-width: 32rem;
+        margin: 0.75rem auto 0;
+        color: rgba(244, 244, 251, 0.66);
+      }
+      a.btn {
+        display: inline-flex;
+        margin-top: 2rem;
+        padding: 0.85rem 1.75rem;
+        border-radius: 999px;
+        background: linear-gradient(120deg, #686886, #7aa9f5);
+        color: #fff;
+        font-weight: 700;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <p class="code">404</p>
+      <h1 data-ar="الصفحة غير موجودة" data-en="Page not found">الصفحة غير موجودة</h1>
+      <p data-ar="الصفحة التي تبحث عنها غير متوفرة أو تم نقلها." data-en="The page you’re looking for isn’t available or has been moved.">الصفحة التي تبحث عنها غير متوفرة أو تم نقلها.</p>
+      <a class="btn" data-ar="العودة إلى الرئيسية" data-en="Back to homepage" href="/">العودة إلى الرئيسية</a>
+    </div>
+    <script>
+      // مسار /en/... يعني نسخة إنجليزية — لا يوجد إطار عمل هنا (صفحة 404 ثابتة)
+      if (location.pathname === '/en' || location.pathname.indexOf('/en/') === 0) {
+        document.documentElement.lang = 'en'
+        document.documentElement.dir = 'ltr'
+        document.title = 'Page not found | Divra'
+        document.querySelectorAll('[data-en]').forEach(function (el) {
+          el.textContent = el.getAttribute('data-en')
+        })
+        document.querySelector('a.btn').setAttribute('href', '/en')
+      }
+    </script>
+  </body>
+</html>

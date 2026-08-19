@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
+import Seo from '../components/Seo.jsx'
 import Hero from '../components/Hero.jsx'
 import DiscoverBreak from '../components/DiscoverBreak.jsx'
 import ProductSwitcher from '../components/ProductSwitcher.jsx'
@@ -19,17 +20,18 @@ export default function Home({ reduced }) {
 
   return (
     <>
+      <Seo />
       <Hero reduced={reduced} />
       {/* فاصل تسويقي */}
       <DiscoverBreak reduced={reduced} />
       {/* المنتج الرسمي (فيديو بلا خيارات) */}
       <ProductSwitcher reduced={reduced} />
-      {/* أربعة أقسام (تكرار مؤقت للتجربة) */}
-      <CollectionDuo ids={['mixers', 'jacuzzi', 'mixers', 'jacuzzi']} />
+      {/* قسمان */}
+      <CollectionDuo ids={['mixers', 'jacuzzi']} />
       {/* حكاية البراند */}
       <BrandStory reduced={reduced} />
-      {/* أربعة أقسام (تكرار مؤقت للتجربة) */}
-      <CollectionDuo ids={['sprays', 'bath', 'sprays', 'bath']} />
+      {/* قسمان */}
+      <CollectionDuo ids={['sprays', 'bath']} />
       {/* التواصل */}
       <Contact />
     </>

@@ -25,7 +25,7 @@ export default function Header() {
   const [open, setOpen] = useState(false)
   const [search, setSearch] = useState(false)
   const { pathname } = useLocation()
-  const { t, lang, toggle } = useLang()
+  const { t, lang, toggle, lp } = useLang()
 
   const lastY = useRef(0)
   const ticking = useRef(false)
@@ -64,7 +64,7 @@ export default function Header() {
   useEffect(() => setOpen(false), [pathname])
 
   // شفاف فوق الهيرو في الأعلى فقط؛ وإلا داكن صلب
-  const transparent = atTop && pathname === '/'
+  const transparent = atTop && (pathname === '/' || pathname === '/en')
   const noAnim = prefersReduced()
 
   return (
@@ -81,7 +81,7 @@ export default function Header() {
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-2.5 sm:px-6">
           {/* الشعار */}
-          <Link to="/" className="flex items-center">
+          <Link to={lp('/')} className="flex items-center">
             <img src="/logo-light.png" alt="ديفرا Divra" className="h-6 w-auto sm:h-[30px]" />
           </Link>
 
@@ -90,7 +90,7 @@ export default function Header() {
             {NAV.map((item) => (
               <Link
                 key={item.to}
-                to={item.to}
+                to={lp(item.to)}
                 className="text-sm font-medium text-white/80 transition-colors hover:text-white"
               >
                 {t(item.label)}
@@ -145,7 +145,7 @@ export default function Header() {
       >
         <nav className="flex flex-1 flex-col items-center justify-center gap-7">
           {NAV.map((item) => (
-            <Link key={item.to} to={item.to} className="font-cairo text-2xl font-bold text-white">
+            <Link key={item.to} to={lp(item.to)} className="font-cairo text-2xl font-bold text-white">
               {t(item.label)}
             </Link>
           ))}
