@@ -196,6 +196,19 @@ export const PRODUCTS = [
     finishes: ['chrome', 'rosegold', 'gold', 'gray', 'black'], images: { chrome: '/products/y93-436-a2-ch.webp', rosegold: '/products/y93-436-a2-rg.webp', gold: '/products/y93-436-a2-tg.webp', gray: '/products/y93-436-a2-gr.webp', black: '/products/y93-436-a2-bk.webp' },
   },
   {
+    id: 'y93-436-a3', collection: 'mixers',
+    title: { ar: 'طقم مغسلة جداري مدمج مربّع الشكل', en: 'Square-cut Concealed Widespread Basin Set' },
+    tagline: { ar: 'مقبضان منفصلان جداريان مع مخرج مدمج مربّع الشكل', en: 'Separate wall-mounted handles with a square-cut concealed spout' },
+    desc: { ar: 'طقم مغسلة بتركيب جداري مدمج (الصمام داخل الحائط) ومقبضين منفصلين للحرارة والتدفّق، بتصميم مربّع الشكل يمنح المغسلة مظهراً نظيفاً وعصرياً.', en: 'A basin set with a concealed in-wall valve and separate hot/cold handles, in a square-cut design that gives the basin a clean, modern look.' },
+    specs: [
+      [{ ar: 'التركيب', en: 'Mount' }, { ar: 'جداري مدمج', en: 'Wall-concealed' }],
+      [{ ar: 'النوع', en: 'Type' }, { ar: 'مقبضان منفصلان', en: 'Separate two-handle' }],
+      [{ ar: 'الخامة', en: 'Material' }, { ar: 'نحاس مصقول', en: 'Polished brass' }],
+      [yrs, y5],
+    ],
+    finishes: ['chrome', 'rosegold', 'gold', 'black'], images: { chrome: '/products/y93-436-a3-ch.webp', rosegold: '/products/y93-436-a3-rg.webp', gold: '/products/y93-436-a3-tg.webp', black: '/products/y93-436-a3-bk.webp' },
+  },
+  {
     id: 'y93-436-a4', collection: 'mixers',
     title: { ar: 'طقم مغسلة ثلاثي مربّع الشكل', en: 'Square-cut Widespread Basin Set' },
     tagline: { ar: 'مقبضان منفصلان للحرارة والتدفّق مع مخرج مقوّس', en: 'Separate hot/cold handles with a curved centre spout' },
@@ -389,6 +402,19 @@ export const PRODUCTS = [
       [yrs, y5],
     ],
     finishes: ['chrome', 'rosegold', 'gold', 'black'], images: { chrome: '/products/y93-572-a2-ch.webp', rosegold: '/products/y93-572-a2-rg.webp', gold: '/products/y93-572-a2-tg.webp', black: '/products/y93-572-a2-bk.webp' },
+  },
+  {
+    id: 'y93-572-a3', collection: 'mixers',
+    title: { ar: 'طقم مغسلة جداري مدمج انسيابي', en: 'Streamlined Concealed Widespread Basin Set' },
+    tagline: { ar: 'مقبضان منفصلان جداريان مع مخرج مدمج انسيابي', en: 'Separate wall-mounted handles with a streamlined concealed spout' },
+    desc: { ar: 'طقم مغسلة بتركيب جداري مدمج (الصمام داخل الحائط) ومقبضين منفصلين للحرارة والتدفّق، بتصميم انسيابي يمنح المغسلة مظهراً نظيفاً وعصرياً.', en: 'A basin set with a concealed in-wall valve and separate hot/cold handles, in a streamlined design that gives the basin a clean, modern look.' },
+    specs: [
+      [{ ar: 'التركيب', en: 'Mount' }, { ar: 'جداري مدمج', en: 'Wall-concealed' }],
+      [{ ar: 'النوع', en: 'Type' }, { ar: 'مقبضان منفصلان', en: 'Separate two-handle' }],
+      [{ ar: 'الخامة', en: 'Material' }, { ar: 'نحاس مصقول', en: 'Polished brass' }],
+      [yrs, y5],
+    ],
+    finishes: ['chrome', 'rosegold', 'gold', 'black'], images: { chrome: '/products/y93-572-a3-ch.webp', rosegold: '/products/y93-572-a3-rg.webp', gold: '/products/y93-572-a3-tg.webp', black: '/products/y93-572-a3-bk.webp' },
   },
   {
     id: 'y93-572-a5', collection: 'mixers',
