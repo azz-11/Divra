@@ -572,6 +572,33 @@ export const PRODUCTS = [
     ],
     finishes: ['rosegold', 'gold', 'black'], images: { rosegold: '/products/y93-572-a4-rg.webp', gold: '/products/y93-572-a4-tg.webp', black: '/products/y93-572-a4-bk.webp' },
   },
+  // ملحقات وتركيبات (كتالوج N05) — محابس زاوية
+  {
+    id: 'valve-corner-ar', collection: 'accessories',
+    title: { ar: 'محبس زاوية كلاسيكي', en: 'Classic Angle Valve' },
+    tagline: { ar: 'محبس تغذية زاوية بتصميم أنيق لتوصيل خطوط المياه', en: 'An elegant angle-stop valve for water supply connections' },
+    desc: { ar: 'محبس زاوية 1/2×1/2 بتشطيب كروم لامع، يُستخدم للتحكّم في تغذية المياه لأدوات الحمّام والمطبخ بسهولة وأمان.', en: 'A 1/2×1/2 angle stop valve in a polished chrome finish, used to control the water supply to bathroom and kitchen fixtures safely and easily.' },
+    specs: [
+      [{ ar: 'المقاس', en: 'Size' }, { ar: '1/2 × 1/2 بوصة', en: '1/2 × 1/2 inch' }],
+      [{ ar: 'التركيب', en: 'Mount' }, { ar: 'جداري', en: 'Wall' }],
+      [{ ar: 'الخامة', en: 'Material' }, { ar: 'نحاس مصقول', en: 'Polished brass' }],
+      [yrs, y5],
+    ],
+    finishes: ['chrome'], images: { chrome: '/products/valve-corner-ar-ch.webp' },
+  },
+  {
+    id: 'valve-corner-gr', collection: 'accessories',
+    title: { ar: 'محبس زاوية عصري', en: 'Modern Angle Valve' },
+    tagline: { ar: 'محبس تغذية زاوية بمقبض هرمي عصري', en: 'An angle-stop valve with a modern pyramid handle' },
+    desc: { ar: 'محبس زاوية 1/2×1/2 بمقبض هرمي عصري ومتوفر بتشطيبين، يُستخدم للتحكّم في تغذية المياه لأدوات الحمّام والمطبخ.', en: 'A 1/2×1/2 angle stop valve with a modern pyramid-shaped handle, available in two finishes, used to control the water supply to bathroom and kitchen fixtures.' },
+    specs: [
+      [{ ar: 'المقاس', en: 'Size' }, { ar: '1/2 × 1/2 بوصة', en: '1/2 × 1/2 inch' }],
+      [{ ar: 'التركيب', en: 'Mount' }, { ar: 'جداري', en: 'Wall' }],
+      [{ ar: 'الخامة', en: 'Material' }, { ar: 'نحاس مصقول', en: 'Polished brass' }],
+      [yrs, y5],
+    ],
+    finishes: ['chrome', 'black'], images: { chrome: '/products/valve-corner-gr-ch.webp', black: '/products/valve-corner-gr-bk.webp' },
+  },
 ]
 
 // الأقسام الستة (ثنائية اللغة)
@@ -635,6 +662,15 @@ export const COLLECTIONS = [
       { id: 'builtin', name: { ar: 'مدمج', en: 'Built-in' } },
       { id: 'spa', name: { ar: 'سبا مساج', en: 'Spa massage' } },
     ],
+  },
+  {
+    id: 'accessories',
+    name: { ar: 'ملحقات وتركيبات', en: 'Fittings & Accessories' }, short: { ar: 'ملحقات', en: 'Accessories' },
+    intro: { ar: 'محابس ووصلات تكميلية بجودة موثوقة لإنهاء تركيب أدواتك الصحية بثقة.', en: 'Reliable-quality valves and connectors to complete your sanitary ware installation with confidence.' },
+    features: [{ ar: 'إغلاق محكم وآمن', en: 'Tight, secure shut-off' }, { ar: 'خامة نحاسية مقاومة للصدأ', en: 'Rust-resistant brass' }, { ar: 'تركيب سريع', en: 'Quick installation' }],
+    accent: '#2f6fd6', bg: '#dbe8ff', image: '/products/valve-corner-gr-bk.webp',
+    cover: '/products/valve-corner-gr-bk.webp',
+    lifestyle: '/products/valve-corner-gr-bk.webp',
   },
 ]
 
