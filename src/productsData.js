@@ -658,7 +658,14 @@ export const PRODUCTS = [
       [{ ar: 'الغطاء', en: 'Seat' }, { ar: 'رفيع بإغلاق ناعم', en: 'Slim soft-close' }],
       [yrs, y5],
     ],
-    finishes: ['white'], images: { white: '/products/toilet-wh-oval.webp' },
+    finishes: ['white'], images: { white: '/products/toilet-wh-oval-1.webp' },
+    gallery: [
+      '/products/toilet-wh-oval-1.webp',
+      '/products/toilet-wh-oval-2.webp',
+      '/products/toilet-wh-oval-3.webp',
+      '/products/toilet-wh-oval-4.webp',
+      '/products/toilet-wh-oval-5.webp',
+    ],
   },
 ]
 
