@@ -599,6 +599,67 @@ export const PRODUCTS = [
     ],
     finishes: ['chrome', 'black'], images: { chrome: '/products/valve-corner-gr-ch.webp', black: '/products/valve-corner-gr-bk.webp' },
   },
+  // كراسي الحمام
+  {
+    id: 'toilet-op-square', collection: 'chairs',
+    title: { ar: 'كرسي حمّام قطعة واحدة كلاسيك', en: 'One-piece Toilet Classic' },
+    tagline: { ar: 'خزّان مربّع الحواف وغطاء انسيابي هادئ الإغلاق', en: 'Square-edged tank with a soft-close streamlined lid' },
+    desc: { ar: 'كرسي حمّام من قطعة واحدة بخزّان مربّع الحواف وقاعدة انسيابية، يجمع بين الحضور العصري وسهولة التنظيف.', en: 'A one-piece toilet with a square-edged tank and a flowing base, combining a modern presence with easy cleaning.' },
+    story: { ar: 'تصميم من قطعة واحدة يلغي الفواصل التي تتجمّع فيها الأوساخ، بخطوط مربّعة الحواف تمنح حمّامك طابعاً معمارياً صارماً، وغطاء بإغلاق ناعم يعمل بصمت. شطف مزدوج موفّر للماء يوازن بين القوة والاقتصاد في كل استخدام.', en: 'A one-piece build removes the seams where grime collects, with square-edged lines that lend your bathroom a crisp architectural character and a soft-close lid that works in silence. A dual, water-saving flush balances power and economy with every use.' },
+    specs: [
+      [{ ar: 'التصميم', en: 'Design' }, { ar: 'قطعة واحدة', en: 'One-piece' }],
+      [{ ar: 'الشطف', en: 'Flush' }, { ar: 'مزدوج موفّر', en: 'Dual, water-saving' }],
+      [{ ar: 'مخرج الصرف', en: 'Outlet' }, { ar: 'أرضي (S-trap)', en: 'Floor (S-trap)' }],
+      [{ ar: 'الغطاء', en: 'Seat' }, { ar: 'إغلاق ناعم', en: 'Soft-close' }],
+      [yrs, y5],
+    ],
+    finishes: ['white'], images: { white: '/products/toilet-op-square.webp' },
+  },
+  {
+    id: 'toilet-op-skirted', collection: 'chairs',
+    title: { ar: 'كرسي حمّام قطعة واحدة سكيرتد', en: 'One-piece Skirted Toilet' },
+    tagline: { ar: 'جوانب مكسوّة انسيابية تُخفي التمديدات وتسهّل التنظيف', en: 'Fully skirted sides that hide plumbing and ease cleaning' },
+    desc: { ar: 'كرسي قطعة واحدة بجوانب مكسوّة بالكامل (Skirted) تُخفي مسار الصرف وتمنح مظهراً نظيفاً متكاملاً.', en: 'A one-piece toilet with fully skirted sides that conceal the trapway for a clean, seamless look.' },
+    story: { ar: 'الجوانب المكسوّة بالكامل تُخفي انحناءات الصرف وتحوّل السطح إلى مستوٍ أملس يُمسح بحركة واحدة. قاعدة عريضة تمنح ثباتاً وإحساساً فاخراً، مع شطف مزدوج قوي وهادئ يحافظ على نظافة الحوض بأقل كمية ماء.', en: 'Fully skirted sides hide the trapway’s curves and turn the surface into a smooth plane wiped in a single pass. A wide base gives stability and a premium feel, while a strong, quiet dual flush keeps the bowl clean with minimal water.' },
+    specs: [
+      [{ ar: 'التصميم', en: 'Design' }, { ar: 'قطعة واحدة مكسوّة', en: 'One-piece skirted' }],
+      [{ ar: 'الشطف', en: 'Flush' }, { ar: 'مزدوج قوي', en: 'Strong dual' }],
+      [{ ar: 'مخرج الصرف', en: 'Outlet' }, { ar: 'أرضي مخفي', en: 'Concealed floor' }],
+      [{ ar: 'الغطاء', en: 'Seat' }, { ar: 'إغلاق ناعم', en: 'Soft-close' }],
+      [yrs, y5],
+    ],
+    finishes: ['white'], images: { white: '/products/toilet-op-skirted.webp' },
+  },
+  {
+    id: 'toilet-wh-square', collection: 'chairs',
+    title: { ar: 'كرسي حمّام معلّق مربّع', en: 'Wall-hung Square Toilet' },
+    tagline: { ar: 'حوض مربّع الشكل معلّق يوفّر مساحة ومظهراً عائماً', en: 'A square wall-hung bowl that saves space with a floating look' },
+    desc: { ar: 'كرسي معلّق بحوض مربّع الشكل يُركّب على خزّان مخفي، يمنح الحمّام إحساساً بالاتساع وسهولة تنظيف الأرضية تحته.', en: 'A wall-hung toilet with a square bowl mounted to a concealed cistern, making the bathroom feel larger and easy to clean beneath.' },
+    story: { ar: 'يعلّق الحوض المربّع على الجدار ليترك الأرضية مكشوفة تماماً، فيبدو الحمّام أوسع وتُمسح الأرضية بلا عوائق. الحواف الهندسية الحادّة تناسب التصاميم المعاصرة، والخزّان المخفي يمنح مظهراً نظيفاً بلا أنابيب ظاهرة.', en: 'The square bowl hangs on the wall to leave the floor completely clear, so the bathroom feels wider and the floor wipes without obstacles. Sharp geometric edges suit contemporary designs, and the concealed cistern gives a clean, pipe-free look.' },
+    specs: [
+      [{ ar: 'التركيب', en: 'Mount' }, { ar: 'معلّق (جداري)', en: 'Wall-hung' }],
+      [{ ar: 'الشكل', en: 'Shape' }, { ar: 'مربّع', en: 'Square' }],
+      [{ ar: 'الخزّان', en: 'Cistern' }, { ar: 'مخفي داخل الجدار', en: 'In-wall concealed' }],
+      [{ ar: 'الغطاء', en: 'Seat' }, { ar: 'رفيع بإغلاق ناعم', en: 'Slim soft-close' }],
+      [yrs, y5],
+    ],
+    finishes: ['white'], images: { white: '/products/toilet-wh-square.webp' },
+  },
+  {
+    id: 'toilet-wh-oval', collection: 'chairs',
+    title: { ar: 'كرسي حمّام معلّق بيضاوي', en: 'Wall-hung Oval Toilet' },
+    tagline: { ar: 'حوض بيضاوي انسيابي معلّق بخطوط ناعمة دافئة', en: 'A flowing oval wall-hung bowl with soft, warm lines' },
+    desc: { ar: 'كرسي معلّق بحوض بيضاوي انسيابي وخطوط منحنية ناعمة، يمنح الحمّام لمسة عصرية دافئة مع سهولة التنظيف.', en: 'A wall-hung toilet with a flowing oval bowl and soft curved lines, giving the bathroom a warm modern touch with easy cleaning.' },
+    story: { ar: 'انحناءات بيضاوية ناعمة تلطّف حدّة الحمّام المعاصر وتمنحه دفئاً بصرياً، بينما يبقى الحوض معلّقاً لتحرير الأرضية. تقنية بلا حافة داخلية (Rimless) توزّع الماء بالكامل حول الحوض لنظافة أعمق بضجيج أقل.', en: 'Soft oval curves soften the edge of a contemporary bathroom and lend it visual warmth, while the bowl stays wall-hung to free the floor. A rimless design spreads water fully around the bowl for a deeper, quieter clean.' },
+    specs: [
+      [{ ar: 'التركيب', en: 'Mount' }, { ar: 'معلّق (جداري)', en: 'Wall-hung' }],
+      [{ ar: 'الشكل', en: 'Shape' }, { ar: 'بيضاوي', en: 'Oval' }],
+      [{ ar: 'التقنية', en: 'Technology' }, { ar: 'بلا حافة (Rimless)', en: 'Rimless' }],
+      [{ ar: 'الغطاء', en: 'Seat' }, { ar: 'رفيع بإغلاق ناعم', en: 'Slim soft-close' }],
+      [yrs, y5],
+    ],
+    finishes: ['white'], images: { white: '/products/toilet-wh-oval.webp' },
+  },
 ]
 
 // الأقسام الستة (ثنائية اللغة)

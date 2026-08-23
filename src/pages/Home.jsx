@@ -24,12 +24,12 @@ export default function Home({ reduced }) {
       <DiscoverBreak reduced={reduced} />
       {/* المنتج الرسمي (فيديو بلا خيارات) */}
       <ProductSwitcher reduced={reduced} />
-      {/* أربعة أقسام (تكرار مؤقت للتجربة) */}
-      <CollectionDuo ids={['mixers', 'jacuzzi', 'mixers', 'jacuzzi']} />
+      {/* أقسام (بلا تكرار) */}
+      <CollectionDuo ids={['mixers', 'jacuzzi', 'basins', 'chairs']} />
       {/* حكاية البراند */}
       <BrandStory reduced={reduced} />
-      {/* أربعة أقسام (تكرار مؤقت للتجربة) */}
-      <CollectionDuo ids={['sprays', 'bath', 'sprays', 'bath']} />
+      {/* بقية الأقسام (بلا تكرار) */}
+      <CollectionDuo ids={['sprays', 'bath', 'accessories']} />
       {/* التواصل */}
       <Contact />
     </>
