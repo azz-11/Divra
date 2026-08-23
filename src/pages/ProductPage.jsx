@@ -90,19 +90,19 @@ export default function ProductPage({ reduced }) {
                         i === active ? 'border-brand-strong shadow-[0_0_0_2px_rgba(47,111,214,.25)]' : 'border-black/10 hover:border-brand-strong/50'
                       }`}
                     >
-                      <img src={src} alt="" onError={() => onImgError(src)} className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
+                      <img src={src} alt="" onError={() => onImgError(src)} className="absolute inset-0 h-full w-full bg-white object-contain p-1" loading="lazy" />
                     </button>
                   ))}
                 </div>
               )}
-              {/* الصورة الكبيرة 3:4 — بلا إطار كحلي */}
-              <div className="min-w-0 flex-1 overflow-hidden rounded-2xl">
+              {/* الصورة الكبيرة 3:4 — المنتج كاملاً دون اقتصاص */}
+              <div className="relative min-w-0 flex-1 overflow-hidden rounded-2xl bg-white">
                 <img
                   key={shown}
                   src={shown}
                   alt={tr(product.title)}
                   onError={() => onImgError(shown)}
-                  className="block aspect-[3/4] w-full object-cover"
+                  className="block aspect-[3/4] w-full object-contain p-4 sm:p-6"
                 />
               </div>
             </div>
@@ -228,8 +228,8 @@ export default function ProductPage({ reduced }) {
             <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-6 lg:grid-cols-4">
               {related.slice(0, 4).map((p) => (
                 <Link key={p.id} to={`/product/${p.id}`} className="group">
-                  <div className="relative aspect-[3/4] overflow-hidden rounded-2xl border border-white/10 bg-[#0d0d24]">
-                    <img src={p.images[p.finishes[0]]} alt={tr(p.title)} loading="lazy" className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                  <div className="relative aspect-[3/4] overflow-hidden rounded-2xl border border-white/10 bg-white">
+                    <img src={p.images[p.finishes[0]]} alt={tr(p.title)} loading="lazy" className="absolute inset-0 h-full w-full object-contain p-3 transition-transform duration-500 group-hover:scale-105" />
                   </div>
                   <div className="mt-3 font-cairo text-sm font-bold text-white sm:text-base">{tr(p.title)}</div>
                   <div className="mt-0.5 text-xs text-brand-light">{tr(collectionOf(p.collection)?.name)}</div>
