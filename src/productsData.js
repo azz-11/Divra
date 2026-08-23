@@ -654,8 +654,8 @@ export const COLLECTIONS = [
     intro: { ar: 'جاكوزي فاخر بنفّاثات تدليك وإضاءة محيطة وتحكّم رقمي.', en: 'A luxurious jacuzzi with massage jets, ambient lighting and digital control.' },
     features: [{ ar: 'نفّاثات تدليك', en: 'Massage jets' }, { ar: 'إضاءة محيطة', en: 'Ambient lighting' }, { ar: 'تحكّم رقمي', en: 'Digital control' }],
     accent: '#2f6fd6', bg: '#d3e6ff', image: '/products/jacuzzi-white.webp',
-    cover: '/categories/cat-6.webp',
-    lifestyle: '/categories/cat-6.webp',
+    cover: '/categories/cat-jacuzzi.webp',
+    lifestyle: '/categories/cat-jacuzzi.webp',
     types: [
       { id: 'freestanding', name: { ar: 'حر قائم', en: 'Freestanding' } },
       { id: 'corner', name: { ar: 'زاوية', en: 'Corner' } },
@@ -671,6 +671,36 @@ export const COLLECTIONS = [
     accent: '#2f6fd6', bg: '#dbe8ff', image: '/products/valve-corner-gr-bk.webp',
     cover: '/products/valve-corner-gr-bk.webp',
     lifestyle: '/products/valve-corner-gr-bk.webp',
+  },
+  {
+    id: 'basins',
+    name: { ar: 'الأحواض والمغاسل', en: 'Basins' }, short: { ar: 'الأحواض', en: 'Basins' },
+    intro: { ar: 'أحواض ومغاسل سيراميك بخطوط نحتية وتشطيب لامع يرتقي بمساحتك.', en: 'Ceramic basins with sculptural lines and a glossy finish that elevate your space.' },
+    features: [{ ar: 'سيراميك مطلي فاخر', en: 'Premium glazed ceramic' }, { ar: 'تصميم نحتي أنيق', en: 'Elegant sculptural design' }, { ar: 'سطح سهل التنظيف', en: 'Easy-to-clean surface' }],
+    accent: '#2f6fd6', bg: '#e4f0ff', image: '/categories/cat-basins.webp',
+    cover: '/categories/cat-basins.webp',
+    lifestyle: '/categories/cat-basins.webp',
+    types: [
+      { id: 'wallhung', name: { ar: 'معلّق', en: 'Wall-hung' } },
+      { id: 'countertop', name: { ar: 'فوق الطاولة', en: 'Countertop' } },
+      { id: 'semipedestal', name: { ar: 'نصف عمود', en: 'Semi-pedestal' } },
+      { id: 'undermount', name: { ar: 'مدمج تحت السطح', en: 'Undermount' } },
+    ],
+  },
+  {
+    id: 'chairs',
+    name: { ar: 'كراسي الحمام', en: 'Toilets' }, short: { ar: 'الكراسي', en: 'Toilets' },
+    intro: { ar: 'كراسي حمّام بتصميم انسيابي عصري وشطف موفّر للماء وسطح سهل التنظيف.', en: 'Toilets with a modern flowing design, water-saving flush and an easy-to-clean surface.' },
+    features: [{ ar: 'شطف مزدوج موفّر', en: 'Dual water-saving flush' }, { ar: 'تصميم انسيابي عصري', en: 'Modern flowing design' }, { ar: 'سيراميك مضاد للبكتيريا', en: 'Anti-bacterial ceramic' }],
+    accent: '#2f6fd6', bg: '#cae1ff', image: '/categories/cat-chairs.webp',
+    cover: '/categories/cat-chairs.webp',
+    lifestyle: '/categories/cat-chairs.webp',
+    types: [
+      { id: 'wallhung', name: { ar: 'معلّق', en: 'Wall-hung' } },
+      { id: 'onepiece', name: { ar: 'قطعة واحدة', en: 'One-piece' } },
+      { id: 'twopiece', name: { ar: 'قطعتين', en: 'Two-piece' } },
+      { id: 'smart', name: { ar: 'ذكي', en: 'Smart' } },
+    ],
   },
 ]
 
