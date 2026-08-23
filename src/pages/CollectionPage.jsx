@@ -221,8 +221,8 @@ export default function CollectionPage() {
 function ProductCard({ p, tr, badge }) {
   return (
     <Link to={`/product/${p.id}`} className="group flex flex-col text-start">
-      <div className="relative aspect-square w-full overflow-hidden bg-[#0d0d24]">
-        <img src={p.images[p.finishes[0]]} alt={tr(p.title)} loading="lazy" className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+      <div className="relative aspect-square w-full overflow-hidden bg-white">
+        <img src={p.images[p.finishes[0]]} alt={tr(p.title)} loading="lazy" className="absolute inset-0 h-full w-full object-contain p-2 transition-transform duration-500 group-hover:scale-105" />
         {badge && (
           <span className="absolute start-2 top-2 rounded-full bg-brand px-2 py-0.5 text-[10px] font-bold text-white" style={{ insetInlineStart: '0.5rem' }}>{badge}</span>
         )}
