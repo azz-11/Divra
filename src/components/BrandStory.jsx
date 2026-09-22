@@ -6,26 +6,8 @@ import { useLang } from '../i18n.jsx'
 const EASE = 'cubic-bezier(0.33,1,0.68,1)'
 const FADE = 750 // مدة الانتقال (crossfade)
 
-// شرائح حكاية العلامة — فيديوهات الحكاية
+// شرائح حكاية العلامة — التصميم والجودة فقط
 const STORY = [
-  {
-    video: '/video/story-5',
-    tag: { ar: 'حكايتنا', en: 'Our story' },
-    title: { ar: 'ديفرا... حيث تبدأ التفاصيل الفاخرة', en: 'Divra… where luxury details begin' },
-    text: {
-      ar: 'لحظاتٌ يومية تتحوّل إلى تجربة استثنائية بلمسة ديفرا.',
-      en: 'Everyday moments transformed into an exceptional experience with a Divra touch.',
-    },
-  },
-  {
-    video: '/video/story-1',
-    tag: { ar: 'حكايتنا', en: 'Our story' },
-    title: { ar: 'كل قطرة تبدأ بفكرة', en: 'Every drop begins with an idea' },
-    text: {
-      ar: 'من شغفٍ بالتفاصيل وُلدت ديفرا، لتحوّل لحظات الماء اليومية إلى تجربة تُلهم.',
-      en: 'From a passion for detail, Divra was born — turning everyday moments of water into an experience that inspires.',
-    },
-  },
   {
     video: '/video/story-3',
     tag: { ar: 'التصميم', en: 'Design' },
@@ -43,16 +25,6 @@ const STORY = [
       ar: 'خاماتٌ مختارة ومعايير عالمية، لتبقى التجربة كاملة عاماً بعد عام.',
       en: 'Selected materials and world-class standards, so the experience stays complete year after year.',
     },
-  },
-  {
-    video: '/video/story-1',
-    tag: { ar: 'ابدأ رحلتك', en: 'Begin your journey' },
-    title: { ar: 'مساحتك تنتظر لمسة ديفرا', en: 'Your space awaits the Divra touch' },
-    text: {
-      ar: 'اكتشف المجموعة، ودَع الماء يروي حكايتك.',
-      en: 'Explore the collection and let water tell your story.',
-    },
-    cta: { to: '/collection/mixers', label: { ar: 'اكتشف المجموعة', en: 'Explore the collection' } },
   },
 ]
 
