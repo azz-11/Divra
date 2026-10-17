@@ -10,11 +10,11 @@ export default function CollectionDuo({ ids = [] }) {
   if (!cols.length) return null
 
   return (
-    <section className="w-full bg-white py-14 sm:py-16">
+    <section className="w-full bg-white">
       {/* هوامش جانبية أوسع من الأطراف، وفجوة أصغر بين الصور */}
-      <div className="grid w-full grid-cols-1 gap-6 px-6 sm:grid-cols-2 sm:px-32 lg:px-52">
+      <div className="grid w-full grid-cols-1 gap-1 sm:grid-cols-2">
         {cols.map((c, i) => (
-          <Link key={i} to={`/collection/${c.id}`} className="group relative block aspect-[4/3] overflow-hidden">
+          <Link key={i} to={`/collection/${c.id}`} className="group relative block aspect-[9/10] overflow-hidden">
             <img
               src={c.cover}
               alt={tr(c.name)}
@@ -23,8 +23,8 @@ export default function CollectionDuo({ ids = [] }) {
             />
             <span className="pointer-events-none absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(3,3,40,.05) 0%, rgba(3,3,40,.15) 45%, rgba(3,3,40,.72) 100%)' }} />
             {/* الاسم */}
-            <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-6 sm:p-7">
-              <h3 className="font-cairo text-2xl font-black text-white drop-shadow sm:text-3xl">{tr(c.name)}</h3>
+            <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-6 sm:p-10">
+              <h3 className="font-cairo text-3xl font-black text-white drop-shadow sm:text-5xl">{tr(c.name)}</h3>
               <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-white/15 text-white backdrop-blur transition-all group-hover:bg-brand group-hover:text-white">
                 <ArrowUpLeft size={18} strokeWidth={2.5} className="ltr:-scale-x-100" />
               </span>

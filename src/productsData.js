@@ -962,7 +962,7 @@ export const COLLECTIONS = [
     intro: { ar: 'خلاطات تجمع الدقّة والأناقة لتكون قلب مغسلتك ومطبخك.', en: 'Mixers that blend precision and elegance to be the heart of your basin and kitchen.' },
     features: [{ ar: 'تحكّم دقيق بالتدفّق', en: 'Precise flow control' }, { ar: 'تشطيب أسود مطفي', en: 'Matte black finish' }, { ar: 'خامات مقاومة للصدأ', en: 'Rust-resistant materials' }],
     accent: '#2f6fd6', bg: '#e4f0ff', image: '/products/mixer-chrome.webp',
-    cover: '/categories/cat-1.webp',
+    cover: '/categories/cover-mixers.webp',
     lifestyle: '/products/mixer-chrome-1.webp',
     types: [
       { id: 'curved', name: { ar: 'منحنى', en: 'Curved' } },
@@ -977,7 +977,7 @@ export const COLLECTIONS = [
     intro: { ar: 'رؤوس مرشّات قابلة للتوجيه بضغط ماء متوازن وتركيب سهل.', en: 'Adjustable shower heads with balanced pressure and easy installation.' },
     features: [{ ar: 'رؤوس قابلة للتوجيه', en: 'Adjustable heads' }, { ar: 'ضغط ماء متوازن', en: 'Balanced pressure' }, { ar: 'تركيب سهل', en: 'Easy installation' }],
     accent: '#2f6fd6', bg: '#afd2ff', image: '/products/shower-gold.webp',
-    cover: '/categories/cat-3.webp',
+    cover: '/categories/cover-sprays.webp',
     lifestyle: '/categories/cat-3.webp',
     types: [
       { id: 'rain', name: { ar: 'مطري', en: 'Rain' } },
@@ -992,7 +992,7 @@ export const COLLECTIONS = [
     intro: { ar: 'خلاطات بانيو جدارية بخطوط نحتية تمنح حمّامك حضوراً فندقياً.', en: 'Wall-mounted bath mixers with sculptural lines that give your bathroom a hotel presence.' },
     features: [{ ar: 'مخرج مزدوج', en: 'Dual outlet' }, { ar: 'محوّل انسيابي', en: 'Smooth diverter' }, { ar: 'تصميم جداري أنيق', en: 'Elegant wall design' }],
     accent: '#2f6fd6', bg: '#e4f0ff', image: '/products/faucet-bath-black.webp',
-    cover: '/categories/cat-4.webp',
+    cover: '/categories/cover-bath.webp',
     lifestyle: '/products/collection-bath.webp',
     types: [
       { id: 'wall', name: { ar: 'جداري', en: 'Wall-mounted' } },
@@ -1007,7 +1007,7 @@ export const COLLECTIONS = [
     intro: { ar: 'جاكوزي فاخر بنفّاثات تدليك وإضاءة محيطة وتحكّم رقمي.', en: 'A luxurious jacuzzi with massage jets, ambient lighting and digital control.' },
     features: [{ ar: 'نفّاثات تدليك', en: 'Massage jets' }, { ar: 'إضاءة محيطة', en: 'Ambient lighting' }, { ar: 'تحكّم رقمي', en: 'Digital control' }],
     accent: '#2f6fd6', bg: '#d3e6ff', image: '/products/jacuzzi-white.webp',
-    cover: '/categories/cat-jacuzzi.webp',
+    cover: '/categories/cover-jacuzzi.webp',
     lifestyle: '/categories/cat-jacuzzi.webp',
     types: [
       { id: 'freestanding', name: { ar: 'حر قائم', en: 'Freestanding' } },
@@ -1022,7 +1022,7 @@ export const COLLECTIONS = [
     intro: { ar: 'محابس ووصلات تكميلية بجودة موثوقة لإنهاء تركيب أدواتك الصحية بثقة.', en: 'Reliable-quality valves and connectors to complete your sanitary ware installation with confidence.' },
     features: [{ ar: 'إغلاق محكم وآمن', en: 'Tight, secure shut-off' }, { ar: 'خامة نحاسية مقاومة للصدأ', en: 'Rust-resistant brass' }, { ar: 'تركيب سريع', en: 'Quick installation' }],
     accent: '#2f6fd6', bg: '#dbe8ff', image: '/products/valve-corner-gr-bk.webp',
-    cover: '/products/valve-corner-gr-bk.webp',
+    cover: '/categories/cover-accessories.webp',
     lifestyle: '/products/valve-corner-gr-bk.webp',
   },
   {
@@ -1031,7 +1031,7 @@ export const COLLECTIONS = [
     intro: { ar: 'أحواض ومغاسل سيراميك بخطوط نحتية وتشطيب لامع يرتقي بمساحتك.', en: 'Ceramic basins with sculptural lines and a glossy finish that elevate your space.' },
     features: [{ ar: 'سيراميك مطلي فاخر', en: 'Premium glazed ceramic' }, { ar: 'تصميم نحتي أنيق', en: 'Elegant sculptural design' }, { ar: 'سطح سهل التنظيف', en: 'Easy-to-clean surface' }],
     accent: '#2f6fd6', bg: '#e4f0ff', image: '/categories/cat-basins.webp',
-    cover: '/categories/cat-basins.webp',
+    cover: '/categories/cover-basins.webp',
     lifestyle: '/categories/cat-basins.webp',
     types: [
       { id: 'wallhung', name: { ar: 'معلّق', en: 'Wall-hung' } },
@@ -1046,7 +1046,7 @@ export const COLLECTIONS = [
     intro: { ar: 'كراسي حمّام بتصميم انسيابي عصري وشطف موفّر للماء وسطح سهل التنظيف.', en: 'Toilets with a modern flowing design, water-saving flush and an easy-to-clean surface.' },
     features: [{ ar: 'شطف مزدوج موفّر', en: 'Dual water-saving flush' }, { ar: 'تصميم انسيابي عصري', en: 'Modern flowing design' }, { ar: 'سيراميك مضاد للبكتيريا', en: 'Anti-bacterial ceramic' }],
     accent: '#2f6fd6', bg: '#cae1ff', image: '/categories/cat-chairs.webp',
-    cover: '/categories/cat-chairs.webp',
+    cover: '/categories/cover-chairs.webp',
     lifestyle: '/categories/cat-chairs.webp',
     types: [
       { id: 'wallhung', name: { ar: 'معلّق', en: 'Wall-hung' } },
