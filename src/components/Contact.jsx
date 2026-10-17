@@ -1,4 +1,3 @@
-import SocialIcons from './SocialIcons.jsx'
 import { useLang } from '../i18n.jsx'
 
 // أيقونات خطية صغيرة (stroke) بأسلوب أنيق
@@ -73,11 +72,6 @@ export default function Contact() {
               </span>
             </a>
           ))}
-        </div>
-
-        <div className="mt-14 flex flex-col items-center gap-4">
-          <span className="text-sm text-text-dim">{t('تابعنا على')}</span>
-          <SocialIcons gap="gap-3" />
         </div>
       </div>
     </section>
