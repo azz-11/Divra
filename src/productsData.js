@@ -993,7 +993,7 @@ export const COLLECTIONS = [
     features: [{ ar: 'مخرج مزدوج', en: 'Dual outlet' }, { ar: 'محوّل انسيابي', en: 'Smooth diverter' }, { ar: 'تصميم جداري أنيق', en: 'Elegant wall design' }],
     accent: '#2f6fd6', bg: '#e4f0ff', image: '/products/faucet-bath-black.webp',
     cover: '/categories/cover-bath.webp',
-    lifestyle: '/products/collection-bath.webp',
+    lifestyle: '/categories/cover-bath.webp',
     types: [
       { id: 'wall', name: { ar: 'جداري', en: 'Wall-mounted' } },
       { id: 'freestanding', name: { ar: 'حر قائم', en: 'Freestanding' } },
