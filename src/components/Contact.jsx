@@ -26,15 +26,15 @@ const INFO = [
 export default function Contact() {
   const { t } = useLang()
   return (
-    <section id="contact" className="relative overflow-hidden bg-surface py-24 md:py-32">
-      <div className="mx-auto max-w-2xl px-6 text-center">
+    <section id="contact" className="relative flex min-h-screen items-center overflow-hidden bg-surface py-24 md:py-32">
+      <div className="mx-auto w-full max-w-6xl px-6 text-center">
         <span className="mb-4 inline-block rounded-full border border-line bg-brand/10 px-4 py-1.5 text-sm text-brand-strong">
           {t('تواصل معنا')}
         </span>
-        <h2 className="font-cairo text-3xl font-black leading-snug sm:text-4xl md:text-5xl">
+        <h2 className="font-cairo text-4xl font-black leading-snug sm:text-5xl md:text-7xl">
           {t('نحن')} <span className="text-gradient">{t('قريبون')}</span> {t('منك')}
         </h2>
-        <p className="mx-auto mt-4 max-w-lg text-text-dim">
+        <p className="mx-auto mt-5 max-w-2xl text-lg text-text-dim md:text-xl">
           {t('تواصل معنا عبر أيّ من القنوات التالية وسنسعد بخدمتك.')}
         </p>
 
@@ -43,7 +43,7 @@ export default function Contact() {
           href="https://wa.me/966566906123"
           target="_blank"
           rel="noopener noreferrer"
-          className="mx-auto mt-9 flex min-h-[46px] w-full max-w-xs items-center justify-center gap-2.5 rounded-full px-6 text-sm font-bold text-white shadow-lg transition-transform hover:-translate-y-0.5"
+          className="mx-auto mt-10 flex min-h-[56px] w-full max-w-sm items-center justify-center gap-2.5 rounded-full px-6 text-base font-bold text-white shadow-lg transition-transform hover:-translate-y-0.5"
           style={{ background: 'linear-gradient(120deg,#25D366,#128C7E)' }}
         >
           <svg viewBox="0 0 24 24" className="h-[18px] w-[18px]" fill="currentColor">
@@ -53,32 +53,29 @@ export default function Contact() {
         </a>
 
         {/* قنوات التواصل — صفوف نظيفة بأيقونات خطية صغيرة وفواصل رفيعة */}
-        <div className="mx-auto mt-10 max-w-md divide-y divide-line overflow-hidden rounded-2xl border border-line">
+        <div className="mt-14 grid gap-5 md:grid-cols-3">
           {INFO.map((item) => (
             <a
               key={item.label}
               href={item.href}
               target={item.href.startsWith('http') ? '_blank' : undefined}
               rel="noopener noreferrer"
-              className="flex items-center gap-4 px-5 py-4 text-start transition-colors hover:bg-brand/5"
+              className="flex flex-col items-center gap-4 rounded-2xl border border-line px-6 py-10 text-center transition-colors hover:bg-brand/5"
             >
-              <span className="shrink-0 text-brand-strong">
-                <svg viewBox="0 0 24 24" className="h-[20px] w-[20px]" fill="currentColor">
+              <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-brand/15 text-brand-strong">
+                <svg viewBox="0 0 24 24" className="h-6 w-6" fill="currentColor">
                   {item.icon}
                 </svg>
               </span>
-              <span className="flex flex-1 flex-col">
-                <span className="text-xs text-text-dimmer">{t(item.label)}</span>
-                <span dir="ltr" className="font-cairo text-sm font-bold text-start">{item.value}</span>
+              <span className="flex flex-col gap-2">
+                <span className="text-sm text-text-dimmer">{t(item.label)}</span>
+                <span dir="ltr" className="font-cairo text-lg font-bold">{item.value}</span>
               </span>
-              <svg viewBox="0 0 24 24" className="h-4 w-4 shrink-0 text-text-dimmer ltr:-scale-x-100" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M15 18l-6-6 6-6" />
-              </svg>
             </a>
           ))}
         </div>
 
-        <div className="mt-10 flex flex-col items-center gap-4">
+        <div className="mt-14 flex flex-col items-center gap-4">
           <span className="text-sm text-text-dim">{t('تابعنا على')}</span>
           <SocialIcons gap="gap-3" />
         </div>
