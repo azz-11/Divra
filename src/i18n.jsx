@@ -2,6 +2,20 @@ import { createContext, useContext, useEffect, useState } from 'react'
 
 // قاموس نصوص الواجهة (المفتاح بالعربية → الإنجليزية)
 const UI = {
+  // صفحة من نحن
+  'هوية سعودية…': 'A Saudi identity…',
+  'بتفاصيل استثنائية': 'with exceptional detail',
+  'صُنع بهوية': 'Crafted with a',
+  'سعودية': 'Saudi identity',
+  'علامة تجارية سعودية متخصصة في الخلاطات والأدوات الصحية، تجمع بين أناقة التصميم العصري والاهتمام بأدق التفاصيل.': 'is a Saudi brand specialising in mixers and sanitary ware, combining the elegance of modern design with attention to the finest detail.',
+  'نؤمن بأن الفخامة لا تقتصر على المظهر، بل تنعكس في جودة التشطيبات، ودقة التصميم، وسهولة الاستخدام.': 'We believe luxury is not just about looks — it shows in the quality of finishes, precision of design and ease of use.',
+  'نسعى من خلال منتجاتنا إلى تقديم تجربة تجمع بين الجمال والعملية، وتضفي لمسة من الرقي على المساحات السكنية والتجارية.': 'Through our products we aim to offer an experience that blends beauty and practicality, adding a touch of refinement to residential and commercial spaces.',
+  'تصميم يعكس الفخامة': 'Design that reflects luxury',
+  'تصاميم عصرية بخطوط أنيقة وتفاصيل مدروسة تناسب مختلف المساحات.': 'Modern designs with elegant lines and considered details to suit any space.',
+  'جودة في كل تفصيل': 'Quality in every detail',
+  'اهتمام بالخامات والتشطيبات لتحقيق التوازن بين المظهر الراقي والأداء العملي.': 'Careful choice of materials and finishes to balance a refined look with practical performance.',
+  'فخامة تناسب أسلوب حياتك': 'Luxury that fits your lifestyle',
+  'حلول تجمع بين الأناقة والراحة، وتواكب تطلعات الذوق السعودي المعاصر.': 'Solutions that combine elegance and comfort, keeping pace with contemporary Saudi taste.',
   // التنقل
   'الرئيسية': 'Home',
   'من نحن': 'About',

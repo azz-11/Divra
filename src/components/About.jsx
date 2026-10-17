@@ -3,33 +3,21 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useLang } from '../i18n.jsx'
 
-const FEATURES = [
-  {
-    title: 'تصميم نحتي',
-    desc: 'خطوط انسيابية منحوتة بعناية تحوّل كل صنبور إلى قطعة فنية.',
-    icon: (
-      <path d="M12 2l2.4 6.9L21 11l-6.6 2.1L12 20l-2.4-6.9L3 11l6.6-2.1L12 2z" />
-    ),
-  },
-  {
-    title: 'جودة معتمدة',
-    desc: 'مواد نحاسية وسبائك مقاومة للصدأ بمعايير جودة عالمية.',
-    icon: (
-      <path d="M12 2l7 3v6c0 5-3.4 8.5-7 11-3.6-2.5-7-6-7-11V5l7-3zm-1 13l5-5-1.4-1.4L11 12.2 9.4 10.6 8 12l3 3z" />
-    ),
-  },
-  {
-    title: 'تصميم يحبه العملاء',
-    desc: 'تجربة استخدام سلسة وتفاصيل تُبهر أصحاب الذوق الرفيع.',
-    icon: (
-      <path d="M12 21s-7-4.6-9.3-9C1.2 8.6 2.8 5 6.2 5c2 0 3.2 1.1 3.8 2 .6-.9 1.8-2 3.8-2 3.4 0 5 3.6 3.5 7-2.3 4.4-9.1 9-9.1 9z" />
-    ),
-  },
-]
+gsap.registerPlugin(ScrollTrigger)
 
-const STATS = [
-  { value: '15+', label: 'عاماً من الخبرة' },
-  { value: '4', label: 'قطع منتقاة' },
+const PILLARS = [
+  {
+    title: 'تصميم يعكس الفخامة',
+    desc: 'تصاميم عصرية بخطوط أنيقة وتفاصيل مدروسة تناسب مختلف المساحات.',
+  },
+  {
+    title: 'جودة في كل تفصيل',
+    desc: 'اهتمام بالخامات والتشطيبات لتحقيق التوازن بين المظهر الراقي والأداء العملي.',
+  },
+  {
+    title: 'فخامة تناسب أسلوب حياتك',
+    desc: 'حلول تجمع بين الأناقة والراحة، وتواكب تطلعات الذوق السعودي المعاصر.',
+  },
 ]
 
 export default function About({ reduced }) {
@@ -40,33 +28,23 @@ export default function About({ reduced }) {
   useEffect(() => {
     if (reduced) return
     const ctx = gsap.context(() => {
-      // الصورة تبدأ مكبّرة وتصغر تدريجياً مع مرور القسم
+      // الصورة تبدأ مكبّرة وتصغر تدريجياً مع التمرير
       gsap.fromTo(
         imageRef.current,
-        { scale: 1.25 },
+        { scale: 1.18 },
         {
           scale: 1,
           ease: 'none',
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: true,
-          },
+          scrollTrigger: { trigger: sectionRef.current, start: 'top bottom', end: 'bottom top', scrub: true },
         },
       )
-      // ظهور العناصر النصية
       gsap.utils.toArray('[data-reveal]').forEach((el) => {
         gsap.from(el, {
           y: 40,
           opacity: 0,
           duration: 0.9,
           ease: 'power3.out',
-          scrollTrigger: {
-            trigger: el,
-            start: 'top 85%',
-            toggleActions: 'play none none reverse',
-          },
+          scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none reverse' },
         })
       })
     }, sectionRef)
@@ -74,88 +52,77 @@ export default function About({ reduced }) {
   }, [reduced])
 
   return (
-    <section
-      id="about"
-      ref={sectionRef}
-      className="relative overflow-hidden bg-surface py-24 md:py-32"
-    >
-      <div className="mx-auto grid max-w-7xl items-center gap-14 px-6 lg:grid-cols-2">
-        {/* عمود الصورة */}
-        <div className="relative flex justify-center">
-          <div className="glass relative aspect-square w-full max-w-md rounded-full p-10">
-            <div
-              className="absolute inset-6 rounded-full opacity-60 blur-2xl"
-              style={{
-                background:
-                  'radial-gradient(circle, rgba(79,143,240,.4), transparent 70%)',
-              }}
-            />
-            <img
-              ref={imageRef}
-              src="/products/faucet-bath-black.webp"
-              alt="مخلط ديفرا الفاخر"
-              className="relative z-10 h-full w-full object-contain drop-shadow-2xl"
-              loading="lazy"
-            />
+    <section id="about" ref={sectionRef} className="relative overflow-hidden bg-surface">
+      {/* القسم الرئيسي: صورة بارتفاع الشاشة + نص */}
+      <div className="grid min-h-screen lg:grid-cols-2">
+        {/* الصورة */}
+        <div className="relative h-[70vh] overflow-hidden lg:order-2 lg:h-auto">
+          <img
+            ref={imageRef}
+            src="/products/about-mixer.webp"
+            alt="خلاط ديفرا"
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+          {/* دمج الصورة مع الخلفية */}
+          <span
+            className="pointer-events-none absolute inset-0 hidden lg:block"
+            style={{ background: 'linear-gradient(to right, transparent 60%, var(--surface) 100%)' }}
+          />
+          <span
+            className="pointer-events-none absolute inset-0 lg:hidden"
+            style={{ background: 'linear-gradient(to bottom, transparent 55%, var(--surface) 100%)' }}
+          />
+          {/* شارة سعودية */}
+          <div className="glass absolute bottom-8 end-8 rounded-2xl px-5 py-4 text-center" style={{ insetInlineEnd: '2rem' }}>
+            <div className="text-xs uppercase tracking-[0.3em] text-brand-light">{t('صُنع بهوية')}</div>
+            <div className="mt-1 font-cairo text-xl font-black">{t('سعودية')}</div>
           </div>
-
-          {/* إحصائيات عائمة */}
-          {STATS.map((s, i) => (
-            <div
-              key={s.label}
-              className={`glass absolute z-20 rounded-xl2 px-5 py-3 text-center ${
-                i === 0
-                  ? 'top-6 start-0'
-                  : 'bottom-6 end-0'
-              }`}
-              style={i === 0 ? { insetInlineStart: 0 } : { insetInlineEnd: 0 }}
-            >
-              <div className="font-cairo text-2xl font-black text-brand-strong">
-                {s.value}
-              </div>
-              <div className="text-xs text-text-dim">{t(s.label)}</div>
-            </div>
-          ))}
         </div>
 
-        {/* عمود النص */}
-        <div>
-          <span
-            data-reveal
-            className="mb-4 inline-block rounded-full border border-line bg-brand/10 px-4 py-1.5 text-sm text-brand-strong"
-          >
-            {t('من نحن')}
-          </span>
-          <h2
-            data-reveal
-            className="font-cairo text-3xl font-black leading-snug sm:text-4xl md:text-5xl"
-          >
-            {t('نصنع')} <span className="text-gradient">{t('تفاصيل')}</span> {t('تدوم')}
-          </h2>
-          <p data-reveal className="mt-5 text-text-dim">
-            {t('في ديفرا نؤمن أن الأدوات الصحية ليست مجرّد وظيفة، بل لغة تعبّر عن رقيّ المكان. نجمع بين هندسة دقيقة وحرفية عالية لنقدّم صنابير ومخلاطات تتحدّى الزمن جمالاً وأداءً.')}
-          </p>
+        {/* النص */}
+        <div className="relative z-10 flex items-center px-6 py-20 sm:px-12 lg:px-20 xl:px-28">
+          <div className="max-w-xl">
+            <span data-reveal className="mb-6 inline-flex items-center gap-3 text-xs font-bold uppercase tracking-[0.3em] text-brand-light">
+              <span className="h-px w-10 bg-brand-light/60" />
+              {t('من نحن')}
+            </span>
+            <h1 data-reveal className="font-cairo text-4xl font-black leading-[1.25] sm:text-5xl xl:text-6xl">
+              {t('هوية سعودية…')}
+              <br />
+              <span className="text-gradient">{t('بتفاصيل استثنائية')}</span>
+            </h1>
 
-          <div className="mt-9 space-y-5">
-            {FEATURES.map((f) => (
-              <div key={f.title} data-reveal className="flex items-start gap-4">
-                <span className="grid h-12 w-12 flex-shrink-0 place-items-center rounded-xl2 bg-brand/15 text-brand-strong">
-                  <svg
-                    viewBox="0 0 24 24"
-                    className="h-6 w-6"
-                    fill="currentColor"
-                    aria-hidden="true"
-                  >
-                    {f.icon}
-                  </svg>
-                </span>
-                <div>
-                  <h3 className="font-cairo text-lg font-bold">{t(f.title)}</h3>
-                  <p className="mt-1 text-sm text-text-dim">{t(f.desc)}</p>
-                </div>
-              </div>
-            ))}
+            <p data-reveal className="mt-8 text-lg leading-loose text-text">
+              <span dir="ltr" className="font-black tracking-wider text-brand-light">DIVRA</span>{' '}
+              {t('علامة تجارية سعودية متخصصة في الخلاطات والأدوات الصحية، تجمع بين أناقة التصميم العصري والاهتمام بأدق التفاصيل.')}
+            </p>
+            <p data-reveal className="mt-5 leading-loose text-text-dim">
+              {t('نؤمن بأن الفخامة لا تقتصر على المظهر، بل تنعكس في جودة التشطيبات، ودقة التصميم، وسهولة الاستخدام.')}
+            </p>
+            <p data-reveal className="mt-5 leading-loose text-text-dim">
+              {t('نسعى من خلال منتجاتنا إلى تقديم تجربة تجمع بين الجمال والعملية، وتضفي لمسة من الرقي على المساحات السكنية والتجارية.')}
+            </p>
           </div>
+        </div>
+      </div>
+
+      {/* الركائز الثلاث */}
+      <div className="border-t border-line">
+        <div className="mx-auto grid max-w-7xl md:grid-cols-3">
+          {PILLARS.map((p, i) => (
+            <div
+              key={p.title}
+              data-reveal
+              className="group relative border-line px-8 py-14 transition-colors hover:bg-brand/5 md:border-e md:last:border-e-0 lg:px-12 lg:py-20"
+            >
+              <div dir="ltr" className="font-cairo text-6xl font-black text-transparent transition-colors group-hover:text-brand-light/20" style={{ WebkitTextStroke: '1px rgba(149,195,255,.45)' }}>
+                0{i + 1}
+              </div>
+              <h3 className="mt-6 font-cairo text-2xl font-bold">{t(p.title)}</h3>
+              <p className="mt-3 leading-relaxed text-text-dim">{t(p.desc)}</p>
+              <span className="absolute bottom-0 start-8 h-0.5 w-0 bg-brand-light transition-all duration-500 group-hover:w-24" style={{ insetInlineStart: '2rem' }} />
+            </div>
+          ))}
         </div>
       </div>
     </section>
