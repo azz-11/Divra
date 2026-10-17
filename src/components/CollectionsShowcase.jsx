@@ -88,7 +88,7 @@ export default function CollectionsShowcase({ reduced }) {
     <section
       id="collections"
       className="relative w-full overflow-hidden"
-      style={{ backgroundColor: active_c.bg, transition: `background-color ${DUR}ms ${EASE}`, fontFamily: 'Tajawal, sans-serif' }}
+      style={{ backgroundColor: active_c.bg, transition: `background-color ${DUR}ms ${EASE}`, fontFamily: "'Arabic UI Display', Cairo, sans-serif" }}
     >
       <div className="relative h-screen w-full overflow-hidden">
         {/* توهج لوني يتبدّل مع القسم */}
@@ -110,7 +110,7 @@ export default function CollectionsShowcase({ reduced }) {
         <div className="absolute start-0 end-0 flex select-none items-center justify-center" style={{ insetInline: 0, top: '16%', zIndex: 2, pointerEvents: 'none' }}>
           <span
             style={{
-              fontFamily: 'Aktiv Grotesk Arabic, Readex Pro, sans-serif', fontSize: 'clamp(72px, 22vw, 300px)', fontWeight: 900,
+              fontFamily: "'Arabic UI Display', Cairo, sans-serif", fontSize: 'clamp(72px, 22vw, 300px)', fontWeight: 900,
               color: '#0f2a4d', opacity: 0.06, lineHeight: 1, letterSpacing: '-0.02em', whiteSpace: 'nowrap',
               transition: `opacity ${DUR}ms ${EASE}`,
             }}
@@ -152,7 +152,7 @@ export default function CollectionsShowcase({ reduced }) {
 
         {/* النص السفلي + أزرار التنقّل + زر كل المنتجات */}
         <div className="absolute bottom-6 start-4 sm:bottom-16 sm:start-16" style={{ zIndex: 60, maxWidth: 460 }}>
-          <p className="mb-2 text-base font-bold uppercase text-[#0f2a4d] sm:mb-3 sm:text-[22px]" style={{ fontFamily: 'Aktiv Grotesk Arabic, Readex Pro, sans-serif', transition: `opacity ${DUR}ms ${EASE}` }}>
+          <p className="mb-2 text-base font-bold uppercase text-[#0f2a4d] sm:mb-3 sm:text-[22px]" style={{ fontFamily: "'Arabic UI Display', Cairo, sans-serif", transition: `opacity ${DUR}ms ${EASE}` }}>
             {tr(active_c.name)}
           </p>
           {/* المميزات */}
@@ -177,7 +177,7 @@ export default function CollectionsShowcase({ reduced }) {
             {/* زر مشاهدة جميع منتجات القسم */}
             <Link to={`/collection/${active_c.id}`}
               className="ms-1 inline-flex items-center gap-2 rounded-full bg-[#2f6fd6] px-5 py-3 text-sm font-bold text-white transition-transform hover:scale-105"
-              style={{ fontFamily: 'Aktiv Grotesk Arabic, Readex Pro, sans-serif' }}>
+              style={{ fontFamily: "'Arabic UI Display', Cairo, sans-serif" }}>
               {t('كل المنتجات')}
               <Next size={18} strokeWidth={2.5} />
             </Link>
@@ -188,7 +188,7 @@ export default function CollectionsShowcase({ reduced }) {
         <div className="absolute bottom-8 end-4 hidden sm:bottom-20 sm:end-10 sm:block" style={{ zIndex: 60 }}>
           <span
             className="flex items-baseline gap-1 text-[#0f2a4d]/90"
-            style={{ fontFamily: 'Aktiv Grotesk Arabic, Readex Pro, sans-serif', letterSpacing: '-0.02em', lineHeight: 1 }}
+            style={{ fontFamily: "'Arabic UI Display', Cairo, sans-serif", letterSpacing: '-0.02em', lineHeight: 1 }}
           >
             <span style={{ fontSize: 'clamp(28px, 5vw, 64px)', fontWeight: 700 }}>
               {String(active + 1).padStart(2, '0')}
