@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState } from 'react'
 
 // قاموس نصوص الواجهة (المفتاح بالعربية → الإنجليزية)
 const UI = {
+  'تصفّح المنتجات': 'Browse products',
   // صفحة من نحن
   'هوية سعودية…': 'A Saudi identity…',
   'بتفاصيل استثنائية': 'with exceptional detail',
